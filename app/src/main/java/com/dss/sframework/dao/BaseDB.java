@@ -82,7 +82,27 @@ public class BaseDB extends SQLiteOpenHelper {
     }
 
     //Receive values from another class and insert on a table
-    public Long insert(String table, String[] fields, Field[] objVar, ArrayList<Object> obj) {
+    public Long insert(String table, String[] fields, Object clazz) {
+
+        Field[] objVar = clazz.getClass().getDeclaredFields();
+        ArrayList<Object> array = new ArrayList<>();
+
+        for(int i = 0; i < objVar.length; i++){
+            Object o = new Object();
+            try {
+                o = objVar[i].get(clazz);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            array.add(o);
+        }
+
+        for(int i = 0; i < fields.length / 2; i++)
+        {
+            String temp = fields[i];
+            fields[i] = fields[fields.length - i - 1];
+            fields[fields.length - i - 1] = temp;
+        }
 
         ContentValues values = new ContentValues();
 
@@ -91,17 +111,17 @@ public class BaseDB extends SQLiteOpenHelper {
             //Verify if variable is numeric
             if (objVar[i].getType() == Integer.class || objVar[i].getType() == Long.class || objVar[i].getType() == Double.class || objVar[i].getType() == int.class ){
 
-                    values.put(fields[i], Integer.valueOf(obj.get(i).toString()));
+                values.put(fields[i], Integer.valueOf(array.get(i).toString()));
 
-            //Verify if variable is text
+                //Verify if variable is text
             }else if (objVar[i].getType() == String.class || objVar[i].getType() == char.class) {
 
-                values.put(fields[i], obj.get(i).toString());
+                values.put(fields[i], array.get(i).toString());
 
-            //Verify if variable is boolean
+                //Verify if variable is boolean
             }else if(objVar[i].getType() == Boolean.class ){
 
-                values.put(fields[i], Boolean.valueOf(obj.get(i).toString()));
+                values.put(fields[i], Boolean.valueOf(array.get(i).toString()));
             }
         }
 

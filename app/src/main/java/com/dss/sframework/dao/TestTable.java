@@ -73,34 +73,10 @@ public class TestTable {
 
     public void insert(TestObject testObject){
 
-//        ContentValues values = new ContentValues();
-
         Object clazz = testObject;
-        Field[] objVar = clazz.getClass().getDeclaredFields();
-        String[] supportArray = fields.clone();
-        ArrayList<Object> obj = new ArrayList<>();
-
-        for(int i = 0; i < objVar.length; i++){
-            Object o = new Object();
-            try {
-                 o = objVar[i].get(clazz);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-
-            obj.add(o);
-        }
-
-        for(int i = 0; i < supportArray.length / 2; i++)
-        {
-            String temp = supportArray[i];
-            supportArray[i] = supportArray[supportArray.length - i - 1];
-            supportArray[supportArray.length - i - 1] = temp;
-        }
-
 
         openCoonection();
-        baseDB.insert(table, supportArray, objVar,obj);
+        baseDB.insert(table, fields,clazz);
         closeConnection();
 
     }
