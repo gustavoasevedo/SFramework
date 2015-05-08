@@ -73,10 +73,10 @@ public class TestTable {
 
     public void insert(TestObject testObject){
 
-        Object clazz = testObject;
+        Object insertObject = testObject;
 
         openCoonection();
-        baseDB.insert(table, fields,clazz);
+        baseDB.insert(table, fields,insertObject);
         closeConnection();
 
     }

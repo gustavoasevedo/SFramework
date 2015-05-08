@@ -28,8 +28,7 @@ public class BaseDB extends SQLiteOpenHelper {
         super(context, database, null, version);
         this.context = context;
     }
-
-    //Create all tables from the application
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -54,7 +53,14 @@ public class BaseDB extends SQLiteOpenHelper {
         onCreate(getWritableDatabase());
     }
 
-    //Create a table based on received parameters
+    /**
+     * Create a table based on received parameters
+     *
+     * @param db Sqlite Database
+     * @param table Name of the table
+     * @param coluns Colluns of the table
+     * @param pk Table Primary Key
+     */
     public void createTable(SQLiteDatabase db,String table,List<BDCreate> coluns,String pk){
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE IF NOT EXISTS ");
@@ -81,16 +87,23 @@ public class BaseDB extends SQLiteOpenHelper {
         db.execSQL(sb.toString());
     }
 
-    //Receive values from another class and insert on a table
-    public Long insert(String table, String[] fields, Object clazz) {
+    /**
+     * Receive values from another class and insert on a table.
+     *
+     * @param table Name of the table
+     * @param fields Colluns of the table
+     * @param insertObject Generic Object with the values will be put in the table
+     * @return
+     */
+    public Long insert(String table, String[] fields, Object insertObject) {
 
-        Field[] objVar = clazz.getClass().getDeclaredFields();
+        Field[] objVar = insertObject.getClass().getDeclaredFields();
         ArrayList<Object> array = new ArrayList<>();
 
         for(int i = 0; i < objVar.length; i++){
             Object o = new Object();
             try {
-                o = objVar[i].get(clazz);
+                o = objVar[i].get(insertObject);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -131,17 +144,31 @@ public class BaseDB extends SQLiteOpenHelper {
     }
 
 
-    //Receive table and coluns to return a generic select on the table
-    public Cursor get(String table, String[] coluns) {
+    /**
+     * Receive table and coluns to return a generic select on the table
+     *
+     * @param table Name of the table
+     * @param colluns Colluns of the table
+     * @return
+     */
+    public Cursor get(String table, String[] colluns) {
 
-        Cursor c = getWritableDatabase().query(table, coluns, null, null,
+        Cursor c = getWritableDatabase().query(table, colluns, null, null,
                 null, null, null);
 
         return c;
     }
 
 
-    //Receive table, coluns, and one or more arguments and run a filtered select on table.
+    /**
+     * Receive table, coluns, and one or more arguments and run a filtered select on table.
+     *
+     * @param table Name of the table
+     * @param coluns Colluns of the table
+     * @param fields Name of the fields who will be the filter
+     * @param args Values of the filter
+     * @return
+     */
     public Cursor getWhere(String table, String[] coluns, String[] fields,String[] args) {
 
         StringBuilder sb = new StringBuilder();
