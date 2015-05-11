@@ -11,19 +11,21 @@ import com.dss.sframework.R;
  */
 public class MainHelper {
 
-    public Button btInsert, btSelect,btnJson;
+    public Button btInsert, btSelect,btnJson,btnJsonList;
 
     public void MainActivity (Context context){
         btInsert = (Button) ((Activity)context).findViewById(R.id.btInsert);
         btSelect = (Button) ((Activity)context).findViewById(R.id.btSelect);
         btnJson = (Button) ((Activity)context).findViewById(R.id.btnJson);
+        btnJsonList = (Button) ((Activity)context).findViewById(R.id.btnJsonList);
     }
 
-    public void setClickListener(View.OnClickListener insertClick,View.OnClickListener selectClick,View.OnClickListener jsonClick ){
+    public void setClickListener(View.OnClickListener insertClick,View.OnClickListener selectClick,View.OnClickListener jsonClick,View.OnClickListener jsonListClick ){
 
         btInsert.setOnClickListener(insertClick);
         btSelect.setOnClickListener(selectClick);
         btnJson.setOnClickListener(jsonClick);
+        btnJsonList.setOnClickListener(jsonListClick);
 
     }
 }

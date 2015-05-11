@@ -22,7 +22,7 @@ public class JsonFactory {
      * @return
      * @throws JSONException
      */
-    public String getJsonObject(Object object) throws JSONException{
+    public JSONObject getJsonObject(Object object) throws JSONException{
 
         Field[] objVar = object.getClass().getDeclaredFields();
         JSONObject j = new JSONObject();
@@ -43,8 +43,6 @@ public class JsonFactory {
             j.put(objVar[i].getName(), String.valueOf(array.get(i).toString()));
         }
 
-        String resp = j.toString();
-
-        return resp;
+        return j;
     }
 }
