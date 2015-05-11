@@ -15,32 +15,37 @@ import java.io.ByteArrayOutputStream;
  */
 public class ImageFactory {
 
-    public String convertPhotoToBase64(String sPhoto) {
+    /**
+     * Receive a bitmap image, convert and return a Base64 string
+     * @param bitmap
+     * @return
+     */
+    public String convertPhotoToBase64(Bitmap bitmap) {
         String encodedImage = null;
         try {
-            Bitmap bm = BitmapFactory.decodeFile(sPhoto);
 
-            bm = Bitmap.createScaledBitmap(bm, 1280, 720, false);
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 50, baos); // bm is the
-            // bitmap object
-            byte[] byteArrayImage = baos.toByteArray();
+            ByteArrayOutputStream bitmapArray = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bitmapArray); // bm is the
+            byte[] byteArrayImage = bitmapArray.toByteArray();
             encodedImage = Base64
                     .encodeToString(byteArrayImage, Base64.DEFAULT);
         } catch (Exception e) {
-            Log.e(e.toString(), "Error converting photo: " + sPhoto);
+            Log.e(e.toString(), "Error converting photo: " + bitmap);
         }
 
         return encodedImage;
     }
 
-    public Drawable convertPhotoFromBase64(String base64,Context context) {
+    /**
+     * Receive a base64 string and a context, convert and return a Bitmap image.
+     * @param base64
+     * @param context
+     * @return
+     */
+    public Bitmap convertPhotoFromBase64(String base64,Context context) {
         byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        Drawable thumb = new BitmapDrawable(context.getResources(), decodedImage);
-
-        return thumb;
+        return decodedImage;
     }
 }

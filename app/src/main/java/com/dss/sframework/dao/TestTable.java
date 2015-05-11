@@ -8,7 +8,6 @@ import android.util.Log;
 import com.dss.sframework.objects.BDCreate;
 import com.dss.sframework.objects.TestObject;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +27,8 @@ public class TestTable {
 
     public TestTable(Context context){
         super();
-        baseDB = new BaseDB(context);
+        InitializeDB initializeDB = new InitializeDB();
+        baseDB = new BaseDB(context,initializeDB.getDbName(),initializeDB.getVersion());
         this.context = context;
     }
 
@@ -52,7 +52,8 @@ public class TestTable {
     }
 
     public void openCoonection(){
-        this.baseDB = new BaseDB(context);
+        InitializeDB initializeDB = new InitializeDB();
+        this.baseDB = new BaseDB(context,initializeDB.getDbName(),initializeDB.getVersion());
         baseDB.setTable(table);
         db = baseDB.getWritableDatabase();
     }
@@ -79,12 +80,6 @@ public class TestTable {
         baseDB.insert(table, fields,insertObject);
         closeConnection();
 
-    }
-
-    public void update(){
-        openCoonection();
-        baseDB.newUpdate();
-        closeConnection();
     }
 
     public ArrayList<TestObject> selectList(){

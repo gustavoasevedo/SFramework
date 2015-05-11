@@ -19,19 +19,15 @@ import com.dss.sframework.objects.BDCreate;;
 
 public class BaseDB extends SQLiteOpenHelper {
 
-    private static final String database = "testeDB"; // Database Name
-    private static final int version = 1; // Database Version
+    private  String database ; // Database Name
+    private int version; // Database Version
     private String table;
     Context context;
 
-    public BaseDB(Context context) {
-        super(context, database, null, version);
-        this.context = context;
-    }
-    
-    @Override
-    public void onCreate(SQLiteDatabase db) {
 
+    public BaseDB(Context context,String dbName, int dbVersion) {
+        super(context, dbName, null, dbVersion);
+        this.context = context;
     }
 
     @Override
@@ -41,16 +37,6 @@ public class BaseDB extends SQLiteOpenHelper {
         sb.append(getTable());
         db.execSQL(sb.toString());
         onCreate(db);
-    }
-
-    public void newUpdate() {
-
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("DROP TABLE IF EXISTS ");
-        sb.append(getTable());
-        getWritableDatabase().execSQL(sb.toString());
-        onCreate(getWritableDatabase());
     }
 
     /**
@@ -202,4 +188,19 @@ public class BaseDB extends SQLiteOpenHelper {
     public void setTable(String table) {
         this.table = table;
     }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+    }
+
+
 }
