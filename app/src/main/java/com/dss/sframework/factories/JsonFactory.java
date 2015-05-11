@@ -40,7 +40,23 @@ public class JsonFactory {
         }
 
         for(int i = objVar.length - 1; i >= 0; i--){
-            j.put(objVar[i].getName(), String.valueOf(array.get(i).toString()));
+
+            //Verify if variable is numeric
+            if (objVar[i].getType() == Integer.class || objVar[i].getType() == Long.class || objVar[i].getType() == Double.class || objVar[i].getType() == int.class ){
+
+                j.put(objVar[i].getName(), Integer.valueOf(array.get(i).toString()));
+
+                //Verify if variable is text
+            }else if (objVar[i].getType() == String.class || objVar[i].getType() == char.class) {
+
+                j.put(objVar[i].getName(), array.get(i).toString());
+
+                //Verify if variable is boolean
+            }else if(objVar[i].getType() == Boolean.class ){
+
+                j.put(objVar[i].getName(), Boolean.valueOf(array.get(i).toString()));
+            }
+
         }
 
         return j;

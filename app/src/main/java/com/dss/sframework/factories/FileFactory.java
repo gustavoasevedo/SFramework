@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class FileFactory {
 
-    private static final String PIC_PATH = "//Teste//";
+    private String PATH;
     Context context;
 
 
@@ -25,7 +25,7 @@ public class FileFactory {
             File sd = Environment.getExternalStorageDirectory();;
 
             if (sd.canWrite()) {
-                File directory = new File(sd, PIC_PATH);
+                File directory = new File(sd, getPATH());
 
                 if (!directory.exists()) {
                     directory.mkdirs();
@@ -46,5 +46,14 @@ public class FileFactory {
         boolean ok = file.delete();
 
         return ok;
+    }
+
+
+    public String getPATH() {
+        return PATH;
+    }
+
+    public void setPATH(String PATH) {
+        this.PATH = PATH;
     }
 }

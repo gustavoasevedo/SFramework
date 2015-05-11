@@ -1,11 +1,16 @@
 package com.dss.sframework.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.dss.sframework.dao.TestTable;
+import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.MainHelper;
 import com.dss.sframework.objects.TestObject;
@@ -21,13 +26,17 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
-
+    String image;
+    ImageFactory imageFactory;
+    MainHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        imageFactory = new ImageFactory();
+        helper = new MainHelper();
 
         TestTable testTable = new TestTable(MainActivity.this);
         testTable.create();
@@ -37,9 +46,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void initLayout(){
-        MainHelper helper = new MainHelper();
         helper.MainActivity(this);
-        helper.setClickListener(insertClick, selectClick,jsonClick,jsonListClick);
+        helper.setClickListener(insertClick, selectClick,jsonClick,jsonListClick,toBase64Click,fromBase64Click);
     }
 
     public View.OnClickListener selectClick = new View.OnClickListener(){
@@ -66,8 +74,8 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onClick(View v){
             TestObject testObject = new TestObject(4,"nome","04-05-2015");
-            TestObject testObject2 = new TestObject(4,"nome do zé","05-05-2015");
-            TestObject testObject3 = new TestObject(4,"nome do zé antonho","06-05-2015");
+            TestObject testObject2 = new TestObject(5,"nome do zÃ©","05-05-2015");
+            TestObject testObject3 = new TestObject(6,"nome do zÃ© antonho","06-05-2015");
 
             ArrayList<Object> arrayList = new ArrayList<>();
             arrayList.add(testObject2);
@@ -116,6 +124,36 @@ public class MainActivity extends ActionBarActivity {
             String json = jsonObject.toString();
 
             Toast.makeText(MainActivity.this,json,Toast.LENGTH_LONG).show();
+        }
+    };
+
+    public View.OnClickListener toBase64Click = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
+
+            String base64 = imageFactory.convertPhotoToBase64(bitmap);
+
+            MainActivity.this.image = base64;
+
+            Toast.makeText(MainActivity.this,base64,Toast.LENGTH_LONG).show();
+
+            helper.btnfromBase64.setVisibility(View.VISIBLE);
+
+        }
+    };
+
+    public View.OnClickListener fromBase64Click = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+
+
+            Bitmap bitmap = imageFactory.convertPhotoFromBase64(image,MainActivity.this);
+
+            Drawable thumb = new BitmapDrawable(getResources(), bitmap);
+
+            helper.imgBase64.setImageDrawable(thumb);
         }
     };
 
