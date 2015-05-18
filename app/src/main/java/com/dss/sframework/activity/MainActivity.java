@@ -27,7 +27,6 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     String image;
-    ImageFactory imageFactory;
     MainHelper helper;
 
     @Override
@@ -35,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imageFactory = new ImageFactory();
+
         helper = new MainHelper();
 
         TestTable testTable = new TestTable(MainActivity.this);
@@ -82,15 +81,14 @@ public class MainActivity extends ActionBarActivity {
             arrayList.add(testObject3);
 
 
-            JsonFactory jsonFactory = new JsonFactory();
             Object send = testObject;
             JSONObject json= null;
 
             try {
-                json = jsonFactory.getJsonObject(send);
+                json = JsonFactory.getJsonObject(send);
                 JSONArray jsonArray = new JSONArray();
                 for(Object i:arrayList){
-                    jsonArray.put(jsonFactory.getJsonObject(i));
+                    jsonArray.put(JsonFactory.getJsonObject(i));
                 }
 
                 json.put("Lista",jsonArray);
@@ -110,12 +108,11 @@ public class MainActivity extends ActionBarActivity {
             TestObject testObject = new TestObject(4,"nome","04-05-2015");
 
 
-            JsonFactory jsonFactory = new JsonFactory();
             Object send = testObject;
             JSONObject jsonObject = null;
             try {
 
-                jsonObject = jsonFactory.getJsonObject(send);
+                jsonObject = JsonFactory.getJsonObject(send);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -133,7 +130,7 @@ public class MainActivity extends ActionBarActivity {
 
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
 
-            String base64 = imageFactory.convertPhotoToBase64(bitmap);
+            String base64 = ImageFactory.convertPhotoToBase64(bitmap);
 
             MainActivity.this.image = base64;
 
@@ -149,7 +146,7 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View v){
 
 
-            Bitmap bitmap = imageFactory.convertPhotoFromBase64(image,MainActivity.this);
+            Bitmap bitmap = ImageFactory.convertPhotoFromBase64(image,MainActivity.this);
 
             Drawable thumb = new BitmapDrawable(getResources(), bitmap);
 

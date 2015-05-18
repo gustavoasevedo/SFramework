@@ -13,14 +13,14 @@ import java.io.ByteArrayOutputStream;
 /**
  * Created by gustavo.vieira on 06/05/2015.
  */
-public class ImageFactory {
+public abstract class ImageFactory {
 
     /**
      * Receive a bitmap image, convert and return a Base64 string
      * @param bitmap
      * @return
      */
-    public String convertPhotoToBase64(Bitmap bitmap) {
+    public static String convertPhotoToBase64(Bitmap bitmap) {
         String encodedImage = null;
         try {
 
@@ -42,7 +42,7 @@ public class ImageFactory {
      * @param context
      * @return
      */
-    public Bitmap convertPhotoFromBase64(String base64,Context context) {
+    public static Bitmap convertPhotoFromBase64(String base64,Context context) {
         byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 

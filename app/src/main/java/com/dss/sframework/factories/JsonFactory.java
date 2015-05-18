@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by gustavo.vieira on 07/05/2015.
  */
-public class JsonFactory {
+public abstract class JsonFactory {
 
     /**
      * Receive a generic object and return a json String
@@ -22,7 +22,7 @@ public class JsonFactory {
      * @return
      * @throws JSONException
      */
-    public JSONObject getJsonObject(Object object) throws JSONException{
+    public static JSONObject getJsonObject(Object object) throws JSONException{
 
         Field[] objVar = object.getClass().getDeclaredFields();
         JSONObject j = new JSONObject();

@@ -27,8 +27,8 @@ public class TestTable {
 
     public TestTable(Context context){
         super();
-        InitializeDB initializeDB = new InitializeDB();
-        baseDB = new BaseDB(context,initializeDB.getDbName(),initializeDB.getVersion());
+
+        baseDB = new BaseDB(context,InitializeDB.getDbName(),InitializeDB.getVersion());
         this.context = context;
     }
 
@@ -52,8 +52,7 @@ public class TestTable {
     }
 
     public void openCoonection(){
-        InitializeDB initializeDB = new InitializeDB();
-        this.baseDB = new BaseDB(context,initializeDB.getDbName(),initializeDB.getVersion());
+        this.baseDB = new BaseDB(context,InitializeDB.getDbName(),InitializeDB.getVersion());
         baseDB.setTable(table);
         db = baseDB.getWritableDatabase();
     }

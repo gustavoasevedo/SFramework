@@ -11,13 +11,14 @@ import java.io.IOException;
  */
 public class FileFactory {
 
-    private String PATH;
+    private String path;
     Context context;
 
 
 
-    public FileFactory(Context context) {
+    public FileFactory(Context context,String path)   {
         this.context = context;
+        this.path = path;
     }
 
     public String getFilePath() throws IOException {
@@ -50,10 +51,10 @@ public class FileFactory {
 
 
     public String getPATH() {
-        return PATH;
+        return path;
     }
 
     public void setPATH(String PATH) {
-        this.PATH = PATH;
+        this.path = PATH;
     }
 }
