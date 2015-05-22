@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.dss.sframework.objects.BDCreate;
 import com.dss.sframework.objects.TestObject;
+import com.dss.sframework.util.ConstantDB;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class TestTable {
     public TestTable(Context context){
         super();
 
-        baseDB = new BaseDB(context,InitializeDB.getDbName(),InitializeDB.getVersion());
+        baseDB = new BaseDB(context, ConstantDB.getDbName(), ConstantDB.getVersion());
         this.context = context;
     }
 
@@ -52,7 +53,7 @@ public class TestTable {
     }
 
     public void openCoonection(){
-        this.baseDB = new BaseDB(context,InitializeDB.getDbName(),InitializeDB.getVersion());
+        this.baseDB = new BaseDB(context, ConstantDB.getDbName(), ConstantDB.getVersion());
         baseDB.setTable(table);
         db = baseDB.getWritableDatabase();
     }
