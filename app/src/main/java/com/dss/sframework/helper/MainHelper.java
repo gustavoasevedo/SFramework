@@ -2,39 +2,44 @@ package com.dss.sframework.helper;
 
 import android.app.Activity;
 import android.content.Context;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+
+import android.widget.TextView;
 
 import com.dss.sframework.R;
+import com.dss.sframework.navigation.NavigationDrawer;
+import com.dss.sframework.util.ConstantNavigationDrawer;
+import com.dss.sframework.util.DeviceInfo;
 
 /**
  * Created by gustavo.vieira on 07/05/2015.
  */
 public class MainHelper {
 
-    public Button btInsert, btSelect,btnJson,btnJsonList,btntoBase64,btnfromBase64;
-    public ImageView imgBase64;
+    private TextView textVersionNumber,textVersionName;
+    private Toolbar toolbar;
 
-    public void MainActivity (View view){
-        btInsert = (Button) view.findViewById(R.id.btInsert);
-        btSelect = (Button) view.findViewById(R.id.btSelect);
-        btnJson = (Button) view.findViewById(R.id.btnJson);
-        btnJsonList = (Button) view.findViewById(R.id.btnJsonList);
-        btntoBase64 = (Button) view.findViewById(R.id.btntoBase64);
-        btnfromBase64 = (Button) view.findViewById(R.id.btnfromBase64);
-        imgBase64 = (ImageView) view.findViewById(R.id.imgBase64);
+    public void MainActivity (Context context){
+        textVersionNumber = (TextView) ((Activity)context).findViewById(R.id.textVersionNumber);
+        textVersionName = (TextView) ((Activity)context).findViewById(R.id.textVersionName);
     }
 
-    public void setClickListener(View.OnClickListener insertClick,View.OnClickListener selectClick,View.OnClickListener jsonClick,View.OnClickListener jsonListClick,
-                                 View.OnClickListener toBase64Click,View.OnClickListener fromBase64Click){
-
-        btInsert.setOnClickListener(insertClick);
-        btSelect.setOnClickListener(selectClick);
-        btnJson.setOnClickListener(jsonClick);
-        btnJsonList.setOnClickListener(jsonListClick);
-        btntoBase64.setOnClickListener(toBase64Click);
-        btnfromBase64.setOnClickListener(fromBase64Click);
+    public void setText(Context context){
+        DeviceInfo deviceInfo = new DeviceInfo(context);
+        textVersionNumber.setText("Version Number: " + String.valueOf(deviceInfo.getVersionCode()));
+        textVersionName.setText("Version Name: " +  deviceInfo.getVersionName());
 
     }
+
+    public void startNavigation(Context context){
+
+        toolbar = (Toolbar) ((Activity)context).findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        ((ActionBarActivity)context).setSupportActionBar(toolbar); // Setting toolbar as the ActionBar with setSupportActionBar() call
+
+        NavigationDrawer navigationDrawer = new NavigationDrawer(ConstantNavigationDrawer.getTITLES(),ConstantNavigationDrawer.getICONS(),ConstantNavigationDrawer.getNAME(),
+                ConstantNavigationDrawer.getEMAIL(),ConstantNavigationDrawer.getPROFILE(),context);
+        navigationDrawer.initDrawer(context, toolbar);
+    }
+
 }

@@ -17,8 +17,9 @@ import com.dss.sframework.R;
 import com.dss.sframework.dao.TestTable;
 import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
-import com.dss.sframework.helper.MainHelper;
+import com.dss.sframework.helper.DemoFragmentHelper;
 import com.dss.sframework.objects.TestObject;
+import com.dss.sframework.util.ConstantIntent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,18 +35,18 @@ public class DemoFragment extends Fragment {
     Context context;
     Activity activity;
     String image;
-    MainHelper helper;
+    DemoFragmentHelper helper;
     View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragmentbuttons, container, false);
+        view = inflater.inflate(R.layout.demofragment, container, false);
 
         context = getActivity();
         activity = ((Activity)context);
 
-        helper = new MainHelper();
+        helper = new DemoFragmentHelper();
 
         TestTable testTable = new TestTable(context);
         testTable.create();
@@ -56,8 +57,8 @@ public class DemoFragment extends Fragment {
     }
 
     public void initLayout(){
-        helper.MainActivity(view);
-        helper.setClickListener(insertClick, selectClick, jsonClick, jsonListClick, toBase64Click, fromBase64Click);
+        helper.DemoFragment(view);
+        helper.setClickListener(insertClick, selectClick, jsonClick, jsonListClick, toBase64Click, fromBase64Click,intentClick);
     }
 
     public View.OnClickListener selectClick = new View.OnClickListener(){
@@ -84,8 +85,8 @@ public class DemoFragment extends Fragment {
         @Override
         public void onClick(View v){
             TestObject testObject = new TestObject(4,"nome","04-05-2015");
-            TestObject testObject2 = new TestObject(5,"nome do zé","05-05-2015");
-            TestObject testObject3 = new TestObject(6,"nome do zé antonho","06-05-2015");
+            TestObject testObject2 = new TestObject(5,"nome do zï¿½","05-05-2015");
+            TestObject testObject3 = new TestObject(6,"nome do zï¿½ antonho","06-05-2015");
 
             ArrayList<Object> arrayList = new ArrayList<>();
             arrayList.add(testObject2);
@@ -157,11 +158,18 @@ public class DemoFragment extends Fragment {
         public void onClick(View v){
 
 
-            Bitmap bitmap = ImageFactory.convertPhotoFromBase64(image,context);
+            Bitmap bitmap = ImageFactory.convertPhotoFromBase64(image, context);
 
             Drawable thumb = new BitmapDrawable(getResources(), bitmap);
 
             helper.imgBase64.setImageDrawable(thumb);
+        }
+    };
+
+    public View.OnClickListener intentClick = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            Toast.makeText(context, ConstantIntent.getMAIN(),Toast.LENGTH_LONG).show();
         }
     };
 

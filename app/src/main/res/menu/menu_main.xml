@@ -5,14 +5,14 @@
     <item
         android:id="@+id/action_close"
         android:orderInCategory="300"
-        android:title="Search"
+        android:title="Close"
         android:icon="@drawable/ic_close"
         app:showAsAction="ifRoom"
         ></item>
 <item
 android:id="@+id/action_reload"
 android:orderInCategory="200"
-android:title="User"
+android:title="Reaload"
 android:icon="@drawable/ic_reload"
 app:showAsAction="ifRoom"></item>
     <item
@@ -20,7 +20,9 @@ app:showAsAction="ifRoom"></item>
         android:orderInCategory="100"
         android:title="Search"
         android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+
         ></item>
 
     </menu>
