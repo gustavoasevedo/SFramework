@@ -1,9 +1,5 @@
 package com.dss.sframework.factories;
 
-import android.content.Context;
-
-import com.dss.sframework.objects.TestObject;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,4 +57,6 @@ public abstract class JsonFactory {
 
         return j;
     }
+
+
 }

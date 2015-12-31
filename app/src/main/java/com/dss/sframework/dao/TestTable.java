@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.dss.sframework.objects.BDCreate;
-import com.dss.sframework.objects.TestObject;
-import com.dss.sframework.util.ConstantDB;
+import com.dss.sframework.objects.TestObject.TestObject;
+import com.dss.sframework.constant.ConstantDB;
 
 import java.util.ArrayList;
 

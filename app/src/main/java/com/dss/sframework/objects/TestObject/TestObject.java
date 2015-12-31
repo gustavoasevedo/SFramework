@@ -1,12 +1,18 @@
-package com.dss.sframework.objects;
+package com.dss.sframework.objects.TestObject;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by gustavo.vieira on 04/05/2015.
  */
 public class TestObject {
 
+    @SerializedName("id")
     public int id;
+
+    @SerializedName("name")
     public String name;
+
+    @SerializedName("date")
     public String date;
 
     public TestObject(int id, String name, String date) {

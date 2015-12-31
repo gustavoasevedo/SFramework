@@ -28,7 +28,7 @@ public class DemoFragmentHelper {
     }
 
     public void setClickListener(View.OnClickListener insertClick,View.OnClickListener selectClick,View.OnClickListener jsonClick,View.OnClickListener jsonListClick,
-                                 View.OnClickListener toBase64Click,View.OnClickListener fromBase64Click,View.OnClickListener intentClick){
+                                 View.OnClickListener toBase64Click,View.OnClickListener fromBase64Click,View.OnClickListener intentClick,View.OnClickListener imgClick){
 
         btInsert.setOnClickListener(insertClick);
         btSelect.setOnClickListener(selectClick);
@@ -37,6 +37,6 @@ public class DemoFragmentHelper {
         btntoBase64.setOnClickListener(toBase64Click);
         btnfromBase64.setOnClickListener(fromBase64Click);
         btnIntent.setOnClickListener(intentClick);
-
+        imgBase64.setOnClickListener(imgClick);
     }
 }

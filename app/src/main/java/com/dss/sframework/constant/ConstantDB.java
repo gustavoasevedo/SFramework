@@ -1,4 +1,4 @@
-package com.dss.sframework.util;
+package com.dss.sframework.constant;
 
 import android.content.Context;
 

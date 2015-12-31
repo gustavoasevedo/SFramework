@@ -1,4 +1,4 @@
-package com.shadow.sframework;
+package com.dss.sframework;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

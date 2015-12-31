@@ -18,8 +18,10 @@ import com.dss.sframework.dao.TestTable;
 import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.DemoFragmentHelper;
-import com.dss.sframework.objects.TestObject;
-import com.dss.sframework.util.ConstantIntent;
+import com.dss.sframework.objects.TestObject.TestObject;
+import com.dss.sframework.constant.ConstantIntent;
+import com.dss.sframework.objects.TestObject.TestObjectList;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,7 +60,7 @@ public class DemoFragment extends Fragment {
 
     public void initLayout(){
         helper.DemoFragment(view);
-        helper.setClickListener(insertClick, selectClick, jsonClick, jsonListClick, toBase64Click, fromBase64Click,intentClick);
+        helper.setClickListener(insertClick, selectClick, jsonClick, jsonListClick, toBase64Click, fromBase64Click,intentClick,imageClick);
     }
 
     public View.OnClickListener selectClick = new View.OnClickListener(){
@@ -85,8 +87,8 @@ public class DemoFragment extends Fragment {
         @Override
         public void onClick(View v){
             TestObject testObject = new TestObject(4,"nome","04-05-2015");
-            TestObject testObject2 = new TestObject(5,"nome do z�","05-05-2015");
-            TestObject testObject3 = new TestObject(6,"nome do z� antonho","06-05-2015");
+            TestObject testObject2 = new TestObject(5,"nome do ze","05-05-2015");
+            TestObject testObject3 = new TestObject(6,"nome do ze antonho","06-05-2015");
 
             ArrayList<Object> arrayList = new ArrayList<>();
             arrayList.add(testObject2);
@@ -110,6 +112,10 @@ public class DemoFragment extends Fragment {
 
             String result = json.toString();
 
+            //Desserialize a list
+            Gson serializer = new Gson();
+            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
+
             Toast.makeText(context,result,Toast.LENGTH_LONG).show();
         }
     };
@@ -132,6 +138,11 @@ public class DemoFragment extends Fragment {
 
             String json = jsonObject.toString();
 
+            //Desserialize one item
+            Gson serializer = new Gson();
+            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("cadastros", "[" + json + "]"), TestObjectList.class);
+
+
             Toast.makeText(context,json,Toast.LENGTH_LONG).show();
         }
     };
@@ -149,6 +160,8 @@ public class DemoFragment extends Fragment {
             Toast.makeText(context,base64,Toast.LENGTH_LONG).show();
 
             helper.btnfromBase64.setVisibility(View.VISIBLE);
+
+
 
         }
     };
@@ -173,5 +186,12 @@ public class DemoFragment extends Fragment {
         }
     };
 
+    public View.OnClickListener imageClick = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+
+            ImageFactory.showDialogImage(context, "Teste", "http://icons.iconarchive.com/icons/carlosjj/google-jfk/128/android-icon.png");
+        }
+    };
 
 }

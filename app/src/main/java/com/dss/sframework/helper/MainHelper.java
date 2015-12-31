@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.dss.sframework.R;
 import com.dss.sframework.navigation.NavigationDrawer;
-import com.dss.sframework.util.ConstantNavigationDrawer;
+import com.dss.sframework.constant.ConstantNavigationDrawer;
 import com.dss.sframework.util.DeviceInfo;
 
 /**

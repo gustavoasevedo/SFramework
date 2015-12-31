@@ -29,7 +29,6 @@ public class DeviceInfo {
         PackageInfo pInfo = getPackageInfo();
 
         return pInfo.versionName;
-//		      code=pInfo.versionCode;
 
     }
 
