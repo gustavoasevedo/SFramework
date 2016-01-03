@@ -12,9 +12,6 @@ import com.dss.sframework.helper.MainHelper;
 import com.dss.sframework.R;
 import com.dss.sframework.constant.ConstantIntent;
 import com.dss.sframework.util.MintUtils;
-import com.dss.sframework.util.ParseUtil;
-import com.parse.Parse;
-import com.parse.ParseInstallation;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -32,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainactivity);
+        setContentView(R.layout.activity_main);
 
         ParsePushBroadcastReceiver.setLastEnabled(ConstantIntent.getMAIN(), MainActivity.this);
         MintUtils.mintStart(MainActivity.this);

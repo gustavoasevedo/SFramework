@@ -16,15 +16,15 @@ import com.dss.sframework.R;
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
-    // IF the viaew under inflation and population is header or Item
+    // IF the viaew under inflation and population is menu_header or Item
     private static final int TYPE_ITEM = 1;
 
-    private String mNavTitles[]; // String Array to store the passed titles Value from mainactivity.java
-    private int mIcons[];       // Int Array to store the passed icons resource value from mainactivity.java
+    private String mNavTitles[]; // String Array to store the passed titles Value from activity_main.java
+    private int mIcons[];       // Int Array to store the passed icons resource value from activity_main.java
 
-    private String name;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
-    private String email;       //String Resource for header view email
+    private String name;        //String Resource for menu_header View Name
+    private int profile;        //int Resource for menu_header view profile picture
+    private String email;       //String Resource for menu_header view email
     Context context;
 
 
@@ -57,10 +57,10 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             else{
 
 
-                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
-                email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
-                profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
-                Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
+                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from menu_headereader.xml for name
+                email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from menu_header.xmlr.xml for email
+                profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from menu_headereader.xml for profile pic
+                Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type menu_header view
             }
 
 
@@ -96,7 +96,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
 
     //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
-    //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate header.xml
+    //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate menu_header.xmlr.xml
     // if the viewType is TYPE_HEADER
     // and pass it to the view holder
 
@@ -104,7 +104,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public NavigationDrawerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_item,parent,false); //Inflating the layout
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_navigation_item,parent,false); //Inflating the layout
 
             ViewHolder vhItem = new ViewHolder(v,viewType,context); //Creating ViewHolder and passing the object of type view
 
@@ -114,7 +114,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
         } else if (viewType == TYPE_HEADER) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header,parent,false); //Inflating the layout
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_header,parent,false); //Inflating the layout
 
             ViewHolder vhHeader = new ViewHolder(v,viewType,context); //Creating ViewHolder and passing the object of type view
 
@@ -131,14 +131,14 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     // which view type is being created 1 for item row
     @Override
     public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder holder, int position) {
-        if(holder.Holderid ==1) {                              // as the list view is going to be called after the header view so we decrement the
+        if(holder.Holderid ==1) {                              // as the list view is going to be called after the menu_header view so we decrement the
             // position by 1 and pass it to the holder while setting the text and image
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
             holder.imageView.setImageResource(mIcons[position -1]);// Settimg the image with array of our icons
         }
         else{
 
-            holder.profile.setImageResource(profile);           // Similarly we set the resources for header view
+            holder.profile.setImageResource(profile);           // Similarly we set the resources for menu_header view
             holder.Name.setText(name);
             holder.email.setText(email);
         }
@@ -147,7 +147,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     // This method returns the number of items present in the list
     @Override
     public int getItemCount() {
-        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the header view.
+        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the menu_header view.
     }
 
 

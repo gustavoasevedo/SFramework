@@ -15,6 +15,8 @@ public abstract class ConstantIntent {
 
     private static final String DEMOFRAGMENT = getFRAGMENTPATH() + ".DemoFragment";
 
+    private static final String LISTFRAGMENT = getFRAGMENTPATH() + ".ListFragment";
+
     public static String getINTENTPATH() {
         return INTENTPATH;
     }
@@ -33,5 +35,9 @@ public abstract class ConstantIntent {
 
     public static String getFRAGMENTPATH() {
         return FRAGMENTPATH;
+    }
+
+    public static String getLISTFRAGMENT() {
+        return LISTFRAGMENT;
     }
 }

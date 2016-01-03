@@ -15,7 +15,7 @@
 
             <include
                 android:id="@+id/tool_bar"
-                layout="@layout/toolbar">
+                layout="@layout/menu_toolbar">
             </include>
             <LinearLayout
                 android:id="@+id/fragment_container"

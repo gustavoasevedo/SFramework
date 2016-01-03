@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.dss.sframework.R;
 import com.dss.sframework.adapter.NavigationDrawerAdapter;
 import com.dss.sframework.fragment.DemoFragment;
+import com.dss.sframework.fragment.ListFragment;
 
 /**
  * Created by gustavo.vieira on 22/05/2015.
@@ -29,8 +30,8 @@ public class NavigationDrawer {
 
     String TITLES[];
     int ICONS[];
-    //Similarly we Create a String Resource for the name and email in the header view
-    //And we also create a int resource for profile picture in the header view
+    //Similarly we Create a String Resource for the name and email in the menu_header view
+    //And we also create a int resource for profile picture in the menu_header view
     String NAME;
     String EMAIL;
     int PROFILE;
@@ -58,8 +59,8 @@ public class NavigationDrawer {
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
 
         mAdapter = new NavigationDrawerAdapter(TITLES,ICONS,NAME,EMAIL,PROFILE,context);       // Creating the Adapter of NavigationDrawerAdapter class(which we are going to see in a bit)
-        // And passing the titles,icons,header view name, header view email,
-        // and header view profile picture
+        // And passing the titles,icons,menu_header view name, menu_header view email,
+        // and menu_header view profile picture
 
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
 
@@ -89,6 +90,11 @@ public class NavigationDrawer {
                             fragmentTransaction.commit();
                             break;
                         case "2":
+                            FragmentManager fragmentManager2 = ((Activity) c).getFragmentManager();
+                            FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                            ListFragment listFragment = new ListFragment();
+                            fragmentTransaction2.replace(R.id.fragment_container, listFragment, "listFragment");
+                            fragmentTransaction2.commit();
                             break;
                         case "3":
                             Toast.makeText(context,"3",Toast.LENGTH_SHORT).show();

@@ -43,7 +43,7 @@ public class DemoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.demofragment, container, false);
+        view = inflater.inflate(R.layout.fragment_buttons, container, false);
 
         context = getActivity();
         activity = ((Activity)context);
@@ -113,8 +113,8 @@ public class DemoFragment extends Fragment {
             String result = json.toString();
 
             //Desserialize a list
-            Gson serializer = new Gson();
-            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
+//            Gson serializer = new Gson();
+//            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
 
             Toast.makeText(context,result,Toast.LENGTH_LONG).show();
         }
@@ -139,8 +139,8 @@ public class DemoFragment extends Fragment {
             String json = jsonObject.toString();
 
             //Desserialize one item
-            Gson serializer = new Gson();
-            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("cadastros", "[" + json + "]"), TestObjectList.class);
+//            Gson serializer = new Gson();
+//            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", "[" + json + "]"), TestObjectList.class);
 
 
             Toast.makeText(context,json,Toast.LENGTH_LONG).show();
