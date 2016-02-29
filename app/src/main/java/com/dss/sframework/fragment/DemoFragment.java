@@ -18,10 +18,8 @@ import com.dss.sframework.dao.TestTable;
 import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.DemoFragmentHelper;
-import com.dss.sframework.objects.TestObject.TestObject;
+import com.dss.sframework.objects.TestObject;
 import com.dss.sframework.constant.ConstantIntent;
-import com.dss.sframework.objects.TestObject.TestObjectList;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +65,7 @@ public class DemoFragment extends Fragment {
         @Override
         public void onClick(View v){
             TestTable testTable = new TestTable(context);
-            TestObject testObject = testTable.selectWhere(4);
+            TestObject testObject = testTable.selectWhere(1);
             Toast.makeText(context, testObject.toString(), Toast.LENGTH_LONG).show();
         }
     };

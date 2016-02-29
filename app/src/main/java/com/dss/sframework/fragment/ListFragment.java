@@ -3,7 +3,6 @@ package com.dss.sframework.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,8 @@ import com.dss.sframework.R;
 import com.dss.sframework.adapter.ListAdapter;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.ListFragmentHelper;
-import com.dss.sframework.objects.TestObject.TestObject;
-import com.dss.sframework.objects.TestObject.TestObjectList;
+import com.dss.sframework.objects.TestObject;
+import com.dss.sframework.dto.TestObjectList;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

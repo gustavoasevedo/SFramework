@@ -9,7 +9,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import com.dss.sframework.objects.BDCreate;;
+
+import com.dss.sframework.annotations.BaseDBName;
+import com.dss.sframework.annotations.BaseDBPrimaryKey;
+import com.dss.sframework.annotations.BaseDBType;
+import com.dss.sframework.objects.BDCreate;
+import com.dss.sframework.annotations.BaseDBFlag;
+import com.dss.sframework.objects.BDInsert;
+import com.dss.sframework.util.KeyValuePair;;
 
 /**
  * Created by gustavo.vieira on 04/05/2015.
@@ -77,50 +84,63 @@ public class BaseDB extends SQLiteOpenHelper {
      * Receive values from another class and insert on a table.
      *
      * @param table Name of the table
-     * @param fields Colluns of the table
      * @param insertObject Generic Object with the values will be put in the table
      * @return
      */
-    public Long insert(String table, String[] fields, Object insertObject) {
+    public Long insert(String table, Object insertObject) throws Exception{
 
-        Field[] objVar = insertObject.getClass().getDeclaredFields();
-        ArrayList<Object> array = new ArrayList<>();
+        Field[] f = insertObject.getClass().getDeclaredFields();
 
-        for(int i = 0; i < objVar.length; i++){
-            Object o = new Object();
-            try {
-                o = objVar[i].get(insertObject);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+        ArrayList<BDInsert> inserts = new ArrayList<>();
+        BDInsert bdInsert;
+        Object o;
+
+
+        for(int i = 0; i < f.length; i++){
+            if (f[i].isAnnotationPresent(BaseDBFlag.class)){
+
+                f[i].setAccessible(true);
+                bdInsert = new BDInsert();
+                o = new Object();
+                try {
+                    o = f[i].get(insertObject);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+                bdInsert.setFieldName(f[i].getAnnotation(BaseDBName.class).value());
+                bdInsert.setField(f[i]);
+                bdInsert.setFieldValue(o);
+                inserts.add(bdInsert);
             }
-            array.add(o);
         }
 
-        for(int i = 0; i < fields.length / 2; i++)
-        {
-            String temp = fields[i];
-            fields[i] = fields[fields.length - i - 1];
-            fields[fields.length - i - 1] = temp;
-        }
+
+
 
         ContentValues values = new ContentValues();
 
-        for (int i = fields.length - 1; i >= 0; i--) {
+        for (BDInsert insert : inserts) {
 
             //Verify if variable is numeric
-            if (objVar[i].getType() == Integer.class || objVar[i].getType() == Long.class || objVar[i].getType() == Double.class || objVar[i].getType() == int.class ){
+            if (insert.getField().getType() == Integer.class ||
+                    insert.getField().getType() == Long.class ||
+                    insert.getField().getType() == Double.class ||
+                    insert.getField().getType() == int.class ){
 
-                values.put(fields[i], Integer.valueOf(array.get(i).toString()));
+                values.put(insert.getFieldName(), Integer.valueOf(insert.getFieldValue().toString()));
 
                 //Verify if variable is text
-            }else if (objVar[i].getType() == String.class || objVar[i].getType() == char.class) {
+            }else if (insert.getField().getType() == String.class || insert.getField().getType() == char.class) {
 
-                values.put(fields[i], array.get(i).toString());
+                values.put(insert.getFieldName(), insert.getFieldValue().toString());
 
                 //Verify if variable is boolean
-            }else if(objVar[i].getType() == Boolean.class ){
+            }else if(insert.getField().getType() == Boolean.class ){
 
-                values.put(fields[i], Boolean.valueOf(array.get(i).toString()));
+                values.put(insert.getFieldName(), Boolean.valueOf(insert.getFieldValue().toString()));
+            }else{
+                
             }
         }
 
@@ -137,9 +157,12 @@ public class BaseDB extends SQLiteOpenHelper {
      * @param colluns Colluns of the table
      * @return
      */
-    public Cursor get(String table, String[] colluns) {
+    public Cursor get(String table, ArrayList<String> colluns) {
 
-        Cursor c = getWritableDatabase().query(table, colluns, null, null,
+        String[] collumnames = new String[colluns.size()];
+        collumnames = colluns.toArray(collumnames);
+
+        Cursor c = getWritableDatabase().query(table, collumnames, null, null,
                 null, null, null);
 
         return c;
@@ -150,12 +173,15 @@ public class BaseDB extends SQLiteOpenHelper {
      * Receive table, coluns, and one or more arguments and run a filtered select on table.
      *
      * @param table Name of the table
-     * @param coluns Colluns of the table
+     * @param colluns Colluns of the table
      * @param fields Name of the fields who will be the filter
      * @param args Values of the filter
      * @return
      */
-    public Cursor getWhere(String table, String[] coluns, String[] fields,String[] args) {
+    public Cursor getWhere(String table, ArrayList<String> colluns, ArrayList<String> fields,String[] args) {
+
+        String[] collumnames = new String[colluns.size()];
+        collumnames = colluns.toArray(collumnames);
 
         StringBuilder sb = new StringBuilder();
 
@@ -166,16 +192,12 @@ public class BaseDB extends SQLiteOpenHelper {
         String Sfields = sb.toString();
         String query = Sfields.substring(0, Sfields.length() - 1);
 
-        Cursor c = getWritableDatabase().query(table, coluns, query, args,
+        Cursor c = getWritableDatabase().query(table, collumnames, query, args,
                 null, null, null);
 
         return c;
     }
 
-
-    public String getDatabase() {
-        return database;
-    }
 
     public int getVersion() {
         return version;
@@ -187,10 +209,6 @@ public class BaseDB extends SQLiteOpenHelper {
 
     public void setTable(String table) {
         this.table = table;
-    }
-
-    public void setDatabase(String database) {
-        this.database = database;
     }
 
     public void setVersion(int version) {

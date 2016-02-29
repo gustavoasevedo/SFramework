@@ -5,10 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.dss.sframework.annotations.BaseDBFlag;
+import com.dss.sframework.annotations.BaseDBName;
+import com.dss.sframework.annotations.BaseDBType;
 import com.dss.sframework.objects.BDCreate;
-import com.dss.sframework.objects.TestObject.TestObject;
+import com.dss.sframework.objects.TestObject;
 import com.dss.sframework.constant.ConstantDB;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
@@ -21,16 +25,31 @@ public class TestTable {
     private Context context;
 
     private final String table = "teste";
-    private final String[] fields = {"id","name","date"};
-    private final String[] types = {"INTEGER","TEXT","TEXT"};
-    private final String pk = "id";
+    private ArrayList<String> fields;
+    private ArrayList<String> types;
+    private String pk;
 
 
     public TestTable(Context context){
         super();
-
         baseDB = new BaseDB(context, ConstantDB.getDbName(), ConstantDB.getVersion());
         this.context = context;
+        Field[] f = TestObject.class.getDeclaredFields();
+
+        fields = new ArrayList<>();
+        types = new ArrayList<>();
+
+        for(int i = 0; i < f.length; i++){
+            f[i].setAccessible(true);
+            if (f[i].isAnnotationPresent(BaseDBFlag.class)){
+                fields.add(f[i].getAnnotation(BaseDBName.class).value());
+                types.add(f[i].getAnnotation(BaseDBType.class).value());
+            }
+            if(f[i].isAnnotationPresent(BaseDBFlag.class)){
+                pk = f[i].getAnnotation(BaseDBName.class).value();
+            }
+        }
+
     }
 
 
@@ -38,10 +57,10 @@ public class TestTable {
         ArrayList<BDCreate> bdCreates = new ArrayList<>();
         BDCreate bdCreate;
 
-        for(int i = 0; i < fields.length; i++) {
+        for(int i = 0; i < fields.size(); i++) {
             bdCreate = new BDCreate();
-            bdCreate.setFieldName(fields[i]);
-            bdCreate.setFieldType(types[i]);
+            bdCreate.setFieldName(fields.get(i));
+            bdCreate.setFieldType(types.get(i));
 
             bdCreates.add(bdCreate);
 
@@ -77,7 +96,7 @@ public class TestTable {
         Object insertObject = testObject;
 
         openCoonection();
-        baseDB.insert(table, fields,insertObject);
+        baseDB.insert(table, insertObject);
         closeConnection();
 
     }
@@ -109,7 +128,9 @@ public class TestTable {
 
     public TestObject selectWhere(int id){
         TestObject testObject = new TestObject();
-        String[] field = {fields[0]};
+        ArrayList<String> field = new ArrayList<>();
+        field.add("id");
+
         String[] values = {String.valueOf(id)};
 
         Cursor c = baseDB.getWhere(table, fields, field, values);
@@ -130,7 +151,14 @@ public class TestTable {
 
         ArrayList<TestObject> lTest = new ArrayList<>();
         TestObject testObject;
-        String[] field = {fields[1]};
+        ArrayList<String> field = new ArrayList<>();
+
+        try {
+            field.add(TestObject.class.getField("id").getName());
+        }catch (NoSuchFieldException e){
+
+        }
+
         String[] values = {name};
 
         openCoonection();
