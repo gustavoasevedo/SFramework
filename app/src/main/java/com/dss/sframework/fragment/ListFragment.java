@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.adapter.ListAdapter;
+import com.dss.sframework.async.UserSyncTask;
+import com.dss.sframework.dao.TestTable;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.ListFragmentHelper;
 import com.dss.sframework.model.TestObject;
@@ -36,6 +38,7 @@ public class ListFragment extends Fragment {
     View view;
     ListAdapter adapter;
     List<TestObject> lista;
+    TestTable testTable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +52,9 @@ public class ListFragment extends Fragment {
 
         initLayout();
 
-        loadList();
+        testTable = new TestTable(context);
+
+        ResultadoAtualizaTask(4);
 
         return view;
     }
@@ -59,39 +64,8 @@ public class ListFragment extends Fragment {
 
     }
 
-    public void loadList(){
-
-        TestObject testObject = new TestObject(4,"nome","04-05-2015");
-        TestObject testObject2 = new TestObject(5,"nome do ze","05-05-2015");
-        TestObject testObject3 = new TestObject(6,"nome do ze antonho","06-05-2015");
-
-        ArrayList<Object> arrayList = new ArrayList<>();
-        arrayList.add(testObject);
-        arrayList.add(testObject2);
-        arrayList.add(testObject3);
-
-        JSONObject json= new JSONObject();
-
-        try {
-            JSONArray jsonArray = new JSONArray();
-            for(Object i:arrayList){
-                jsonArray.put(JsonFactory.getJsonObject(i));
-            }
-
-            json.put("TestObjectList",jsonArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        //Desserialize a list
-        Gson serializer = new Gson();
-        TestObjectList testObjectList = serializer.fromJson(json.toString(),TestObjectList.class);
-        lista = testObjectList.list;
-        configureAdapter();
-
-    }
-
     public void configureAdapter(){
+        lista = testTable.selectList();
         adapter = new ListAdapter(context, R.layout.item_list, lista);
         helper.setAdapter(adapter);
         helper.setListClickListener(listClickListener);
@@ -105,5 +79,36 @@ public class ListFragment extends Fragment {
             Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
         }
     };
+
+
+    private void ResultadoAtualizaTask(int idUsuario) {
+        new UserSyncTask(idUsuario,context) {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+                if (result != null && !result.equals("[]") && !result.equals("null")){
+                    Gson serializer = new Gson();
+                    TestObjectList testObjectList = serializer.fromJson(result.toString(),TestObjectList.class);
+
+                    for(TestObject object : testObjectList.list) {
+                        testTable.insert(object);
+                    }
+                    configureAdapter();
+                } else {
+                    if (context != null) {
+                        Toast.makeText(context, "Erro ao baixar dados", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        }.execute();
+    }
+
 
 }
