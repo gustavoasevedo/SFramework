@@ -7,9 +7,11 @@ import android.util.Log;
 
 import com.dss.sframework.annotations.BaseDBFlag;
 import com.dss.sframework.annotations.BaseDBName;
+import com.dss.sframework.annotations.BaseDBPrimaryKey;
 import com.dss.sframework.annotations.BaseDBType;
-import com.dss.sframework.objects.BDCreate;
-import com.dss.sframework.objects.TestObject;
+import com.dss.sframework.exceptions.InvalidTypeException;
+import com.dss.sframework.model.BDCreate;
+import com.dss.sframework.model.TestObject;
 import com.dss.sframework.constant.ConstantDB;
 
 import java.lang.reflect.Field;
@@ -45,7 +47,7 @@ public class TestTable {
                 fields.add(f[i].getAnnotation(BaseDBName.class).value());
                 types.add(f[i].getAnnotation(BaseDBType.class).value());
             }
-            if(f[i].isAnnotationPresent(BaseDBFlag.class)){
+            if(f[i].isAnnotationPresent(BaseDBPrimaryKey.class)){
                 pk = f[i].getAnnotation(BaseDBName.class).value();
             }
         }
@@ -96,7 +98,11 @@ public class TestTable {
         Object insertObject = testObject;
 
         openCoonection();
-        baseDB.insert(table, insertObject);
+        try {
+            baseDB.insert(table, insertObject);
+        } catch (InvalidTypeException invalidTypeException) {
+            invalidTypeException.printStackTrace();
+        }
         closeConnection();
 
     }
@@ -137,9 +143,9 @@ public class TestTable {
 
         try {
             if (c.moveToNext()) {
-                testObject.setId(c.getInt(0));
-                testObject.setName(c.getString(1));
-                testObject.setDate(c.getString(2));
+                testObject.setId(c.getInt(c.getColumnIndex("id")));
+                testObject.setName(c.getString((c.getColumnIndex("name"))));
+                testObject.setDate(c.getString((c.getColumnIndex("date"))));
             }
         } finally {
             c.close();
@@ -167,9 +173,9 @@ public class TestTable {
         try {
             while (c.moveToNext()) {
                 testObject = new TestObject();
-                testObject.setId(c.getInt(0));
-                testObject.setName(c.getString(1));
-                testObject.setDate(c.getString(2));
+                testObject.setId(c.getInt(c.getColumnIndex("id")));
+                testObject.setName(c.getString((c.getColumnIndex("name"))));
+                testObject.setDate(c.getString((c.getColumnIndex("date"))));
 
 
                 lTest.add(testObject);

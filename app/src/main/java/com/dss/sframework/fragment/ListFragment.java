@@ -14,7 +14,7 @@ import com.dss.sframework.R;
 import com.dss.sframework.adapter.ListAdapter;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.ListFragmentHelper;
-import com.dss.sframework.objects.TestObject;
+import com.dss.sframework.model.TestObject;
 import com.dss.sframework.dto.TestObjectList;
 import com.google.gson.Gson;
 

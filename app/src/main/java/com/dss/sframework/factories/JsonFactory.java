@@ -26,6 +26,7 @@ public abstract class JsonFactory {
         ArrayList<Object> array = new ArrayList<>();
 
         for(int i = 0; i < objVar.length; i++){
+            objVar[i].setAccessible(true);
             Object o = new Object();
             try {
                 o = objVar[i].get(object);

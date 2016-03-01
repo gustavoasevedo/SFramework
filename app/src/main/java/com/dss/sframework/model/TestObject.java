@@ -1,4 +1,4 @@
-package com.dss.sframework.objects;
+package com.dss.sframework.model;
 import com.dss.sframework.annotations.BaseDBFlag;
 import com.dss.sframework.annotations.BaseDBName;
 import com.dss.sframework.annotations.BaseDBPrimaryKey;

@@ -1,4 +1,4 @@
-package com.dss.sframework.objects;
+package com.dss.sframework.model;
 
 import java.lang.reflect.Field;
 

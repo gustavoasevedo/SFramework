@@ -5,10 +5,20 @@ package com.dss.sframework.constant;
  */
 public abstract class ConstantUrl {
     
-    private static String URL_WEBSERVICE = "www.";
+    private static String URL_WEBSERVICE = "http://testformyenterprise.net76.net";
+
+    private static String METHOD_USER = "/user.php";
 
     public static String getURL_WEBSERVICE() {
         return URL_WEBSERVICE;
+    }
+
+    public static String getMethodUser() {
+        return METHOD_USER;
+    }
+
+    public static void setMethodUser(String methodUser) {
+        METHOD_USER = methodUser;
     }
 
     public void setURL_WEBSERVICE(String URL_WEBSERVICE) {

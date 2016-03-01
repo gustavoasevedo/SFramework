@@ -24,7 +24,7 @@ public class CheckSyncTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
 
-        String url = ConstantUrl.getURL_WEBSERVICE();
+        String url = ConstantUrl.getURL_WEBSERVICE() + ConstantUrl.getMethodUser();
 
         try {
             return HttpUtil.getExecute(url);

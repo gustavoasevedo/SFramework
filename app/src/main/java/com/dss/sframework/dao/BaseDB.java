@@ -11,12 +11,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.dss.sframework.annotations.BaseDBName;
-import com.dss.sframework.annotations.BaseDBPrimaryKey;
-import com.dss.sframework.annotations.BaseDBType;
-import com.dss.sframework.objects.BDCreate;
+import com.dss.sframework.constant.ConstantException;
+import com.dss.sframework.exceptions.InvalidTypeException;
+import com.dss.sframework.model.BDCreate;
 import com.dss.sframework.annotations.BaseDBFlag;
-import com.dss.sframework.objects.BDInsert;
-import com.dss.sframework.util.KeyValuePair;;
+import com.dss.sframework.model.BDInsert;
+;
 
 /**
  * Created by gustavo.vieira on 04/05/2015.
@@ -87,7 +87,7 @@ public class BaseDB extends SQLiteOpenHelper {
      * @param insertObject Generic Object with the values will be put in the table
      * @return
      */
-    public Long insert(String table, Object insertObject) throws Exception{
+    public Long insert(String table, Object insertObject) throws InvalidTypeException {
 
         Field[] f = insertObject.getClass().getDeclaredFields();
 
@@ -140,7 +140,7 @@ public class BaseDB extends SQLiteOpenHelper {
 
                 values.put(insert.getFieldName(), Boolean.valueOf(insert.getFieldValue().toString()));
             }else{
-                
+                throw new InvalidTypeException(ConstantException.getINVALIDTYPEEXCEPTION());
             }
         }
 

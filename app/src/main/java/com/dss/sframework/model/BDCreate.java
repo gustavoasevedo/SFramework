@@ -1,4 +1,4 @@
-package com.dss.sframework.objects;
+package com.dss.sframework.model;
 
 /**
  * Created by gustavo.vieira on 04/05/2015.

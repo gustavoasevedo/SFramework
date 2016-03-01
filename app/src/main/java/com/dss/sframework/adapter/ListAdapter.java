@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.dss.sframework.R;
-import com.dss.sframework.objects.TestObject;
+import com.dss.sframework.model.TestObject;
 import java.util.List;
 
 /**
