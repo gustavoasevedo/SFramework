@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dss.sframework.async.UserSyncTask;
 import com.dss.sframework.broadcast.ParsePushBroadcastReceiver;
 import com.dss.sframework.helper.MainHelper;
 import com.dss.sframework.R;
@@ -17,6 +18,7 @@ import com.dss.sframework.util.MintUtils;
 public class MainActivity extends ActionBarActivity {
 
     MainHelper helper;
+    Context context;
 
     @Override
     protected void onResume() {
@@ -33,6 +35,9 @@ public class MainActivity extends ActionBarActivity {
 
         ParsePushBroadcastReceiver.setLastEnabled(ConstantIntent.getMAIN(), MainActivity.this);
         MintUtils.mintStart(MainActivity.this);
+
+        context = this;
+        ResultadoAtualizaTask(4);
 
         helper = new MainHelper();
         helper.MainActivity(this);
@@ -75,7 +80,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void ResultadoAtualizaTask(int idUsuario) {
+        new UserSyncTask(idUsuario,context) {
 
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+        }.execute();
+    }
 }
 
 

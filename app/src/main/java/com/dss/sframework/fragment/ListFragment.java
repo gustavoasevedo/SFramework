@@ -54,8 +54,6 @@ public class ListFragment extends Fragment {
 
         testTable = new TestTable(context);
 
-        ResultadoAtualizaTask(4);
-
         return view;
     }
 
@@ -79,36 +77,6 @@ public class ListFragment extends Fragment {
             Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
         }
     };
-
-
-    private void ResultadoAtualizaTask(int idUsuario) {
-        new UserSyncTask(idUsuario,context) {
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                super.onPostExecute(result);
-
-                if (result != null && !result.equals("[]") && !result.equals("null")){
-                    Gson serializer = new Gson();
-                    TestObjectList testObjectList = serializer.fromJson(result.toString(),TestObjectList.class);
-
-                    for(TestObject object : testObjectList.list) {
-                        testTable.insert(object);
-                    }
-                    configureAdapter();
-                } else {
-                    if (context != null) {
-                        Toast.makeText(context, "Erro ao baixar dados", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        }.execute();
-    }
 
 
 }

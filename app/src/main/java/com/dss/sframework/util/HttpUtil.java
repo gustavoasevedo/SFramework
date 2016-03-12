@@ -17,9 +17,12 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -49,76 +52,122 @@ public class HttpUtil {
         return getStringFromInputStream(is);
     }
 
-    public static String postExecute(String urlString) throws IOException {
 
-        URL url = new URL(urlString);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
-        urlConnection.setReadTimeout(DATARETRIEVAL_TIMEOUT);
-        urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty("Accept", "application/json");
-        urlConnection.setDoInput(true);
-        urlConnection.connect();
-
-        InputStream is = urlConnection.getInputStream();
-        return getStringFromInputStream(is);
-    }
-
-    public static String postData(String url, ArrayList<NameValuePair> nameValuePairs) {
-        // Create a new HttpClient and Post Header
-        String result = "";
-        InputStream is = null;
-
+    public static String postData(String urlString, ArrayList<NameValuePair> nameValuePairs) {
+        URL url = null;
+        HttpURLConnection urlConn = null;
+        DataOutputStream printout;
+        DataInputStream input;
         try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(url);
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            is = entity.getContent();
-
-
-            result = is.toString();
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+            url = new URL(urlString);
         }
+        catch (Exception ex){
+
+        }
+        String result = "";
+        try
+        {
+            urlConn = (HttpURLConnection)url.openConnection();
+            urlConn.setDoInput(true);
+            urlConn.setDoOutput(true);
+            urlConn.setUseCaches(false);
+            urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConn.setRequestMethod("POST");
+            urlConn.connect();
+
+            // Send POST output.
+            printout = new DataOutputStream(urlConn.getOutputStream ());
+
+            for(NameValuePair nameValuePair : nameValuePairs){
+                String parameter = nameValuePair.getName() + "=" + nameValuePair.getValue();
+                printout.write(parameter.getBytes("UTF-8"));
+            }
+
+            printout.flush();
+            printout.close();
+
+            InputStreamReader _is;
+            if (urlConn.getResponseCode() / 100 == 2)
+                _is = new InputStreamReader(urlConn.getInputStream());
+            else
+                _is = new InputStreamReader(urlConn.getErrorStream());
+
+            BufferedReader reader = new BufferedReader(_is);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            // Read Server Response
+            while((line = reader.readLine()) != null)
+            {
+                // Append server response in string
+                sb.append(line + "\n");
+            }
+
+
+            result = sb.toString();
+        }
+        catch (Exception ex){
+
+        }
+
+
         return result;
     }
 
-    public static String postJson(String url, String json) {
-        // Create a new HttpClient and Post Header
-        String result = "";
-        InputStream is = null;
-
+    public static String postJson(String urlString, JSONObject json) {
+        URL url = null;
+        HttpURLConnection urlConn = null;
+        DataOutputStream printout;
+        DataInputStream input;
         try {
-            DefaultHttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppostreq = new HttpPost(url);
-            StringEntity se = new StringEntity(json.toString());
-            se.setContentType("application/json;charset=UTF-8");
-            se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json;charset=UTF-8"));
-            httppostreq.setEntity(se);
+            url = new URL(urlString);
+        }
+        catch (Exception ex){
 
-            HttpResponse httpresponse = httpclient.execute(httppostreq);
+        }
+        String result = "";
+        try
+        {
+            urlConn = (HttpURLConnection)url.openConnection();
+            urlConn.setDoInput(true);
+            urlConn.setDoOutput(true);
+            urlConn.setUseCaches(false);
+            urlConn.setRequestProperty("Content-Type", "application/json");
 
-            String responseText = null;
+            urlConn.connect();
 
-            try {
-                responseText = EntityUtils.toString(httpresponse.getEntity());
-            }catch (ParseException e) {
-                e.printStackTrace();
-                Log.i("Parse Exception", e + "");
+            // Send POST output.
+            printout = new DataOutputStream(urlConn.getOutputStream ());
+            String jsonString = json.toString();
+            printout.write(jsonString.getBytes("UTF-8"));
+            printout.flush();
+            printout.close();
+
+            InputStreamReader _is;
+            if (urlConn.getResponseCode() / 100 == 2)
+                _is = new InputStreamReader(urlConn.getInputStream());
+            else
+                _is = new InputStreamReader(urlConn.getErrorStream());
+
+            BufferedReader reader = new BufferedReader(_is);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            // Read Server Response
+            while((line = reader.readLine()) != null)
+            {
+                // Append server response in string
+                sb.append(line + "\n");
             }
 
-            result = responseText;
 
-            result = is.toString();
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+            result = sb.toString();
         }
+        catch (Exception ex){
+
+        }
+
+
         return result;
     }
 

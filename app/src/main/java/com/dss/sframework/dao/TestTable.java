@@ -16,6 +16,7 @@ import com.dss.sframework.constant.ConstantDB;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gustavo.vieira on 04/05/2015.
@@ -93,15 +94,17 @@ public class TestTable {
     }
 
 
-    public void insert(TestObject testObject){
-
-        Object insertObject = testObject;
+    public void insert(List<TestObject> testObject){
 
         openCoonection();
-        try {
-            baseDB.insert(table, insertObject);
-        } catch (InvalidTypeException invalidTypeException) {
-            invalidTypeException.printStackTrace();
+        Object insertObject;
+        for(TestObject object : testObject) {
+            insertObject = object;
+            try {
+                baseDB.insert(table, insertObject);
+            } catch (InvalidTypeException invalidTypeException) {
+                invalidTypeException.printStackTrace();
+            }
         }
         closeConnection();
 
@@ -118,9 +121,9 @@ public class TestTable {
         try {
             while (c.moveToNext()) {
                 testObject = new TestObject();
-                testObject.setId(c.getInt(0));
-                testObject.setName(c.getString(1));
-                testObject.setDate(c.getString(2));
+                testObject.setId(c.getInt(c.getColumnIndex("id")));
+                testObject.setName(c.getString((c.getColumnIndex("name"))));
+                testObject.setDate(c.getString((c.getColumnIndex("date"))));
 
                 Listtest.add(testObject);
 

@@ -76,7 +76,9 @@ public class DemoFragment extends Fragment {
         public void onClick(View v){
             TestTable testTable = new TestTable(context);
             TestObject testObject = new TestObject(4,"nome","04-05-2015");
-            testTable.insert(testObject);
+            ArrayList<TestObject> insert= new ArrayList<>();
+            insert.add(testObject);
+            testTable.insert(insert);
             Toast.makeText(context,"Inserido com sucesso",Toast.LENGTH_LONG).show();
         }
     };
