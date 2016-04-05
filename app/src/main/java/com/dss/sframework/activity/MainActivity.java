@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         MintUtils.mintStart(MainActivity.this);
 
         context = this;
-        ResultadoAtualizaTask(4);
+        UserAtualizaTask(4);
 
         helper = new MainHelper();
         helper.MainActivity(this);
@@ -80,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void ResultadoAtualizaTask(int idUsuario) {
+    private void UserAtualizaTask(int idUsuario) {
         new UserSyncTask(idUsuario,context) {
 
             @Override

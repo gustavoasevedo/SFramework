@@ -12,20 +12,12 @@ import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.adapter.ListAdapter;
-import com.dss.sframework.async.UserSyncTask;
-import com.dss.sframework.dao.TestTable;
-import com.dss.sframework.factories.JsonFactory;
+import com.dss.sframework.dao.BaseTable;
+import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.helper.ListFragmentHelper;
 import com.dss.sframework.model.TestObject;
-import com.dss.sframework.dto.TestObjectList;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by gustavo.vieira on 22/05/2015.
@@ -37,8 +29,8 @@ public class ListFragment extends Fragment {
     ListFragmentHelper helper;
     View view;
     ListAdapter adapter;
-    List<TestObject> lista;
-    TestTable testTable;
+    ArrayList<TestObject> lista;
+    BaseTable testTable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +44,8 @@ public class ListFragment extends Fragment {
 
         initLayout();
 
-        testTable = new TestTable(context);
+        testTable = new BaseTable(context,TestObject.class);
+        configureAdapter();
 
         return view;
     }
@@ -63,7 +56,12 @@ public class ListFragment extends Fragment {
     }
 
     public void configureAdapter(){
-        lista = testTable.selectList();
+
+
+        lista = new ArrayList<>();
+
+        lista = TestObjectDao.getInstance(context).selectList();
+
         adapter = new ListAdapter(context, R.layout.item_list, lista);
         helper.setAdapter(adapter);
         helper.setListClickListener(listClickListener);

@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.dao.TestTable;
+import com.dss.sframework.dao.BaseTable;
+import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.DemoFragmentHelper;
@@ -48,8 +49,8 @@ public class DemoFragment extends Fragment {
 
         helper = new DemoFragmentHelper();
 
-        TestTable testTable = new TestTable(context);
-        testTable.create();
+        BaseTable baseTable = new BaseTable(context,TestObject.class);
+        baseTable.create();
 
         initLayout();
 
@@ -64,8 +65,9 @@ public class DemoFragment extends Fragment {
     public View.OnClickListener selectClick = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            TestTable testTable = new TestTable(context);
-            TestObject testObject = testTable.selectWhere(4);
+
+            
+            TestObject testObject = TestObjectDao.getInstance(context).selectId(4);
             Toast.makeText(context, testObject.toString(), Toast.LENGTH_LONG).show();
         }
     };
@@ -74,11 +76,11 @@ public class DemoFragment extends Fragment {
     public View.OnClickListener insertClick = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            TestTable testTable = new TestTable(context);
+            BaseTable baseTable = new BaseTable(context,TestObject.class);
             TestObject testObject = new TestObject(4,"nome","04-05-2015");
             ArrayList<TestObject> insert= new ArrayList<>();
             insert.add(testObject);
-            testTable.insert(insert);
+            baseTable.insert(insert);
             Toast.makeText(context,"Inserido com sucesso",Toast.LENGTH_LONG).show();
         }
     };

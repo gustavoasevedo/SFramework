@@ -5,18 +5,15 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.dss.sframework.constant.ConstantUrl;
-import com.dss.sframework.dao.TestTable;
+import com.dss.sframework.dao.BaseTable;
 import com.dss.sframework.dto.TestObjectList;
-import com.dss.sframework.factories.JsonFactory;
+import com.dss.sframework.model.TestObject;
 import com.dss.sframework.util.HttpUtil;
 import com.google.gson.Gson;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -24,12 +21,12 @@ public class UserSyncTask extends AsyncTask<Void, Void, String> {
 
     private int mIdUsuario;
     private Context mContext;
-    private TestTable testTable;
+    private BaseTable testTable;
 
     public UserSyncTask(int idUsuario, Context context) {
         mIdUsuario = idUsuario;
         mContext = context;
-        testTable = new TestTable(mContext);
+        testTable = new BaseTable(mContext, TestObject.class);
     }
 
     @Override

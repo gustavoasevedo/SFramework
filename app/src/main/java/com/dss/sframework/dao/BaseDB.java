@@ -1,8 +1,4 @@
 package com.dss.sframework.dao;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,12 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.dss.sframework.annotations.BaseDBName;
+import com.dss.sframework.annotations.BaseDBFieldName;
 import com.dss.sframework.constant.ConstantException;
 import com.dss.sframework.exceptions.InvalidTypeException;
 import com.dss.sframework.model.BDCreate;
-import com.dss.sframework.annotations.BaseDBFlag;
 import com.dss.sframework.model.BDInsert;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 ;
 
 /**
@@ -97,7 +97,7 @@ public class BaseDB extends SQLiteOpenHelper {
 
 
         for(int i = 0; i < f.length; i++){
-            if (f[i].isAnnotationPresent(BaseDBFlag.class)){
+            if (f[i].isAnnotationPresent(BaseDBFieldName.class)){
 
                 f[i].setAccessible(true);
                 bdInsert = new BDInsert();
@@ -108,7 +108,7 @@ public class BaseDB extends SQLiteOpenHelper {
                     e.printStackTrace();
                 }
 
-                bdInsert.setFieldName(f[i].getAnnotation(BaseDBName.class).value());
+                bdInsert.setFieldName(f[i].getAnnotation(BaseDBFieldName.class).value());
                 bdInsert.setField(f[i]);
                 bdInsert.setFieldValue(o);
                 inserts.add(bdInsert);
