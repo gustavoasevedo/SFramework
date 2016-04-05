@@ -242,37 +242,68 @@ public class BaseTable {
         return object;
     }
 
-    public ArrayList<TestObject> selectListWhere(String name){
+    protected ArrayList<Object> selectListWhere(Class aClass,ArrayList<String>field,String[] values)
+            throws ClassNotFoundException, NoSuchMethodException,
+            IllegalAccessException, InvocationTargetException,
+            InstantiationException, InvalidTypeException{
 
-        ArrayList<TestObject> lTest = new ArrayList<>();
-        TestObject testObject;
-        ArrayList<String> field = new ArrayList<>();
+        Class<?> clazz = Class.forName(aClass.getName());
+        Constructor<?> ctor = clazz.getConstructor();
+        ctor.setAccessible(true);
 
-        try {
-            field.add(TestObject.class.getField("id").getName());
-        }catch (NoSuchFieldException e){
-
-        }
-
-        String[] values = {name};
+        ArrayList<Object> list = new ArrayList<>();
+        Object object;
 
         openCoonection();
         Cursor c = baseDB.getWhere(tableName, fields, field, values);
 
         try {
             while (c.moveToNext()) {
-                testObject = new TestObject();
-                testObject.setId(c.getInt(c.getColumnIndex("id")));
-                testObject.setName(c.getString((c.getColumnIndex("name"))));
-                testObject.setDate(c.getString((c.getColumnIndex("date"))));
+                object = ctor.newInstance();
+
+                Method[] methods = aClass.getMethods();
+
+                for(int i = 0;i < methods.length;i++) {
+                    methods[i].setAccessible(true);
 
 
-                lTest.add(testObject);
+                    if (methods[i].isAnnotationPresent(BaseDBMethodSetName.class)) {
+
+                        Type parameterizedType = (Type) methods[i].getGenericParameterTypes()[0];
+
+                        if (parameterizedType == Integer.class||
+                                parameterizedType == int.class) {
+
+                            methods[i].invoke(object,c.getInt(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+
+                        } else if (parameterizedType == Long.class) {
+
+                            methods[i].invoke(object,c.getLong(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                        }else if (parameterizedType == Double.class) {
+
+                            methods[i].invoke(object,c.getDouble(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                            //Verify if variable is text
+                        }else if (parameterizedType == String.class ||
+                                parameterizedType == char.class) {
+
+                            methods[i].invoke(object,c.getString(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                        }else{
+                            throw new InvalidTypeException(ConstantException.getINVALIDTYPEEXCEPTION());
+                        }
+                    }
+                }
+
+                list.add(object);
+
             }
         } finally {
             c.close();
         }
-        return lTest;
+        return list;
     }
 
 

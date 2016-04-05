@@ -33,6 +33,46 @@ public class TestObjectDao extends BaseTable {
     }
 
 
+    public TestObject selectId(int Id){
+
+        Object object = new Object();
+        TestObject testObject = new TestObject();
+
+
+        ArrayList<String> fields = new ArrayList<>();
+        try {
+            fields.add(TestObject.class.getField("id").getName());
+        }catch (NoSuchFieldException e){
+
+        }
+
+        String[] values = {String.valueOf(Id)};
+
+        try {
+
+            object = selectWhere(TestObject.class,fields,values);
+
+            testObject = (TestObject) object;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvalidTypeException e) {
+            e.printStackTrace();
+        }
+
+        return testObject;
+
+    }
+
+
     public ArrayList<TestObject> selectList(){
         ArrayList<Object> objectList = new ArrayList<>();
         ArrayList<TestObject> lista = new ArrayList<>();
@@ -63,23 +103,31 @@ public class TestObjectDao extends BaseTable {
         return lista;
     }
 
-    public TestObject selectId(int Id){
 
-        Object object = new Object();
-        TestObject testObject = new TestObject();
+    public ArrayList<TestObject> selectListbyName(String nome){
 
+        ArrayList<Object> objectList = new ArrayList<>();
+        ArrayList<TestObject> lista = new ArrayList<>();
 
         ArrayList<String> fields = new ArrayList<>();
-        fields.add("id");
-
-        String[] values = {String.valueOf(Id)};
 
         try {
+            fields.add(TestObject.class.getField("name").getName());
+        }catch (NoSuchFieldException e){
 
-            object = selectWhere(TestObject.class,fields,values);
+        }
 
-            testObject = (TestObject) object;
+        String[] values = {nome};
 
+        try {
+            objectList = selectListWhere(TestObject.class,fields,values);
+
+            lista = new ArrayList<TestObject>();
+
+            for(Object object : objectList){
+                TestObject testObject = (TestObject) object;
+                lista.add(testObject);
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -94,8 +142,7 @@ public class TestObjectDao extends BaseTable {
             e.printStackTrace();
         }
 
-        return testObject;
-
+        return lista;
     }
 
 
