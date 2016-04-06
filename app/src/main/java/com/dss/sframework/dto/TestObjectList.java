@@ -4,7 +4,6 @@ import com.dss.sframework.model.TestObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TestObjectList {
 
@@ -13,6 +12,6 @@ public class TestObjectList {
     }
 
     @SerializedName("TestObjectList")
-    public List<TestObject> list = new ArrayList<>();
+    public ArrayList<TestObject> list = new ArrayList<>();
 
 }

@@ -19,6 +19,7 @@ public class TestObjectDao extends BaseTable {
 
     public TestObjectDao(Context context) {
         super(context, TestObject.class);
+        createTable();
     }
 
     public static TestObjectDao getInstance(Context context) {
@@ -32,6 +33,26 @@ public class TestObjectDao extends BaseTable {
         return instance;
     }
 
+    public void insertObject(TestObject testObject){
+
+        ArrayList<Object> objectArrayList = new ArrayList<>();
+
+        objectArrayList.add(testObject);
+
+        insert(objectArrayList);
+    }
+
+    public void insertListObject(ArrayList<TestObject> testObjectList){
+
+        ArrayList<Object> objectArrayList = new ArrayList<>();
+
+        for(Object object: testObjectList){
+            objectArrayList.add(object);
+        }
+
+        insert(objectArrayList);
+    }
+
 
     public TestObject selectId(int Id){
 
@@ -40,11 +61,9 @@ public class TestObjectDao extends BaseTable {
 
 
         ArrayList<String> fields = new ArrayList<>();
-        try {
-            fields.add(TestObject.class.getField("id").getName());
-        }catch (NoSuchFieldException e){
 
-        }
+        fields.add("id");
+
 
         String[] values = {String.valueOf(Id)};
 
@@ -111,11 +130,7 @@ public class TestObjectDao extends BaseTable {
 
         ArrayList<String> fields = new ArrayList<>();
 
-        try {
-            fields.add(TestObject.class.getField("name").getName());
-        }catch (NoSuchFieldException e){
-
-        }
+        fields.add("name");
 
         String[] values = {nome};
 

@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.adapter.ListAdapter;
-import com.dss.sframework.dao.BaseTable;
 import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.helper.ListFragmentHelper;
 import com.dss.sframework.model.TestObject;
@@ -30,7 +29,6 @@ public class ListFragment extends Fragment {
     View view;
     ListAdapter adapter;
     ArrayList<TestObject> lista;
-    BaseTable testTable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,8 +41,6 @@ public class ListFragment extends Fragment {
         helper = new ListFragmentHelper();
 
         initLayout();
-
-        testTable = new BaseTable(context,TestObject.class);
         configureAdapter();
 
         return view;

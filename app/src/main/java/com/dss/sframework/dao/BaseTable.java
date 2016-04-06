@@ -13,7 +13,6 @@ import com.dss.sframework.constant.ConstantDB;
 import com.dss.sframework.constant.ConstantException;
 import com.dss.sframework.exceptions.InvalidTypeException;
 import com.dss.sframework.model.BDCreate;
-import com.dss.sframework.model.TestObject;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -21,7 +20,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by gustavo.vieira on 04/05/2015.
@@ -38,7 +36,7 @@ public class BaseTable {
     private String pk;
 
 
-    public BaseTable(Context context, Class modelClass){
+    protected BaseTable(Context context, Class modelClass){
         super();
         baseDB = new BaseDB(context, ConstantDB.getDbName(), ConstantDB.getVersion());
         this.context = context;
@@ -63,7 +61,7 @@ public class BaseTable {
     }
 
 
-    public void create(){
+    protected void createTable(){
         ArrayList<BDCreate> bdCreates = new ArrayList<>();
         BDCreate bdCreate;
 
@@ -101,11 +99,11 @@ public class BaseTable {
     }
 
 
-    public void insert(List<TestObject> testObject){
+    protected void insert(ArrayList<Object> receiveObject){
 
         openCoonection();
         Object insertObject;
-        for(TestObject object : testObject) {
+        for(Object object : receiveObject) {
             insertObject = object;
             try {
                 baseDB.insert(tableName, insertObject);
@@ -306,5 +304,127 @@ public class BaseTable {
         return list;
     }
 
+
+    protected Object selectRawQuery(Class aClass,String query,String[] values)
+            throws ClassNotFoundException, NoSuchMethodException,
+            IllegalAccessException, InvocationTargetException,
+            InstantiationException, InvalidTypeException{
+
+
+        Class<?> clazz = Class.forName(aClass.getName());
+        Constructor<?> ctor = clazz.getConstructor();
+        ctor.setAccessible(true);
+
+        Object object = ctor.newInstance();
+
+        Cursor c = baseDB.getRawQuery(query,values);
+
+        try {
+            if (c.moveToNext()) {
+                Method[] methods = aClass.getMethods();
+
+                for(int i = 0;i < methods.length;i++) {
+                    methods[i].setAccessible(true);
+
+                    if (methods[i].isAnnotationPresent(BaseDBMethodSetName.class)) {
+
+                        Type parameterizedType = (Type) methods[i].getGenericParameterTypes()[0];
+
+                        if (parameterizedType == Integer.class||
+                                parameterizedType == int.class) {
+
+                            methods[i].invoke(object,c.getInt(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+
+                        } else if (parameterizedType == Long.class) {
+
+                            methods[i].invoke(object,c.getLong(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                        }else if (parameterizedType == Double.class) {
+
+                            methods[i].invoke(object,c.getDouble(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                            //Verify if variable is text
+                        }else if (parameterizedType == String.class ||
+                                parameterizedType == char.class) {
+
+                            methods[i].invoke(object,c.getString(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                        }else{
+                            throw new InvalidTypeException(ConstantException.getINVALIDTYPEEXCEPTION());
+                        }
+                    }
+                }
+            }
+        } finally {
+            c.close();
+        }
+
+        return object;
+    }
+
+    protected ArrayList<Object> selectListRawQuery(Class aClass,String query,String[] values)
+            throws ClassNotFoundException, NoSuchMethodException,
+            IllegalAccessException, InvocationTargetException,
+            InstantiationException, InvalidTypeException{
+
+        Class<?> clazz = Class.forName(aClass.getName());
+        Constructor<?> ctor = clazz.getConstructor();
+        ctor.setAccessible(true);
+
+        ArrayList<Object> list = new ArrayList<>();
+        Object object;
+
+        openCoonection();
+        Cursor c = baseDB.getRawQuery(query,values);
+
+        try {
+            while (c.moveToNext()) {
+                object = ctor.newInstance();
+
+                Method[] methods = aClass.getMethods();
+
+                for(int i = 0;i < methods.length;i++) {
+                    methods[i].setAccessible(true);
+
+
+                    if (methods[i].isAnnotationPresent(BaseDBMethodSetName.class)) {
+
+                        Type parameterizedType = (Type) methods[i].getGenericParameterTypes()[0];
+
+                        if (parameterizedType == Integer.class||
+                                parameterizedType == int.class) {
+
+                            methods[i].invoke(object,c.getInt(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+
+                        } else if (parameterizedType == Long.class) {
+
+                            methods[i].invoke(object,c.getLong(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                        }else if (parameterizedType == Double.class) {
+
+                            methods[i].invoke(object,c.getDouble(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                            //Verify if variable is text
+                        }else if (parameterizedType == String.class ||
+                                parameterizedType == char.class) {
+
+                            methods[i].invoke(object,c.getString(c.getColumnIndex(methods[i].getAnnotation(BaseDBMethodSetName.class).value())));
+
+                        }else{
+                            throw new InvalidTypeException(ConstantException.getINVALIDTYPEEXCEPTION());
+                        }
+                    }
+                }
+
+                list.add(object);
+
+            }
+        } finally {
+            c.close();
+        }
+        return list;
+    }
 
 }

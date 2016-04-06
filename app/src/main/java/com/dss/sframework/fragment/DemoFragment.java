@@ -14,13 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.dao.BaseTable;
+import com.dss.sframework.constant.ConstantIntent;
 import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.DemoFragmentHelper;
 import com.dss.sframework.model.TestObject;
-import com.dss.sframework.constant.ConstantIntent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,9 +48,6 @@ public class DemoFragment extends Fragment {
 
         helper = new DemoFragmentHelper();
 
-        BaseTable baseTable = new BaseTable(context,TestObject.class);
-        baseTable.create();
-
         initLayout();
 
         return view;
@@ -76,11 +72,12 @@ public class DemoFragment extends Fragment {
     public View.OnClickListener insertClick = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            BaseTable baseTable = new BaseTable(context,TestObject.class);
             TestObject testObject = new TestObject(4,"nome","04-05-2015");
             ArrayList<TestObject> insert= new ArrayList<>();
             insert.add(testObject);
-            baseTable.insert(insert);
+
+            TestObjectDao.getInstance(context).insertListObject(insert);
+
             Toast.makeText(context,"Inserido com sucesso",Toast.LENGTH_LONG).show();
         }
     };

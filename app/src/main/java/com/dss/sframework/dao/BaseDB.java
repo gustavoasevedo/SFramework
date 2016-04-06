@@ -199,6 +199,14 @@ public class BaseDB extends SQLiteOpenHelper {
     }
 
 
+    public Cursor getRawQuery(String query,String[] args) {
+
+        Cursor c = getWritableDatabase().rawQuery(query,args);
+
+        return c;
+    }
+
+
     public int getVersion() {
         return version;
     }

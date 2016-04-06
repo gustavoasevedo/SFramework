@@ -2,20 +2,23 @@ package com.dss.sframework.activity;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dss.sframework.R;
 import com.dss.sframework.async.UserSyncTask;
 import com.dss.sframework.broadcast.ParsePushBroadcastReceiver;
-import com.dss.sframework.helper.MainHelper;
-import com.dss.sframework.R;
 import com.dss.sframework.constant.ConstantIntent;
+import com.dss.sframework.delegate.UpdateDelegate;
+import com.dss.sframework.helper.MainHelper;
 import com.dss.sframework.util.MintUtils;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
     MainHelper helper;
     Context context;
@@ -37,7 +40,8 @@ public class MainActivity extends ActionBarActivity {
         MintUtils.mintStart(MainActivity.this);
 
         context = this;
-        UserAtualizaTask(4);
+        UserSyncTask gProdTask = new UserSyncTask(4,this);
+        gProdTask.execute();
 
         helper = new MainHelper();
         helper.MainActivity(this);
@@ -80,15 +84,34 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void UserAtualizaTask(int idUsuario) {
-        new UserSyncTask(idUsuario,context) {
 
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
+    @Override
+    public void sucessoUpdate(boolean sucesso) {
+        if(sucesso) {
+            Toast.makeText(context, "Sucesso ao carregar Dados", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(context, "Erro ao carregar Dados", Toast.LENGTH_LONG).show();
+        }
+    }
 
-        }.execute();
+    @Override
+    public void ErroUpdate(Exception e) {
+        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public TextView getTVTitulo() {
+        return null;
+    }
+
+    @Override
+    public TextView getTVPorcentagem() {
+        return null;
     }
 }
 
