@@ -4,13 +4,14 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.async.UserSyncTask;
+import com.dss.sframework.tasks.UserSyncTask;
 import com.dss.sframework.broadcast.ParsePushBroadcastReceiver;
 import com.dss.sframework.constant.ConstantIntent;
 import com.dss.sframework.delegate.UpdateDelegate;
@@ -96,7 +97,8 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
     @Override
     public void ErroUpdate(Exception e) {
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        Log.e("MainActivity", e.toString());
+        Toast.makeText(this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

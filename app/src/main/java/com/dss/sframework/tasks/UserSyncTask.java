@@ -1,8 +1,7 @@
-package com.dss.sframework.async;
+package com.dss.sframework.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dss.sframework.constant.ConstantUrl;
 import com.dss.sframework.dao.TestObjectDao;
@@ -23,8 +22,8 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     private Exception erro;
     private int totalPorcentagem;
     private UpdateDelegate delegate;
-
     private int mIdUsuario;
+//    ProgressDialog progress;
 
     public UserSyncTask(int idUsuario,UpdateDelegate delegate) {
         this.mIdUsuario = idUsuario;
@@ -36,6 +35,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
         super.onPreExecute();
 //        delegate.getTVTitulo().setText("Carregando Lista de Usuarios");
 //        delegate.getTVPorcentagem().setText("Aguarde...");
+//        progress = ProgressDialog.show(delegate.getContext(), "Aguarde...", "Verificando atualizações", true, false);
     }
 
     @Override
@@ -57,13 +57,14 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
                 TestObjectDao.getInstance(delegate.getContext()).insertListObject(testObjectList.list);
             } else {
                 if (delegate.getContext() != null) {
-                    Toast.makeText(delegate.getContext(), "Erro ao baixar dados de Usuario", Toast.LENGTH_LONG).show();
+                    this.erro = new Exception("Erro ao baixar dados de Usuario.");
+                    return false;
                 }
             }
 
             return true;
         }catch (Exception e){
-            this.erro = e;
+            this.erro = new Exception("Erro ao baixar dados de Usuario.");
             return false;
         }
 
@@ -77,6 +78,8 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     @Override
     protected void onPostExecute(Boolean sucesso) {
         Log.i(TAG, "Sucesso: " + sucesso);
+
+//        progress.dismiss();
 
         if (sucesso) {
             delegate.sucessoUpdate(sucesso);
