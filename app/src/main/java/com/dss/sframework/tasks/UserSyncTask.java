@@ -2,6 +2,7 @@ package com.dss.sframework.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.dss.sframework.constant.ConstantUrl;
 import com.dss.sframework.dao.TestObjectDao;
@@ -15,6 +16,8 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 
+import javax.xml.datatype.Duration;
+
 
 public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     private static final String TAG = "UserSyncTask";
@@ -23,6 +26,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     private int totalPorcentagem;
     private UpdateDelegate delegate;
     private int mIdUsuario;
+    long time;
 //    ProgressDialog progress;
 
     public UserSyncTask(int idUsuario,UpdateDelegate delegate) {
@@ -36,6 +40,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
 //        delegate.getTVTitulo().setText("Carregando Lista de Usuarios");
 //        delegate.getTVPorcentagem().setText("Aguarde...");
 //        progress = ProgressDialog.show(delegate.getContext(), "Aguarde...", "Verificando atualizações", true, false);
+          time = System.currentTimeMillis();
     }
 
     @Override
@@ -44,7 +49,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
             String url = ConstantUrl.getURL_WEBSERVICE() + ConstantUrl.getMethodUser();
 
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("id", Integer.toString(mIdUsuario)));
+            nameValuePairs.add(new BasicNameValuePair("id", ""));
 
             String result = HttpUtil.postData(url, nameValuePairs);
 
@@ -78,6 +83,10 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     @Override
     protected void onPostExecute(Boolean sucesso) {
         Log.i(TAG, "Sucesso: " + sucesso);
+
+        long completedIn = System.currentTimeMillis() - time;
+
+        Toast.makeText(delegate.getContext(),String.valueOf(completedIn),Toast.LENGTH_LONG).show();
 
 //        progress.dismiss();
 
