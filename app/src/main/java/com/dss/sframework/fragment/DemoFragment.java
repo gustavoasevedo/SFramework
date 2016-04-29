@@ -63,7 +63,7 @@ public class DemoFragment extends Fragment {
         public void onClick(View v){
 
             
-            TestObject testObject = TestObjectDao.getInstance(context).selectId(4);
+            TestObject testObject = TestObjectDao.getInstance(context).selectId(1);
             Toast.makeText(context, testObject.toString(), Toast.LENGTH_LONG).show();
         }
     };
@@ -72,7 +72,7 @@ public class DemoFragment extends Fragment {
     public View.OnClickListener insertClick = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            TestObject testObject = new TestObject(4,"nome","04-05-2015");
+            TestObject testObject = TestObjectDao.getInstance(context).selectId(3);
             ArrayList<TestObject> insert= new ArrayList<>();
             insert.add(testObject);
 
@@ -85,9 +85,9 @@ public class DemoFragment extends Fragment {
     public View.OnClickListener jsonListClick = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            TestObject testObject = new TestObject(4,"nome","04-05-2015");
-            TestObject testObject2 = new TestObject(5,"nome do ze","05-05-2015");
-            TestObject testObject3 = new TestObject(6,"nome do ze antonho","06-05-2015");
+            TestObject testObject = TestObjectDao.getInstance(context).selectId(2);
+            TestObject testObject2 = TestObjectDao.getInstance(context).selectId(5);
+            TestObject testObject3 = TestObjectDao.getInstance(context).selectId(7);
 
             ArrayList<Object> arrayList = new ArrayList<>();
             arrayList.add(testObject2);
@@ -122,7 +122,7 @@ public class DemoFragment extends Fragment {
     public View.OnClickListener jsonClick = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            TestObject testObject = new TestObject(4,"nome","04-05-2015");
+            TestObject testObject = TestObjectDao.getInstance(context).selectId(5);
 
 
             Object send = testObject;

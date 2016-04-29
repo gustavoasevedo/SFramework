@@ -37,8 +37,15 @@ public class MainHelper {
         toolbar = (Toolbar) ((Activity)context).findViewById(R.id.tool_bar); // Attaching the layout to the menu_toolbar object
         ((ActionBarActivity)context).setSupportActionBar(toolbar); // Setting menu_toolbar as the ActionBar with setSupportActionBar() call
 
-        NavigationDrawer navigationDrawer = new NavigationDrawer(ConstantNavigationDrawer.getTITLES(),ConstantNavigationDrawer.getICONS(),ConstantNavigationDrawer.getNAME(),
-                ConstantNavigationDrawer.getEMAIL(),ConstantNavigationDrawer.getPROFILE(),context);
+        NavigationDrawer navigationDrawer = new NavigationDrawer(
+                ConstantNavigationDrawer.getTITLES(),
+                ConstantNavigationDrawer.getICONS(),
+                ConstantNavigationDrawer.getNAME(),
+                ConstantNavigationDrawer.getEMAIL(),
+                ConstantNavigationDrawer.getPROFILE(),
+                context);
+
+
         navigationDrawer.initDrawer(context, toolbar);
     }
 

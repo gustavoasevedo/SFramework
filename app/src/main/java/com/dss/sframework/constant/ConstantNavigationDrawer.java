@@ -7,11 +7,27 @@ import com.dss.sframework.R;
  */
 public class ConstantNavigationDrawer {
 
-    private static final String[] TITLES = {"Buttons","Lists","Item 3","Item4","Item5"};
-    private static final int[] ICONS = {R.drawable.ic_file,R.drawable.ic_file,R.drawable.ic_file,R.drawable.ic_file,R.drawable.ic_file};
+    private static final String[] TITLES =
+            {"Buttons",
+                    "Lists",
+                    "Item 3",
+                    "Item4",
+                    "Item5"};
+
+    private static final int[] ICONS =
+            {R.drawable.ic_file,
+                    R.drawable.ic_file,
+                    R.drawable.ic_file,
+                    R.drawable.ic_file,
+                    R.drawable.ic_file};
+
     private static final String NAME = "Gustavo Asevedo Vieira";
+
     private static final String EMAIL = "gustavo.asevedo@gmail.com";
+
     private static final int PROFILE = R.drawable.ic_search;
+
+
 
     public static String[] getTITLES() {
         return TITLES;
