@@ -9,20 +9,11 @@
         android:icon="@drawable/ic_close"
         app:showAsAction="ifRoom"
         ></item>
-<item
-android:id="@+id/action_reload"
-android:orderInCategory="200"
-android:title="Reaload"
-android:icon="@drawable/ic_reload"
-app:showAsAction="ifRoom"></item>
     <item
-        android:id="@+id/action_search"
-        android:orderInCategory="100"
-        android:title="Search"
-        android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:id="@+id/action_reload"
+        android:orderInCategory="200"
+        android:title="Reaload"
+        android:icon="@drawable/ic_reload"
+        app:showAsAction="ifRoom"></item>
 
-        ></item>
-
-    </menu>
+</menu>

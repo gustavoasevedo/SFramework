@@ -1,9 +1,6 @@
 package com.dss.sframework.navigation;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,15 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.adapter.NavigationDrawerAdapter;
-import com.dss.sframework.fragment.DemoFragment;
-import com.dss.sframework.fragment.ListFragment;
+import com.dss.sframework.fragment.FragmentStarter;
 
 /**
  * Created by gustavo.vieira on 22/05/2015.
@@ -80,22 +75,18 @@ public class NavigationDrawer {
                 if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
                     Drawer.closeDrawers();
 
-                    switch(String.valueOf(recyclerView.getChildPosition(child))) {
+                    switch(String.valueOf(recyclerView.getChildAdapterPosition(child))) {
 
                         case "1":
-                            FragmentManager fragmentManager = ((Activity) c).getFragmentManager();
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            DemoFragment demoFragment = new DemoFragment();
-                            fragmentTransaction.replace(R.id.fragment_container, demoFragment, "demoFragment");
-                            fragmentTransaction.commit();
+                            FragmentStarter.startDemoFragment(c);
+
                             break;
+
                         case "2":
-                            FragmentManager fragmentManager2 = ((Activity) c).getFragmentManager();
-                            FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-                            ListFragment listFragment = new ListFragment();
-                            fragmentTransaction2.replace(R.id.fragment_container, listFragment, "listFragment");
-                            fragmentTransaction2.commit();
+                            FragmentStarter.startListFragment(c);
+
                             break;
+
                         case "3":
                             Toast.makeText(context,"3",Toast.LENGTH_SHORT).show();
                             break;
@@ -113,7 +104,12 @@ public class NavigationDrawer {
             }
 
             @Override
-            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
             }
         });
@@ -140,7 +136,7 @@ public class NavigationDrawer {
             ; // Drawer Toggle Object Made
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();
-        Drawer.openDrawer(Gravity.LEFT);
+//        Drawer.openDrawer(Gravity.LEFT);
     }
     final GestureDetector mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 

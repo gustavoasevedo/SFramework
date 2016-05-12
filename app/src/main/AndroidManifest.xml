@@ -36,6 +36,11 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,36 +48,34 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".broadcast.ParsePushBroadcastReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
 
-        <service android:name="com.parse.PushService" />
+        <service android:name=".services.RegistrationIntentService" android:exported="false"/>
 
-        <receiver android:name="com.parse.ParseBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
-
-
-        <receiver android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+        <service
+            android:name=".broadcast.GcmMessageHandler"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+            </intent-filter>
+        </service>
 
-                <category android:name="com.dss.sframework" />
+        <service
+            android:name=".services.IDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.codepath.gcmquickstart" />
             </intent-filter>
         </receiver>
-
 
     </application>
 

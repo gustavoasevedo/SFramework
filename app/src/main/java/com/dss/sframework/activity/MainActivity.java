@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
+import com.dss.sframework.fragment.FragmentStarter;
 import com.dss.sframework.tasks.UserSyncTask;
 import com.dss.sframework.broadcast.ParsePushBroadcastReceiver;
 import com.dss.sframework.constant.ConstantIntent;
@@ -48,6 +49,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         helper.MainActivity(this);
         helper.startNavigation(this);
         helper.setText(this);
+        FragmentStarter.startDemoFragment(this);
 
 
     }
@@ -67,10 +69,6 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         int id = item.getItemId();
 
         switch (id){
-            case R.id.action_search:;
-              //  Toast.makeText(MainActivity.this,"Busca",Toast.LENGTH_LONG).show();
-            break;
-
             case R.id.action_reload:;
                 //  Toast.makeText(MainActivity.this,"Recarrega",Toast.LENGTH_LONG).show();
                 break;

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ public class ListFragment extends Fragment {
     View view;
     ListAdapter adapter;
     ArrayList<TestObject> lista;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,14 +65,36 @@ public class ListFragment extends Fragment {
         helper.setAdapter(adapter);
         helper.setListClickListener(listClickListener);
         adapter.notifyDataSetChanged();
+
+        helper.addTextChangedListener(textChangedListener);
     }
 
     public AdapterView.OnItemClickListener listClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> arg0, View v, int position,long arg3) {
-            String mensagem = "Nome: " + lista.get(position).getName();
+            String mensagem = "Nome: " + adapter.getFilteredObject().get(position).getName();
             Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
         }
+    };
+
+    public TextWatcher textChangedListener = new TextWatcher(){
+
+        @Override
+        public void onTextChanged(CharSequence cs, int arg1, int arg2,
+        int arg3) {
+            // When user changed the Text
+            adapter.getFilter().filter(cs);
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1,
+        int arg2, int arg3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable arg0) {
+        }
+
     };
 
 
