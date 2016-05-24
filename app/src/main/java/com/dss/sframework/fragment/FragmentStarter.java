@@ -1,9 +1,10 @@
 package com.dss.sframework.fragment;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.dss.sframework.R;
 
@@ -13,21 +14,24 @@ import com.dss.sframework.R;
 public abstract class FragmentStarter {
 
 
-    public static void startDemoFragment(Context context){
-        FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+    public static Fragment startDemoFragment(Context context){
+        FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         DemoFragment demoFragment = new DemoFragment();
         fragmentTransaction.replace(R.id.fragment_container, demoFragment, "demoFragment");
         fragmentTransaction.commit();
+        return demoFragment;
     }
 
-    public static void startListFragment(Context context) {
+    public static Fragment startListFragment(Context context) {
 
-        FragmentManager fragmentManager2 = ((Activity) context).getFragmentManager();
-        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+        FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ListFragment listFragment = new ListFragment();
-        fragmentTransaction2.replace(R.id.fragment_container, listFragment, "listFragment");
-        fragmentTransaction2.commit();
+        fragmentTransaction.replace(R.id.fragment_container, listFragment, "listFragment");
+        fragmentTransaction.commit();
+
+        return listFragment;
 
     }
 

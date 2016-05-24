@@ -2,6 +2,7 @@ package com.dss.sframework.navigation;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
+import com.dss.sframework.activity.PagerActivity;
 import com.dss.sframework.adapter.NavigationDrawerAdapter;
 import com.dss.sframework.fragment.FragmentStarter;
 
@@ -63,7 +65,7 @@ public class NavigationDrawer {
 
         mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
 
-        final Context c = context;
+        final Context fContext = context;
 
         mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
@@ -78,18 +80,20 @@ public class NavigationDrawer {
                     switch(String.valueOf(recyclerView.getChildAdapterPosition(child))) {
 
                         case "1":
-                            FragmentStarter.startDemoFragment(c);
+                            FragmentStarter.startDemoFragment(fContext);
 
                             break;
 
                         case "2":
-                            FragmentStarter.startListFragment(c);
+                            FragmentStarter.startListFragment(fContext);
 
                             break;
 
                         case "3":
-                            Toast.makeText(context,"3",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(fContext, PagerActivity.class);
+                            ((Activity)fContext).startActivity(intent);
                             break;
+
                         case "4":
                             Toast.makeText(context,"4",Toast.LENGTH_SHORT).show();
                             break;

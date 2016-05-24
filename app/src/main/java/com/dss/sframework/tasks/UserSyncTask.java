@@ -16,8 +16,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 
-import javax.xml.datatype.Duration;
-
 
 public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     private static final String TAG = "UserSyncTask";
@@ -39,8 +37,18 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
         super.onPreExecute();
 //        delegate.getTVTitulo().setText("Carregando Lista de Usuarios");
 //        delegate.getTVPorcentagem().setText("Aguarde...");
-//        progress = ProgressDialog.show(delegate.getContext(), "Aguarde...", "Verificando atualizações", true, false);
-          time = System.currentTimeMillis();
+//        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            progress = new ProgressDialog(delegate.getContext(), android.R.style.Theme_Material_Light_Dialog);
+//        }else{
+//            progress = new ProgressDialog(delegate.getContext());
+//        }
+//        progress.setCancelable(false);
+//        progress.setTitle("Aguarde...");
+//        progress.setMessage("Enviando Coaching");
+//        progress.show();
+
+        time = System.currentTimeMillis();
+
     }
 
     @Override

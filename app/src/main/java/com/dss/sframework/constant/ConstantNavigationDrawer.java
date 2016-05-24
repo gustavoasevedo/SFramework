@@ -10,7 +10,7 @@ public class ConstantNavigationDrawer {
     private static final String[] TITLES =
             {"Buttons",
                     "Lists",
-                    "Item 3",
+                    "Pager",
                     "Item4",
                     "Item5"};
 
