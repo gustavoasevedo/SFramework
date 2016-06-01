@@ -17,7 +17,6 @@ import com.dss.sframework.broadcast.ParsePushBroadcastReceiver;
 import com.dss.sframework.constant.ConstantIntent;
 import com.dss.sframework.delegate.UpdateDelegate;
 import com.dss.sframework.helper.MainHelper;
-import com.dss.sframework.util.MintUtils;
 
 
 public class MainActivity extends ActionBarActivity implements UpdateDelegate {
@@ -39,7 +38,6 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         setContentView(R.layout.activity_main);
 
         ParsePushBroadcastReceiver.setLastEnabled(ConstantIntent.getMAIN(), MainActivity.this);
-        MintUtils.mintStart(MainActivity.this);
 
         context = this;
         UserSyncTask gProdTask = new UserSyncTask(4,this);

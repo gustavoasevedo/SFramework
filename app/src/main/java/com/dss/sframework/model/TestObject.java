@@ -1,9 +1,9 @@
 package com.dss.sframework.model;
-import com.dss.sframework.annotations.BaseDBFieldName;
-import com.dss.sframework.annotations.BaseDBMethodGetName;
-import com.dss.sframework.annotations.BaseDBMethodSetName;
-import com.dss.sframework.annotations.BaseDBPrimaryKey;
-import com.dss.sframework.annotations.BaseDBType;
+import com.dss.sdatabase.annotations.BaseDBFieldName;
+import com.dss.sdatabase.annotations.BaseDBMethodGetName;
+import com.dss.sdatabase.annotations.BaseDBMethodSetName;
+import com.dss.sdatabase.annotations.BaseDBPrimaryKey;
+import com.dss.sdatabase.annotations.BaseDBType;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

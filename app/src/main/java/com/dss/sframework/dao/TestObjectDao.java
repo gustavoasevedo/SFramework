@@ -2,7 +2,9 @@ package com.dss.sframework.dao;
 
 import android.content.Context;
 
-import com.dss.sframework.exceptions.InvalidTypeException;
+import com.dss.sdatabase.dao.BaseTable;
+import com.dss.sdatabase.exceptions.InvalidTypeException;
+import com.dss.sframework.constant.ConstantDB;
 import com.dss.sframework.model.TestObject;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +20,7 @@ public class TestObjectDao extends BaseTable {
     private static TestObjectDao instance;
 
     public TestObjectDao(Context context) {
-        super(context, TestObject.class);
+        super(context, TestObject.class, ConstantDB.getDbName(),ConstantDB.getVersion());
         createTable();
     }
 
