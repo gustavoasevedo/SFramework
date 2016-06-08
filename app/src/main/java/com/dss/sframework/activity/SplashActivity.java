@@ -1,13 +1,12 @@
 package com.dss.sframework.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
+import android.support.v7.app.ActionBarActivity;
 import com.dss.sframework.R;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends ActionBarActivity {
 
     /** Duration of wait **/
     private final int SPLASH_DISPLAY_LENGTH = 2000;

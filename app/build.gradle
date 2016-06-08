@@ -27,15 +27,15 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 repositories {
-        maven {
-            url "http://testformyenterprise.net76.net/gradle/sDatabase/"
-        }
+    maven {
+        url "http://testformyenterprise.net76.net/gradle/sDatabase/"
+    }
 }
 
 dependencies {
@@ -45,17 +45,11 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.0.0'
     compile 'com.android.support:design:23.+'
     compile 'com.android.support:recyclerview-v7:23.0.+'
-
     compile 'com.google.code.gson:gson:2.3'
-    compile 'com.google.android.gms:play-services-gcm:8.4.0'
-
-    compile 'com.parse.bolts:bolts-android:1.+'
-    compile 'com.parse:parse-android:1.+'
-
+    compile 'com.google.android.gms:play-services:3.1.36'
+    compile 'com.google.android.gms:play-services-maps:8.3.0'
     compile 'de.hdodenhof:circleimageview:1.2.1'
-
     compile 'com.github.bumptech.glide:glide:3.6.1'
-
     compile 'com.dss.sDatabase:sDatabase:0.1'
-
+    compile 'com.google.android.gms:play-services:9.0.1'
 }

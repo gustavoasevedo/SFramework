@@ -95,7 +95,9 @@ public class NavigationDrawer {
                             break;
 
                         case "4":
-                            Toast.makeText(context,"4",Toast.LENGTH_SHORT).show();
+
+                            FragmentStarter.startMapsFragment(fContext);
+
                             break;
                         case "5":
                             Toast.makeText(context,"5",Toast.LENGTH_SHORT).show();

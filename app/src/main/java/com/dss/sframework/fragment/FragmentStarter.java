@@ -35,4 +35,16 @@ public abstract class FragmentStarter {
 
     }
 
+    public static Fragment startMapsFragment(Context context) {
+
+        FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MapsFragment listFragment = new MapsFragment();
+        fragmentTransaction.replace(R.id.fragment_container, listFragment, "mapsFragment");
+        fragmentTransaction.commit();
+
+        return listFragment;
+
+    }
+
 }

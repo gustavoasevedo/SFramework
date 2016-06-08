@@ -2,15 +2,14 @@ package com.dss.sframework.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.support.v7.app.ActionBarActivity;
 import com.dss.sframework.R;
 import com.dss.sframework.helper.PagerActivityHelper;
 
 
-public class PagerActivity extends ActionBarActivity{
+public class PagerActivity extends ActionBarActivity {
 
     private Context context;;
     PagerActivityHelper pagerActivityHelper;

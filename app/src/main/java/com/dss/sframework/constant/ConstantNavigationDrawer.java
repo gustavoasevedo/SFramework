@@ -11,7 +11,7 @@ public class ConstantNavigationDrawer {
             {"Buttons",
                     "Lists",
                     "Pager",
-                    "Item4",
+                    "Maps",
                     "Item5"};
 
     private static final int[] ICONS =

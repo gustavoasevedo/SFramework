@@ -11,12 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.fragment.FragmentStarter;
-import com.dss.sframework.tasks.UserSyncTask;
-import com.dss.sframework.broadcast.ParsePushBroadcastReceiver;
-import com.dss.sframework.constant.ConstantIntent;
 import com.dss.sframework.delegate.UpdateDelegate;
+import com.dss.sframework.fragment.FragmentStarter;
 import com.dss.sframework.helper.MainHelper;
+import com.dss.sframework.tasks.UserSyncTask;
 
 
 public class MainActivity extends ActionBarActivity implements UpdateDelegate {
@@ -28,16 +26,12 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
     protected void onResume() {
         super.onResume();
         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        nMgr.cancelAll();
-        ParsePushBroadcastReceiver.changeNotificationIconBegin(this);
-    }
+        nMgr.cancelAll();}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ParsePushBroadcastReceiver.setLastEnabled(ConstantIntent.getMAIN(), MainActivity.this);
 
         context = this;
         UserSyncTask gProdTask = new UserSyncTask(4,this);

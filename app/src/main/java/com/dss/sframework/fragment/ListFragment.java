@@ -4,26 +4,30 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.adapter.ListAdapter;
 import com.dss.sframework.dao.TestObjectDao;
+import com.dss.sframework.delegate.UpdateDelegate;
 import com.dss.sframework.helper.ListFragmentHelper;
 import com.dss.sframework.model.TestObject;
+import com.dss.sframework.tasks.UserSyncTask;
 
 import java.util.ArrayList;
 
 /**
  * Created by gustavo.vieira on 22/05/2015.
  */
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements UpdateDelegate {
 
     Context context;
     Activity activity;
@@ -50,7 +54,7 @@ public class ListFragment extends Fragment {
     }
 
     public void initLayout(){
-        helper.DemoFragment(view);
+        helper.ListFragment(view);
 
     }
 
@@ -67,6 +71,7 @@ public class ListFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         helper.addTextChangedListener(textChangedListener);
+        helper.setSwipeListener(onRefreshListener);
     }
 
     public AdapterView.OnItemClickListener listClickListener = new AdapterView.OnItemClickListener() {
@@ -74,6 +79,16 @@ public class ListFragment extends Fragment {
         public void onItemClick(AdapterView<?> arg0, View v, int position,long arg3) {
             String mensagem = "Nome: " + adapter.getFilteredObject().get(position).getName();
             Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    public SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+
+            UserSyncTask userSyncTask = new UserSyncTask(1,ListFragment.this);
+            userSyncTask.execute();
+
         }
     };
 
@@ -98,4 +113,30 @@ public class ListFragment extends Fragment {
     };
 
 
+    @Override
+    public void sucessoUpdate(boolean sucesso) {
+        helper.finishSwipe();
+        lista = TestObjectDao.getInstance(context).selectList();
+
+        adapter = new ListAdapter(context, R.layout.item_list, lista);
+        helper.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void ErroUpdate(Exception e) {
+
+    }
+
+
+
+    @Override
+    public TextView getTVTitulo() {
+        return null;
+    }
+
+    @Override
+    public TextView getTVPorcentagem() {
+        return null;
+    }
 }

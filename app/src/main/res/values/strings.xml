@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- GPS -->
+    <string name="gps_is_settings">Configuração do GPS</string>
+    <string name="gps_not_available">Habilite o GPS antes de continuar.</string>
+
 </resources>
