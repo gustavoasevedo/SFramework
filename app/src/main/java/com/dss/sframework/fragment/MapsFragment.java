@@ -1,61 +1,71 @@
 package com.dss.sframework.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.util.LocationUtils;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-/**
- * Created by digipronto on 02/06/16.
- */
+
 public class MapsFragment extends Fragment {
-
-
 
     MapView mapView;
     GoogleMap map;
+    View view;
+    Context context;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)          {
-        View v = inflater.inflate(R.layout.fragment_maps, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        view = inflater.inflate(R.layout.fragment_maps, container, false);
 
-        // Gets the MapView from the XML layout and creates it
-        mapView = (MapView) v.findViewById(R.id.location_map);
+        context = getActivity();
+
+        loadLayout(savedInstanceState);
+
+        loadMap();
+
+        return view;
+    }
+
+    public void loadLayout(Bundle savedInstanceState){
+        mapView = (MapView) view.findViewById(R.id.location_map);
         mapView.onCreate(savedInstanceState);
+    }
 
-        // Gets to GoogleMap from the MapView and does initialization stuff
+
+    public void loadMap(){
         map = mapView.getMap();
         map.getUiSettings().setMyLocationButtonEnabled(false);
 
-        if(LocationUtils.gpsIsEnabled(getActivity())) {
-            map.setMyLocationEnabled(true);
+        if(LocationUtils.gpsIsEnabled(context)){
+
+            try{
+
+                map.setMyLocationEnabled(true);
+
+            }catch (SecurityException e){
+                Toast.makeText(context,e.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            }
+
         }
 
-        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-            MapsInitializer.initialize(this.getActivity());
+        MapsInitializer.initialize(context);
 
-        // Updates the location and zoom of the MapView
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LocationUtils.getLocation(getActivity()), 10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LocationUtils.getLocation(context), 18);
         map.animateCamera(cameraUpdate);
+        map.setBuildingsEnabled(true);
+        map.setTrafficEnabled(true);
 
-        return v;
     }
 
     @Override
