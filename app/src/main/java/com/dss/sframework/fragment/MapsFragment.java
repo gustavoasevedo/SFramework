@@ -63,7 +63,6 @@ public class MapsFragment extends Fragment {
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LocationUtils.getLocation(context), 18);
         map.animateCamera(cameraUpdate);
-        map.setBuildingsEnabled(true);
         map.setTrafficEnabled(true);
 
     }
