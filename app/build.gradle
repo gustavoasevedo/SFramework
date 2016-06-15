@@ -37,10 +37,6 @@ repositories {
     maven {
         url "http://testformyenterprise.net76.net/gradle/sDatabase/"
     }
-    maven {
-        url "http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk"
-    }
-
 
 }
 

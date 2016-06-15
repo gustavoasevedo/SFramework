@@ -38,10 +38,10 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         gProdTask.execute();
 
         helper = new MainHelper();
-        helper.MainActivity(this);
-        helper.startNavigation(this);
-        helper.setText(this);
-        FragmentStarter.startDemoFragment(this);
+        helper.MainActivity(context);
+        helper.startNavigation(context);
+        helper.setText(context);
+        FragmentStarter.startDemoFragment(context);
 
 
     }
@@ -61,11 +61,11 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         int id = item.getItemId();
 
         switch (id){
-            case R.id.action_reload:;
+            case R.id.action_reload:
                 //  Toast.makeText(MainActivity.this,"Recarrega",Toast.LENGTH_LONG).show();
                 break;
 
-            case R.id.action_close:;
+            case R.id.action_close:
                 finish();
                 break;
         }
