@@ -11,12 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.activity.PagerActivity;
 import com.dss.sframework.adapter.NavigationDrawerAdapter;
 import com.dss.sframework.fragment.FragmentStarter;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 /**
  * Created by gustavo.vieira on 22/05/2015.
@@ -100,7 +100,16 @@ public class NavigationDrawer {
 
                             break;
                         case "5":
-                            Toast.makeText(context,"5",Toast.LENGTH_SHORT).show();
+
+//                            caminhoThumb = "http://img.youtube.com/vi/" + video + "/0.jpg";
+                            fContext.startActivity(YouTubeStandalonePlayer.createVideoIntent(((Activity)fContext),
+                                    "AIzaSyBdp77tuS3_7MZSoZLUX-YmCw250udgb68", "p5DVeDWtA5U"));
+                            break;
+
+                        case "6":
+
+                            FragmentStarter.startVideoFragment(fContext);
+
                             break;
 
                     }

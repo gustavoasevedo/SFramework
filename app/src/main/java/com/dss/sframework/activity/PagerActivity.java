@@ -1,6 +1,7 @@
 package com.dss.sframework.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +48,10 @@ public class PagerActivity extends ActionBarActivity {
                 break;
 
             case R.id.action_close:;
-                finish();
+                Intent i = new Intent(context,MainActivity.class);
+
+                context.startActivity(i);
+                PagerActivity.this.finish();
                 break;
         }
 

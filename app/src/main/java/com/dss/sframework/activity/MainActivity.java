@@ -26,7 +26,8 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
     protected void onResume() {
         super.onResume();
         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        nMgr.cancelAll();}
+        nMgr.cancelAll();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

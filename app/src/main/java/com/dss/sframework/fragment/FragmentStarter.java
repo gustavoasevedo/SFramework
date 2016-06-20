@@ -19,6 +19,7 @@ public abstract class FragmentStarter {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         DemoFragment demoFragment = new DemoFragment();
         fragmentTransaction.replace(R.id.fragment_container, demoFragment, "demoFragment");
+        fragmentTransaction.addToBackStack("demoFragment");
         fragmentTransaction.commit();
         return demoFragment;
     }
@@ -29,6 +30,7 @@ public abstract class FragmentStarter {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ListFragment listFragment = new ListFragment();
         fragmentTransaction.replace(R.id.fragment_container, listFragment, "listFragment");
+        fragmentTransaction.addToBackStack("listFragment");
         fragmentTransaction.commit();
 
         return listFragment;
@@ -41,10 +43,24 @@ public abstract class FragmentStarter {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MapsFragment listFragment = new MapsFragment();
         fragmentTransaction.replace(R.id.fragment_container, listFragment, "mapsFragment");
+        fragmentTransaction.addToBackStack("mapsFragment");
         fragmentTransaction.commit();
 
         return listFragment;
 
     }
 
+
+    public static Fragment startVideoFragment(Context context) {
+
+        FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        VideoFragment listFragment = new VideoFragment();
+        fragmentTransaction.replace(R.id.fragment_container, listFragment, "videoFragment");
+        fragmentTransaction.addToBackStack("videoFragment");
+        fragmentTransaction.commit();
+
+        return listFragment;
+
+    }
 }
