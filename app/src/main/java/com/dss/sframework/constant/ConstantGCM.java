@@ -5,10 +5,7 @@ package com.dss.sframework.constant;
  */
 public abstract class ConstantGCM {
 
-    private static final String GCMSENDERKEY = "AIzaSyA-gSXvIl2TDYeA4Myafq5XTBfYIDtrXoQ";
+    public static final String GCMSENDERKEY = "AIzaSyA-gSXvIl2TDYeA4Myafq5XTBfYIDtrXoQ";
 
 
-    public static String getGCMSENDERKEY() {
-        return GCMSENDERKEY;
-    }
 }

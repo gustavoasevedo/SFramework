@@ -127,16 +127,4 @@ public class ListFragment extends Fragment implements UpdateDelegate {
     public void ErroUpdate(Exception e) {
 
     }
-
-
-
-    @Override
-    public TextView getTVTitulo() {
-        return null;
-    }
-
-    @Override
-    public TextView getTVPorcentagem() {
-        return null;
-    }
 }

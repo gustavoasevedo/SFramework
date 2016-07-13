@@ -15,11 +15,14 @@ import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.constant.ConstantIntent;
+import com.dss.sframework.constant.ConststantAD;
 import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
 import com.dss.sframework.helper.DemoFragmentHelper;
 import com.dss.sframework.model.TestObject;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +59,12 @@ public class DemoFragment extends Fragment {
     public void initLayout(){
         helper.DemoFragment(view);
         helper.setClickListener(insertClick, selectClick, jsonClick, jsonListClick, toBase64Click, fromBase64Click,intentClick,imageClick);
+
+        AdView mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(ConststantAD.banner_ad_unit_id)
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     public View.OnClickListener selectClick = new View.OnClickListener(){

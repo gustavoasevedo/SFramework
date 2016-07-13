@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
@@ -43,6 +42,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         helper.startNavigation(context);
         helper.setText(context);
         FragmentStarter.startDemoFragment(context);
+
 
 
     }
@@ -97,15 +97,6 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         return this;
     }
 
-    @Override
-    public TextView getTVTitulo() {
-        return null;
-    }
-
-    @Override
-    public TextView getTVPorcentagem() {
-        return null;
-    }
 }
 
 
