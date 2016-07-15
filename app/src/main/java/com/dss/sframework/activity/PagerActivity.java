@@ -102,8 +102,6 @@ public class PagerActivity extends ActionBarActivity {
         btnFotos.setBackgroundResource(getIconByIndex(0, true));
         btnWeb.setBackgroundResource(getIconByIndex(1, false));
 
-
-
         groupTabs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

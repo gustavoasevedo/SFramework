@@ -144,24 +144,13 @@ public class ListAdapter extends ArrayAdapter<TestObject> {
                 for (int i = 0; i < lObject.size(); i++) {
                     TestObject object = lObject.get(i);
                     String dataNames = object.getName();
-                    // if
-                    // (dataNames.toLowerCase().startsWith(constraint.toString()))
-                    // {
                     if (dataNames.toLowerCase().contains(constraint.toString())) {
                         FilteredArrayNames.add(object);
                     }
                 }
-                // for (int i = 0; i < mDatabaseOfNames.size(); i++) {
-                // String dataNames = mDatabaseOfNames.get(i);
-                // if
-                // (dataNames.toLowerCase().startsWith(constraint.toString())) {
-                // FilteredArrayNames.add(dataNames);
-                // }
-                // }
 
                 results.count = FilteredArrayNames.size();
                 results.values = FilteredArrayNames;
-                // Log.e("VALUES", results.values.toString());
 
                 return results;
             }

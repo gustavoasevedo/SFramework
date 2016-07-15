@@ -94,6 +94,7 @@ public class ListFragment extends Fragment implements UpdateDelegate {
         }
     };
 
+
     public SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {

@@ -36,7 +36,6 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
     Toolbar tool_bar;
 
 
-
     @AfterViews
     void afterViews() {
 

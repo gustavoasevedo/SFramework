@@ -21,6 +21,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
@@ -69,25 +70,9 @@ public class DemoFragment extends Fragment {
     void afterViews() {
 
         context = getActivity();
-        setClicks();
         loadAd();
 
     }
-
-
-    public void setClicks(){
-
-        btInsert.setOnClickListener(insertClick);
-        btSelect.setOnClickListener(selectClick);
-        btnJson.setOnClickListener(jsonClick);
-        btnJsonList.setOnClickListener(jsonListClick);
-        btntoBase64.setOnClickListener(toBase64Click);
-        btnfromBase64.setOnClickListener(fromBase64Click);
-        btnIntent.setOnClickListener(intentClick);
-        imgBase64.setOnClickListener(imageClick);
-
-    }
-
 
     public void loadAd(){
         AdRequest adRequest = new AdRequest.Builder()
@@ -96,20 +81,17 @@ public class DemoFragment extends Fragment {
         adView.loadAd(adRequest);
     }
 
-    public View.OnClickListener selectClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
 
-            
+    @Click(R.id.btSelect)
+    void selectClick(){
             TestObject testObject = TestObjectDao.getInstance(context).selectId(1);
             Toast.makeText(context, testObject.toString(), Toast.LENGTH_LONG).show();
         }
-    };
 
 
-    public View.OnClickListener insertClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
+    @Click(R.id.btInsert)
+    void insertClick(){
+
             TestObject testObject = TestObjectDao.getInstance(context).selectId(3);
             ArrayList<TestObject> insert= new ArrayList<>();
             insert.add(testObject);
@@ -117,12 +99,11 @@ public class DemoFragment extends Fragment {
             TestObjectDao.getInstance(context).insertListObject(insert);
 
             Toast.makeText(context,"Inserido com sucesso",Toast.LENGTH_LONG).show();
-        }
-    };
 
-    public View.OnClickListener jsonListClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
+    }
+
+    @Click(R.id.btnJsonList)
+    void jsonListClick(){
             TestObject testObject = TestObjectDao.getInstance(context).selectId(2);
             TestObject testObject2 = TestObjectDao.getInstance(context).selectId(5);
             TestObject testObject3 = TestObjectDao.getInstance(context).selectId(7);
@@ -154,14 +135,11 @@ public class DemoFragment extends Fragment {
 //            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
 
             Toast.makeText(context,result,Toast.LENGTH_LONG).show();
-        }
-    };
+    }
 
-    public View.OnClickListener jsonClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
+    @Click(R.id.btnJson)
+    void jsonClick (){
             TestObject testObject = TestObjectDao.getInstance(context).selectId(5);
-
 
             Object send = testObject;
             JSONObject jsonObject = null;
@@ -182,7 +160,6 @@ public class DemoFragment extends Fragment {
 
             Toast.makeText(context,json,Toast.LENGTH_LONG).show();
         }
-    };
 
     public View.OnClickListener toBase64Click = new View.OnClickListener(){
         @Override
@@ -198,37 +175,28 @@ public class DemoFragment extends Fragment {
 
             btnfromBase64.setVisibility(View.VISIBLE);
 
-
-
         }
     };
 
-    public View.OnClickListener fromBase64Click = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-
+    @Click(R.id.btnfromBase64)
+    void fromBase64Click(){
 
             Bitmap bitmap = ImageFactory.convertPhotoFromBase64(image, context);
 
             Drawable thumb = new BitmapDrawable(getResources(), bitmap);
 
             imgBase64.setImageDrawable(thumb);
-        }
-    };
+    }
 
-    public View.OnClickListener intentClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
+    @Click(R.id.btnIntent)
+    void intentClick(){
             Toast.makeText(context, "com.dss.sframework.fragment.DemoFragment",Toast.LENGTH_LONG).show();
-        }
-    };
+    }
 
-    public View.OnClickListener imageClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
+    @Click(R.id.imgBase64)
+    void imageClick(){
 
             ImageFactory.showDialogImage(context, "Teste", "http://icons.iconarchive.com/icons/carlosjj/google-jfk/128/android-icon.png");
-        }
-    };
+    }
 
 }
