@@ -2,49 +2,65 @@ package com.dss.sframework.activity;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
+import com.dss.sframework.constant.ConstantNavigationDrawer;
 import com.dss.sframework.delegate.UpdateDelegate;
 import com.dss.sframework.fragment.FragmentStarter;
-import com.dss.sframework.helper.MainHelper;
+import com.dss.sframework.navigation.NavigationDrawer;
 import com.dss.sframework.tasks.UserSyncTask;
+import com.dss.sframework.util.DeviceInfo;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
+@EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
-    MainHelper helper;
-    Context context;
+    @ViewById
+    TextView textVersionNumber;
+
+    @ViewById
+    TextView textVersionName;
+
+    @ViewById
+    Toolbar tool_bar;
+
+
+
+    @AfterViews
+    void afterViews() {
+
+        startNavigation();
+
+        setText();
+
+        FragmentStarter.startDemoFragment(this);
+
+    }
+
+    @Background
+    void doTask(){
+        UserSyncTask gProdTask = new UserSyncTask(4,this);
+        gProdTask.execute();
+    }
+
+
 
     @Override
     protected void onResume() {
         super.onResume();
         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         nMgr.cancelAll();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        context = this;
-        UserSyncTask gProdTask = new UserSyncTask(4,this);
-        gProdTask.execute();
-
-        helper = new MainHelper();
-        helper.MainActivity(context);
-        helper.startNavigation(context);
-        helper.setText(context);
-        FragmentStarter.startDemoFragment(context);
-
-
-
     }
 
     @Override
@@ -80,9 +96,9 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
     @Override
     public void sucessoUpdate(boolean sucesso) {
         if(sucesso) {
-            Toast.makeText(context, "Sucesso ao carregar Dados", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sucesso ao carregar Dados", Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(context, "Erro ao carregar Dados", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Erro ao carregar Dados", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -95,6 +111,30 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
     @Override
     public Context getContext() {
         return this;
+    }
+
+    public void startNavigation(){
+        // Attaching the layout to the menu_toolbar object
+        this.setSupportActionBar(tool_bar); // Setting menu_toolbar as the ActionBar with setSupportActionBar() call
+
+        NavigationDrawer navigationDrawer = new NavigationDrawer(
+                ConstantNavigationDrawer.TITLES,
+                ConstantNavigationDrawer.ICONS,
+                ConstantNavigationDrawer.NAME,
+                ConstantNavigationDrawer.EMAIL,
+                ConstantNavigationDrawer.PROFILE,
+                this);
+
+
+        navigationDrawer.initDrawer(this, tool_bar);
+    }
+
+
+    public void setText(){
+        DeviceInfo deviceInfo = new DeviceInfo(this);
+        textVersionNumber.setText("Version Number: " + String.valueOf(deviceInfo.getVersionCode()));
+        textVersionName.setText("Version Name: " +  deviceInfo.getVersionName());
+
     }
 
 }

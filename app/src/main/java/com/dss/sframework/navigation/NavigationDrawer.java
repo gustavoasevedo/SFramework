@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.dss.sframework.R;
-import com.dss.sframework.activity.PagerActivity;
+import com.dss.sframework.activity.PagerActivity_;
 import com.dss.sframework.adapter.NavigationDrawerAdapter;
 import com.dss.sframework.fragment.FragmentStarter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
@@ -90,7 +90,7 @@ public class NavigationDrawer {
                             break;
 
                         case "3":
-                            Intent intent = new Intent(fContext, PagerActivity.class);
+                            Intent intent = new Intent(fContext, PagerActivity_.class);
                             ((Activity)fContext).startActivity(intent);
                             break;
 

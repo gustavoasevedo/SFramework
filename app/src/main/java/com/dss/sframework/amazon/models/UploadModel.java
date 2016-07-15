@@ -174,7 +174,7 @@ public class UploadModel extends TransferModel {
 
                     mUpload = getTransferManager().upload(
                             new PutObjectRequest(
-                                    ConstantAmazon.getBucketName().toLowerCase(Locale.US),
+                                    ConstantAmazon.BUCKET_NAME.toLowerCase(Locale.US),
                                     mediaURL,
                                     mFile)
                                     .withCannedAcl(CannedAccessControlList.PublicRead)
@@ -182,7 +182,7 @@ public class UploadModel extends TransferModel {
                     );
 
 
-                Log.i("TAG", "Upload: " + ConstantAmazon.getAmazonFileUrl() + mediaURL);
+                Log.i("TAG", "Upload: " + ConstantAmazon.BUCKET_NAME + mediaURL);
 
                 mUpload.addProgressListener(mListener);
             } catch (Exception e) {

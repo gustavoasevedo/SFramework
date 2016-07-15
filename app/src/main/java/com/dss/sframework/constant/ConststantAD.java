@@ -5,6 +5,6 @@ package com.dss.sframework.constant;
  */
 public abstract class ConststantAD {
 
-    public static String banner_ad_unit_id = "ca-app-pub-3940256099942544/6300978111";
+    public static String banner_ad_unit_id = "ca-app-pub-1529850270295751/3497603225";
 
 }

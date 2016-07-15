@@ -9,9 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.dss.sframework.fragment.DemoFragment;
-import com.dss.sframework.fragment.ListFragment;
-
+import com.dss.sframework.fragment.DemoFragment_;
+import com.dss.sframework.fragment.ListFragment_;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     int mNumOfTabs;
@@ -30,13 +29,13 @@ public class PagerAdapter extends FragmentPagerAdapter {
             switch (position) {
                 case 0:
 
-                    fragment = new DemoFragment();
+                    fragment = new DemoFragment_();
 
                     return fragment;
 
                 case 1:
 
-                    fragment = new ListFragment();
+                    fragment = new ListFragment_();
 
                     return fragment;
             }

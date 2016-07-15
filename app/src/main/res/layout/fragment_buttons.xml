@@ -91,9 +91,10 @@
         android:layout_height="wrap_content"
         ads:adSize="BANNER"
         android:gravity="bottom"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:adUnitId="ca-app-pub-1529850270295751/3497603225"
         android:layout_below="@+id/linearLayout"
-        android:layout_marginTop="30dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp">
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

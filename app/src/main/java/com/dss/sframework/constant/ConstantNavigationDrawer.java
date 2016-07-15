@@ -7,7 +7,7 @@ import com.dss.sframework.R;
  */
 public class ConstantNavigationDrawer {
 
-    private static final String[] TITLES =
+    public static final String[] TITLES =
             {"Buttons",
                     "Lists",
                     "Pager",
@@ -15,7 +15,7 @@ public class ConstantNavigationDrawer {
                     "Youtube Player",
                     "Video Player"};
 
-    private static final int[] ICONS =
+    public static final int[] ICONS =
             {R.drawable.ic_file,
                     R.drawable.ic_file,
                     R.drawable.ic_file,
@@ -23,31 +23,10 @@ public class ConstantNavigationDrawer {
                     R.drawable.ic_file,
                     R.drawable.ic_file};
 
-    private static final String NAME = "Gustavo Asevedo Vieira";
+    public static final String NAME = "Gustavo Asevedo Vieira";
 
-    private static final String EMAIL = "gustavo.asevedo@gmail.com";
+    public static final String EMAIL = "gustavo.asevedo@gmail.com";
 
-    private static final int PROFILE = R.drawable.ic_search;
+    public static final int PROFILE = R.drawable.ic_search;
 
-
-
-    public static String[] getTITLES() {
-        return TITLES;
-    }
-
-    public static int[] getICONS() {
-        return ICONS;
-    }
-
-    public static String getNAME() {
-        return NAME;
-    }
-
-    public static String getEMAIL() {
-        return EMAIL;
-    }
-
-    public static int getPROFILE() {
-        return PROFILE;
-    }
 }

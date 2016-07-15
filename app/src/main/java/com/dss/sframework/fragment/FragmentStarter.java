@@ -17,7 +17,7 @@ public abstract class FragmentStarter {
     public static Fragment startDemoFragment(Context context){
         FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        DemoFragment demoFragment = new DemoFragment();
+        DemoFragment_ demoFragment = new DemoFragment_();
         fragmentTransaction.replace(R.id.fragment_container, demoFragment, "demoFragment");
         fragmentTransaction.addToBackStack("demoFragment");
         fragmentTransaction.commit();
@@ -28,7 +28,7 @@ public abstract class FragmentStarter {
 
         FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ListFragment listFragment = new ListFragment();
+        ListFragment_ listFragment = new ListFragment_();
         fragmentTransaction.replace(R.id.fragment_container, listFragment, "listFragment");
         fragmentTransaction.addToBackStack("listFragment");
         fragmentTransaction.commit();

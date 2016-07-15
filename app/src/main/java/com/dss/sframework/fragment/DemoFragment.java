@@ -1,29 +1,28 @@
 package com.dss.sframework.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.constant.ConstantIntent;
 import com.dss.sframework.constant.ConststantAD;
 import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.factories.ImageFactory;
 import com.dss.sframework.factories.JsonFactory;
-import com.dss.sframework.helper.DemoFragmentHelper;
 import com.dss.sframework.model.TestObject;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,38 +32,68 @@ import java.util.ArrayList;
 /**
  * Created by gustavo.vieira on 22/05/2015.
  */
+@EFragment(R.layout.fragment_buttons)
 public class DemoFragment extends Fragment {
 
     Context context;
-    Activity activity;
     String image;
-    DemoFragmentHelper helper;
-    View view;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_buttons, container, false);
+    @ViewById
+    Button btInsert;
+
+    @ViewById
+    Button btSelect;
+
+    @ViewById
+    Button btnJson;
+
+    @ViewById
+    Button btnJsonList;
+
+    @ViewById
+    Button btntoBase64;
+
+    @ViewById
+    Button btnfromBase64;
+
+    @ViewById
+    Button btnIntent;
+
+    @ViewById
+    ImageView imgBase64;
+
+    @ViewById
+    AdView adView;
+
+    @AfterViews
+    void afterViews() {
 
         context = getActivity();
-        activity = ((Activity)context);
+        setClicks();
+        loadAd();
 
-        helper = new DemoFragmentHelper();
-
-        initLayout();
-
-        return view;
     }
 
-    public void initLayout(){
-        helper.DemoFragment(view);
-        helper.setClickListener(insertClick, selectClick, jsonClick, jsonListClick, toBase64Click, fromBase64Click,intentClick,imageClick);
 
-        AdView mAdView = (AdView) view.findViewById(R.id.adView);
+    public void setClicks(){
+
+        btInsert.setOnClickListener(insertClick);
+        btSelect.setOnClickListener(selectClick);
+        btnJson.setOnClickListener(jsonClick);
+        btnJsonList.setOnClickListener(jsonListClick);
+        btntoBase64.setOnClickListener(toBase64Click);
+        btnfromBase64.setOnClickListener(fromBase64Click);
+        btnIntent.setOnClickListener(intentClick);
+        imgBase64.setOnClickListener(imageClick);
+
+    }
+
+
+    public void loadAd(){
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(ConststantAD.banner_ad_unit_id)
                 .build();
-        mAdView.loadAd(adRequest);
+        adView.loadAd(adRequest);
     }
 
     public View.OnClickListener selectClick = new View.OnClickListener(){
@@ -167,7 +196,7 @@ public class DemoFragment extends Fragment {
 
             Toast.makeText(context,base64,Toast.LENGTH_LONG).show();
 
-            helper.btnfromBase64.setVisibility(View.VISIBLE);
+            btnfromBase64.setVisibility(View.VISIBLE);
 
 
 
@@ -183,14 +212,14 @@ public class DemoFragment extends Fragment {
 
             Drawable thumb = new BitmapDrawable(getResources(), bitmap);
 
-            helper.imgBase64.setImageDrawable(thumb);
+            imgBase64.setImageDrawable(thumb);
         }
     };
 
     public View.OnClickListener intentClick = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            Toast.makeText(context, ConstantIntent.getMAIN(),Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "com.dss.sframework.fragment.DemoFragment",Toast.LENGTH_LONG).show();
         }
     };
 

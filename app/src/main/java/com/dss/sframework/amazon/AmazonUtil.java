@@ -42,10 +42,9 @@ public class AmazonUtil {
         if (sCredProvider == null) {
             sCredProvider = new CognitoCachingCredentialsProvider(
                     context,
-
-                    ConstantAmazon.getAwsAccountId(),
-                    ConstantAmazon.getCognitoPoolId(),
-                    ConstantAmazon.getCognitoRoleUnauth(),
+                    ConstantAmazon.AWS_ACCOUNT_ID,
+                    ConstantAmazon.COGNITO_POOL_ID,
+                    ConstantAmazon.COGNITO_ROLE_UNAUTH,
                     null,
 //                    Regions.SA_EAST_1);
                     Regions.US_EAST_1);
@@ -72,15 +71,15 @@ public class AmazonUtil {
     }
 
     public static boolean doesBucketExist() {
-        return sS3Client.doesBucketExist(ConstantAmazon.getBucketName().toLowerCase(Locale.US));
+        return sS3Client.doesBucketExist(ConstantAmazon.BUCKET_NAME.toLowerCase(Locale.US));
     }
 
     public static void createBucket() {
-        sS3Client.createBucket(ConstantAmazon.getBucketName().toLowerCase(Locale.US));
+        sS3Client.createBucket(ConstantAmazon.BUCKET_NAME.toLowerCase(Locale.US));
     }
 
     public static void deleteBucket() {
-        String name = ConstantAmazon.getBucketName().toLowerCase(Locale.US);
+        String name = ConstantAmazon.BUCKET_NAME.toLowerCase(Locale.US);
         List<S3ObjectSummary> objData = sS3Client.listObjects(name).getObjectSummaries();
         if (objData.size() > 0) {
             DeleteObjectsRequest emptyBucket = new DeleteObjectsRequest(name);

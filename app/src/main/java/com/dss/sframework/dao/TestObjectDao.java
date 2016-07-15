@@ -20,7 +20,7 @@ public class TestObjectDao extends BaseTable {
     private static TestObjectDao instance;
 
     public TestObjectDao(Context context) {
-        super(context, TestObject.class, ConstantDB.getDbName(),ConstantDB.getVersion());
+        super(context, TestObject.class, ConstantDB.dbName,ConstantDB.version);
         createTable();
     }
 

@@ -2,59 +2,69 @@ package com.dss.sframework.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
 import com.dss.sframework.adapter.ListAdapter;
 import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.delegate.UpdateDelegate;
-import com.dss.sframework.helper.ListFragmentHelper;
 import com.dss.sframework.model.TestObject;
 import com.dss.sframework.tasks.UserSyncTask;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
 /**
  * Created by gustavo.vieira on 22/05/2015.
  */
+@EFragment(R.layout.fragment_lista)
 public class ListFragment extends Fragment implements UpdateDelegate {
+
+    @ViewById
+    ListView listItems;
+
+    @ViewById
+    EditText txtSearch;
+
+    @ViewById
+    SwipeRefreshLayout swipeContainer;
+
 
     Context context;
     Activity activity;
-    ListFragmentHelper helper;
-    View view;
     ListAdapter adapter;
     ArrayList<TestObject> lista;
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_lista, container, false);
-
+    @AfterViews
+    void afterViews() {
         context = getActivity();
         activity = ((Activity)context);
 
-        helper = new ListFragmentHelper();
+        configureSwipe();
 
-        initLayout();
         configureAdapter();
-
-        return view;
     }
 
-    public void initLayout(){
-        helper.ListFragment(view);
+
+    public void configureSwipe(){
+        swipeContainer.setColorSchemeColors(
+                getContext().getResources().getColor(R.color.blue),
+                getContext().getResources().getColor(R.color.lightblue),
+                getContext().getResources().getColor(R.color.blue),
+                getContext().getResources().getColor(R.color.white)
+        );
 
     }
 
@@ -66,12 +76,14 @@ public class ListFragment extends Fragment implements UpdateDelegate {
         lista = TestObjectDao.getInstance(context).selectList();
 
         adapter = new ListAdapter(context, R.layout.item_list, lista);
-        helper.setAdapter(adapter);
-        helper.setListClickListener(listClickListener);
+        listItems.setAdapter(adapter);
+
+        listItems.setOnItemClickListener(listClickListener);
         adapter.notifyDataSetChanged();
 
-        helper.addTextChangedListener(textChangedListener);
-        helper.setSwipeListener(onRefreshListener);
+        txtSearch.addTextChangedListener(textChangedListener);
+
+        swipeContainer.setOnRefreshListener(onRefreshListener);
     }
 
     public AdapterView.OnItemClickListener listClickListener = new AdapterView.OnItemClickListener() {
@@ -115,16 +127,16 @@ public class ListFragment extends Fragment implements UpdateDelegate {
 
     @Override
     public void sucessoUpdate(boolean sucesso) {
-        helper.finishSwipe();
+        swipeContainer.setRefreshing(false);
         lista = TestObjectDao.getInstance(context).selectList();
 
         adapter = new ListAdapter(context, R.layout.item_list, lista);
-        helper.setAdapter(adapter);
+        listItems.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void ErroUpdate(Exception e) {
-
+        swipeContainer.setRefreshing(false);
     }
 }

@@ -54,7 +54,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            String url = ConstantUrl.getURL_WEBSERVICE() + ConstantUrl.getMethodUser();
+            String url = ConstantUrl.URL_WEBSERVICE + ConstantUrl.METHOD_USER;
 
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("id", ""));
