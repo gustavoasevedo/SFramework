@@ -65,6 +65,8 @@ public class HttpUtil {
             urlConn.setUseCaches(false);
             urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             urlConn.setRequestMethod("POST");
+            urlConn.setConnectTimeout(CONNECTION_TIMEOUT);
+            urlConn.setReadTimeout(DATARETRIEVAL_TIMEOUT);
             urlConn.connect();
 
             // Send POST output.
@@ -129,7 +131,8 @@ public class HttpUtil {
             urlConn.setDoOutput(true);
             urlConn.setUseCaches(false);
             urlConn.setRequestProperty("Content-Type", "application/json");
-
+            urlConn.setConnectTimeout(CONNECTION_TIMEOUT);
+            urlConn.setReadTimeout(DATARETRIEVAL_TIMEOUT);
             urlConn.connect();
 
             // Send POST output.

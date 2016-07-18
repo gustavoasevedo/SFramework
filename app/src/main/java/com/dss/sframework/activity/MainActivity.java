@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dss.sframework.AnalyticsTrackers;
 import com.dss.sframework.R;
 import com.dss.sframework.constant.ConstantNavigationDrawer;
 import com.dss.sframework.delegate.UpdateDelegate;
@@ -19,7 +20,6 @@ import com.dss.sframework.tasks.UserSyncTask;
 import com.dss.sframework.util.DeviceInfo;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -45,15 +45,12 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
         FragmentStarter.startDemoFragment(this);
 
-    }
-
-    @Background
-    void doTask(){
         UserSyncTask gProdTask = new UserSyncTask(4,this);
         gProdTask.execute();
+
+        AnalyticsTrackers.initialize(this);
+
     }
-
-
 
     @Override
     protected void onResume() {
@@ -78,7 +75,10 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
         switch (id){
             case R.id.action_reload:
-                //  Toast.makeText(MainActivity.this,"Recarrega",Toast.LENGTH_LONG).show();
+
+                UserSyncTask gProdTask = new UserSyncTask(4,this);
+                gProdTask.execute();
+
                 break;
 
             case R.id.action_close:

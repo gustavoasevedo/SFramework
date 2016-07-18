@@ -41,7 +41,7 @@ public abstract class FragmentStarter {
 
         FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        MapsFragment listFragment = new MapsFragment();
+        MapsFragment_ listFragment = new MapsFragment_();
         fragmentTransaction.replace(R.id.fragment_container, listFragment, "mapsFragment");
         fragmentTransaction.addToBackStack("mapsFragment");
         fragmentTransaction.commit();
@@ -55,7 +55,7 @@ public abstract class FragmentStarter {
 
         FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        VideoFragment listFragment = new VideoFragment();
+        VideoFragment_ listFragment = new VideoFragment_();
         fragmentTransaction.replace(R.id.fragment_container, listFragment, "videoFragment");
         fragmentTransaction.addToBackStack("videoFragment");
         fragmentTransaction.commit();

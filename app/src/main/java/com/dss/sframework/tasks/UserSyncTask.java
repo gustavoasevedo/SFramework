@@ -2,7 +2,6 @@ package com.dss.sframework.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dss.sframework.constant.ConstantUrl;
 import com.dss.sframework.dao.TestObjectDao;
@@ -47,7 +46,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
 //        progress.setMessage("Enviando Coaching");
 //        progress.show();
 
-        time = System.currentTimeMillis();
+//        time = System.currentTimeMillis();
 
     }
 
@@ -92,9 +91,9 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onPostExecute(Boolean sucesso) {
         Log.i(TAG, "Sucesso: " + sucesso);
 
-        long completedIn = System.currentTimeMillis() - time;
-
-        Toast.makeText(delegate.getContext(),String.valueOf(completedIn),Toast.LENGTH_LONG).show();
+//        long completedIn = System.currentTimeMillis() - time;
+//
+//        Toast.makeText(delegate.getContext(),String.valueOf(completedIn),Toast.LENGTH_LONG).show();
 
 //        progress.dismiss();
 

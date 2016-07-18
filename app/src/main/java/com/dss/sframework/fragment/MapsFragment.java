@@ -1,11 +1,7 @@
 package com.dss.sframework.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
@@ -16,35 +12,32 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
 
+@EFragment(R.layout.fragment_maps)
 public class MapsFragment extends Fragment {
 
-    MapView mapView;
+
     GoogleMap map;
-    View view;
     Context context;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        view = inflater.inflate(R.layout.fragment_maps, container, false);
+    MapView location_map;
 
+    @AfterViews
+    void afterViews() {
         context = getActivity();
 
-        loadLayout(savedInstanceState);
+        location_map.onCreate(this.getArguments());
 
         loadMap();
 
-        return view;
     }
 
-    public void loadLayout(Bundle savedInstanceState){
-        mapView = (MapView) view.findViewById(R.id.location_map);
-        mapView.onCreate(savedInstanceState);
-    }
 
 
     public void loadMap(){
-        map = mapView.getMap();
+        map = location_map.getMap();
         map.getUiSettings().setMyLocationButtonEnabled(false);
 
         if(LocationUtils.gpsIsEnabled(context)){
@@ -69,20 +62,20 @@ public class MapsFragment extends Fragment {
 
     @Override
     public void onResume() {
-        mapView.onResume();
+        location_map.onResume();
         super.onResume();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mapView.onDestroy();
+        location_map.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mapView.onLowMemory();
+        location_map.onLowMemory();
     }
 }
 
