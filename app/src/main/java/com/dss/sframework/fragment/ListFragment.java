@@ -69,8 +69,6 @@ public class ListFragment extends Fragment implements UpdateDelegate {
     }
 
     public void configureAdapter(){
-
-
         lista = new ArrayList<>();
 
         lista = TestObjectDao.getInstance(context).selectList();

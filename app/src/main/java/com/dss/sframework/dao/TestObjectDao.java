@@ -58,22 +58,54 @@ public class TestObjectDao extends BaseTable {
 
     public TestObject selectId(int Id){
 
-        Object object = new Object();
         TestObject testObject = new TestObject();
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("id");
+        String[] values = {String.valueOf(Id)};
 
+        testObject = selectWhereObject(fields,values);
+
+        return testObject;
+
+    }
+
+
+    public ArrayList<TestObject> selectList(){
+        ArrayList<Object> objectList = new ArrayList<>();
+        ArrayList<TestObject> lista = new ArrayList<>();
+
+        objectList = selectNoWhere();
+
+        lista = mountObjectList(objectList);
+
+        return lista;
+    }
+
+
+    public ArrayList<TestObject> selectListbyName(String nome){
+
+        ArrayList<Object> objectList = new ArrayList<>();
+        ArrayList<TestObject> lista = new ArrayList<>();
 
         ArrayList<String> fields = new ArrayList<>();
+        fields.add("name");
+        String[] values = {nome};
 
-        fields.add("id");
+        objectList = selectWhereArray(fields,values);
+
+        lista = mountObjectList(objectList);
+
+        return lista;
+    }
 
 
-        String[] values = {String.valueOf(Id)};
+    public TestObject selectWhereObject(ArrayList<String> fields,String[] values){
+
+        TestObject testObject = new TestObject();
 
         try {
 
-            object = selectWhere(TestObject.class,fields,values);
-
-            testObject = (TestObject) object;
+            testObject = (TestObject) selectWhere(TestObject.class,fields,values);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -90,61 +122,16 @@ public class TestObjectDao extends BaseTable {
         }
 
         return testObject;
-
     }
 
-
-    public ArrayList<TestObject> selectList(){
-        ArrayList<Object> objectList = new ArrayList<>();
-        ArrayList<TestObject> lista = new ArrayList<>();
-
-        try {
-            objectList = selectList(TestObject.class);
-
-            lista = new ArrayList<TestObject>();
-
-            for(Object object : objectList){
-                TestObject testObject = (TestObject) object;
-                lista.add(testObject);
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvalidTypeException e) {
-            e.printStackTrace();
-        }
-
-        return lista;
-    }
-
-
-    public ArrayList<TestObject> selectListbyName(String nome){
+    public ArrayList<Object> selectWhereArray(ArrayList<String> fields,String[] values){
 
         ArrayList<Object> objectList = new ArrayList<>();
-        ArrayList<TestObject> lista = new ArrayList<>();
-
-        ArrayList<String> fields = new ArrayList<>();
-
-        fields.add("name");
-
-        String[] values = {nome};
 
         try {
+
             objectList = selectListWhere(TestObject.class,fields,values);
 
-            lista = new ArrayList<TestObject>();
-
-            for(Object object : objectList){
-                TestObject testObject = (TestObject) object;
-                lista.add(testObject);
-            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -159,9 +146,45 @@ public class TestObjectDao extends BaseTable {
             e.printStackTrace();
         }
 
-        return lista;
+        return objectList;
+    }
+
+    public ArrayList<Object> selectNoWhere(){
+
+        ArrayList<Object> objectList = new ArrayList<>();
+
+        try {
+
+            objectList = selectList(TestObject.class);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvalidTypeException e) {
+            e.printStackTrace();
+        }
+
+        return objectList;
     }
 
 
+    public ArrayList<TestObject> mountObjectList(ArrayList<Object> objectList){
+
+        ArrayList<TestObject> lista = new ArrayList<>();
+
+        for(Object object : objectList){
+            TestObject testObject = (TestObject) object;
+            lista.add(testObject);
+        }
+
+        return lista;
+    }
 
 }

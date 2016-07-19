@@ -53,27 +53,20 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            String url = ConstantUrl.URL_WEBSERVICE + ConstantUrl.METHOD_USER;
-
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("id", ""));
-
-            String result = HttpUtil.postData(url, nameValuePairs);
+            String result = makeConnection();
 
             if (result != null && !result.equals("[]") && !result.equals("null")) {
-                Gson serializer = new Gson();
-                TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
 
-                totalPorcentagem = testObjectList.list.size();
+                TestObjectList testObjectList = decompodeJson(result);
 
                 TestObjectDao.getInstance(delegate.getContext()).insertListObject(testObjectList.list);
+
             } else {
                 if (delegate.getContext() != null) {
                     this.erro = new Exception("Erro ao baixar dados de Usuario.");
                     return false;
                 }
             }
-
             return true;
         }catch (Exception e){
             this.erro = new Exception("Erro ao baixar dados de Usuario.");
@@ -102,6 +95,31 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
         } else {
             delegate.ErroUpdate(erro);
         }
+    }
+
+
+    public String makeConnection(){
+        String url = ConstantUrl.URL_WEBSERVICE + ConstantUrl.METHOD_USER;
+
+        String result = HttpUtil.postData(url, buildNameValuePair());
+
+        return result;
+    }
+
+    public ArrayList<NameValuePair> buildNameValuePair(){
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("id", ""));
+
+        return nameValuePairs;
+    }
+
+    public TestObjectList decompodeJson(String result){
+        Gson serializer = new Gson();
+        TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
+
+        totalPorcentagem = testObjectList.list.size();
+
+        return testObjectList;
     }
 
 }

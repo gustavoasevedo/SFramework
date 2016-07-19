@@ -61,33 +61,23 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         switch (id){
             case R.id.action_reload:
-
                 UserSyncTask gProdTask = new UserSyncTask(4,this);
                 gProdTask.execute();
-
                 break;
 
             case R.id.action_close:
                 finish();
                 break;
         }
-
-        //noinspection SimplifiableIfStatement
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -113,8 +103,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
     }
 
     public void startNavigation(){
-        // Attaching the layout to the menu_toolbar object
-        this.setSupportActionBar(tool_bar); // Setting menu_toolbar as the ActionBar with setSupportActionBar() call
+        this.setSupportActionBar(tool_bar);
 
         NavigationDrawer navigationDrawer = new NavigationDrawer(
                 ConstantNavigationDrawer.TITLES,
@@ -123,7 +112,6 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
                 ConstantNavigationDrawer.EMAIL,
                 ConstantNavigationDrawer.PROFILE,
                 this);
-
 
         navigationDrawer.initDrawer(this, tool_bar);
     }

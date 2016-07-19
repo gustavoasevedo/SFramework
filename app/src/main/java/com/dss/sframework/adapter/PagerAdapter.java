@@ -1,9 +1,5 @@
 package com.dss.sframework.adapter;
 
-/**
- * Created by digipronto on 13/05/16.
- */
-
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

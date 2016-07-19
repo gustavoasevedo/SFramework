@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -72,7 +70,6 @@ public abstract class ImageFactory {
      * @return
      */
     public static void showDialogImage(final Context context, String titulo, String url) {
-        // custom dialog
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -94,7 +91,6 @@ public abstract class ImageFactory {
 
 
         Glide.with(context)
-//                .load("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRqdDzVXBlT7uvIhzEG0IEeGJjGBNSWSqTXskMUGynnZTAmGeMv7nCPbTV1uw")
                 .load(url)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -102,7 +98,6 @@ public abstract class ImageFactory {
                 .into(image);
 
         Button dialogButton = (Button) dialog.findViewById(R.id.closeButton);
-        // if button is clicked, close the custom dialog
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

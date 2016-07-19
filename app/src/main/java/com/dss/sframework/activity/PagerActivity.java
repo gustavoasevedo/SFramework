@@ -42,111 +42,64 @@ public class PagerActivity extends ActionBarActivity {
 
     PagerAdapter adapter;
 
-
-
     @AfterViews
     void afterViews() {
 
-        setSupportActionBar(tool_bar); // Setting menu_toolbar as the ActionBar with setSupportActionBar() call
+        setSupportActionBar(tool_bar);
 
         startPager();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.action_reload:;
-                //  Toast.makeText(MainActivity.this,"Recarrega",Toast.LENGTH_LONG).show();
-                break;
-
-            case R.id.action_close:;
-                Intent i = new Intent(this,MainActivity_.class);
-
-                startActivity(i);
-                PagerActivity.this.finish();
-                break;
-        }
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-
     public void startPager(){
 
+        configureTabs();
+
+        configureAdapter();
+
+        groupTabs.setOnCheckedChangeListener(onCheckedChangeListener);
+
+        pager.addOnPageChangeListener(onPageChangeListener);
+    }
+
+
+    public void configureTabs(){
         tab_layout.addTab(tab_layout.newTab().setText(""));
         tab_layout.addTab(tab_layout.newTab().setText(""));
 
         tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tab_layout.setVisibility(View.INVISIBLE);
 
+        btnFotos.setBackgroundResource(getIconByIndex(0, true));
+        btnWeb.setBackgroundResource(getIconByIndex(1, false));
+    }
+
+    public void configureAdapter(){
         adapter = new PagerAdapter (this.getSupportFragmentManager(), tab_layout.getTabCount(), this);
 
         pager.setAdapter(adapter);
-
-        btnFotos.setBackgroundResource(getIconByIndex(0, true));
-        btnWeb.setBackgroundResource(getIconByIndex(1, false));
-
-        groupTabs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.btnFotos:
-                        pager.setCurrentItem(0);
-                        btnFotos.setBackgroundResource(getIconByIndex(0, true));
-                        btnWeb.setBackgroundResource(getIconByIndex(1, false));
-                        break;
-                    case R.id.btnWeb:
-                        pager.setCurrentItem(1);
-                        btnFotos.setBackgroundResource(getIconByIndex(0, false));
-                        btnWeb.setBackgroundResource(getIconByIndex(1, true));
-                        break;
-                }
-            }
-        });
-
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (position) {
-                    case 0:
-                        groupTabs.check(R.id.btnFotos);
-                        break;
-                    case 1:
-                        groupTabs.check(R.id.btnWeb);
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-
-        });
     }
 
+    public RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            checkButtons(checkedId);
+        }
+    };
+
+    public void checkButtons(int checkedId){
+        switch (checkedId) {
+            case R.id.btnFotos:
+                pager.setCurrentItem(0);
+                btnFotos.setBackgroundResource(getIconByIndex(0, true));
+                btnWeb.setBackgroundResource(getIconByIndex(1, false));
+                break;
+            case R.id.btnWeb:
+                pager.setCurrentItem(1);
+                btnFotos.setBackgroundResource(getIconByIndex(0, false));
+                btnWeb.setBackgroundResource(getIconByIndex(1, true));
+                break;
+        }
+    }
 
     public int getIconByIndex(int index, boolean disabled) {
 
@@ -167,6 +120,59 @@ public class PagerActivity extends ActionBarActivity {
         }
 
         return rc;
+    }
+
+    public ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            makeScrooAction(position);
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+    public void makeScrooAction(int position){
+        switch (position) {
+            case 0:
+                groupTabs.check(R.id.btnFotos);
+                break;
+            case 1:
+                groupTabs.check(R.id.btnWeb);
+                break;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_reload:;
+                break;
+
+            case R.id.action_close:;
+                Intent i = new Intent(this,MainActivity_.class);
+
+                startActivity(i);
+                PagerActivity.this.finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

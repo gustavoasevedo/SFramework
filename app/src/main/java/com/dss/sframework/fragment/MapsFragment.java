@@ -14,50 +14,55 @@ import com.google.android.gms.maps.MapsInitializer;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_maps)
 public class MapsFragment extends Fragment {
 
-
     GoogleMap map;
     Context context;
 
+    @ViewById
     MapView location_map;
 
     @AfterViews
     void afterViews() {
         context = getActivity();
-
-        location_map.onCreate(this.getArguments());
-
         loadMap();
-
     }
 
-
-
     public void loadMap(){
-        map = location_map.getMap();
-        map.getUiSettings().setMyLocationButtonEnabled(false);
+        location_map.onCreate(getArguments());
 
-        if(LocationUtils.gpsIsEnabled(context)){
-
-            try{
-
-                map.setMyLocationEnabled(true);
-
-            }catch (SecurityException e){
-                Toast.makeText(context,e.getMessage().toString(),Toast.LENGTH_SHORT).show();
-            }
-
-        }
+        initMap();
+        checkLocation();
 
         MapsInitializer.initialize(context);
 
+
+        setLocation();
+
+    }
+
+    public void checkLocation(){
+        if(LocationUtils.gpsIsEnabled(context)){
+            try{
+                map.setMyLocationEnabled(true);
+            }catch (SecurityException e){
+                Toast.makeText(context,e.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void initMap(){
+        map = location_map.getMap();
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+    }
+
+    public void setLocation(){
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LocationUtils.getLocation(context), 18);
         map.animateCamera(cameraUpdate);
         map.setTrafficEnabled(true);
-
     }
 
     @Override

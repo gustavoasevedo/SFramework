@@ -41,7 +41,7 @@ public abstract class FragmentStarter {
 
         FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        MapsFragment_ listFragment = new MapsFragment_();
+        MapsFragment listFragment = new MapsFragment_();
         fragmentTransaction.replace(R.id.fragment_container, listFragment, "mapsFragment");
         fragmentTransaction.addToBackStack("mapsFragment");
         fragmentTransaction.commit();

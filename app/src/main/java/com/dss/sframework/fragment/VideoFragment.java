@@ -10,12 +10,14 @@ import com.dss.sframework.R;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_video)
 public class VideoFragment extends Fragment {
 
     Context context;
 
+    @ViewById
     VideoView videoview;
 
     @AfterViews
@@ -27,17 +29,34 @@ public class VideoFragment extends Fragment {
     }
 
     public void initPlayer(){
+
+        MediaController mediaController = configureControler();
+
+        Uri uri = configureURI();
+
+        configureVideo(uri,mediaController);
+
+    }
+
+    public MediaController configureControler(){
         MediaController mediaController= new MediaController(context);
         mediaController.setAnchorView(videoview);
 
+        return mediaController;
+
+    }
+
+    public Uri configureURI(){
         Uri uri = Uri.parse("android.resource://"+ context.getPackageName()+"/"+context.getResources().
                 getIdentifier("video", "raw", context.getPackageName()));
 
-        videoview.setMediaController(mediaController);
-
-        videoview.setVideoURI(uri);
-        videoview.requestFocus();
+        return uri;
     }
 
+    public void configureVideo(Uri uri, MediaController mediaController){
+        videoview.setVideoURI(uri);
+        videoview.setMediaController(mediaController);
+        videoview.requestFocus();
+    }
 
 }
