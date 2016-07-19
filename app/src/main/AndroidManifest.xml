@@ -49,16 +49,16 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme"
         >
-        <activity android:name=".activity.MainActivity_"
+        <activity android:name=".view.activity.MainActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.PagerActivity_"
+            android:name=".view.activity.PagerActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.SplashActivity_"
+            android:name=".view.activity.SplashActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -72,13 +72,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBdp77tuS3_7MZSoZLUX-YmCw250udgb68" />
 
-        <service android:name=".services.FirebaseMessagingService">
+        <service android:name=".controler.services.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".services.FirebaseInstanceIDService">
+        <service android:name=".controler.services.FirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
