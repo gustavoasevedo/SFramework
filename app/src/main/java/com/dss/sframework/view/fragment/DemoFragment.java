@@ -16,7 +16,7 @@ import com.dss.sframework.tools.constant.ConststantAD;
 import com.dss.sframework.controler.dao.TestObjectDao;
 import com.dss.sframework.tools.factories.ImageFactory;
 import com.dss.sframework.tools.factories.JsonFactory;
-import com.dss.sframework.model.object.TestObject;
+import com.dss.sframework.model.TestObject.TestObject;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 

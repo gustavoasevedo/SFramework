@@ -5,7 +5,7 @@ import android.content.Context;
 import com.dss.sdatabase.dao.BaseTable;
 import com.dss.sdatabase.exceptions.InvalidTypeException;
 import com.dss.sframework.tools.constant.ConstantDB;
-import com.dss.sframework.model.object.TestObject;
+import com.dss.sframework.model.TestObject.TestObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

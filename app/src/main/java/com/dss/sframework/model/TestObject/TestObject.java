@@ -1,4 +1,4 @@
-package com.dss.sframework.model.object;
+package com.dss.sframework.model.TestObject;
 import com.dss.sdatabase.annotations.BaseDBFieldName;
 import com.dss.sdatabase.annotations.BaseDBMethodGetName;
 import com.dss.sdatabase.annotations.BaseDBMethodSetName;

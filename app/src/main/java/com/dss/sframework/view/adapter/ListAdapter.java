@@ -10,7 +10,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import com.dss.sframework.R;
-import com.dss.sframework.model.object.TestObject;
+import com.dss.sframework.model.TestObject.TestObject;
 
 import java.util.ArrayList;
 import java.util.List;

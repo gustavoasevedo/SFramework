@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.dss.sframework.R;
 import com.dss.sframework.view.adapter.ListAdapter;
 import com.dss.sframework.controler.dao.TestObjectDao;
-import com.dss.sframework.controler.delegate.UpdateDelegate;
-import com.dss.sframework.model.object.TestObject;
+import com.dss.sframework.tools.delegate.UpdateDelegate;
+import com.dss.sframework.model.TestObject.TestObject;
 import com.dss.sframework.controler.tasks.UserSyncTask;
 
 import org.androidannotations.annotations.AfterViews;

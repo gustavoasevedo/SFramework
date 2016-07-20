@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.dss.sframework.AnalyticsTrackers;
 import com.dss.sframework.R;
 import com.dss.sframework.tools.constant.ConstantNavigationDrawer;
-import com.dss.sframework.controler.delegate.UpdateDelegate;
+import com.dss.sframework.tools.delegate.UpdateDelegate;
 import com.dss.sframework.view.fragment.FragmentStarter;
 import com.dss.sframework.view.navigation.NavigationDrawer;
 import com.dss.sframework.controler.tasks.UserSyncTask;

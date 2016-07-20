@@ -1,6 +1,5 @@
-package com.dss.sframework.model.dto;
+package com.dss.sframework.model.TestObject;
 
-import com.dss.sframework.model.object.TestObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

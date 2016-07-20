@@ -1,4 +1,4 @@
-package com.dss.sframework.controler.delegate;
+package com.dss.sframework.tools.delegate;
 
 import android.content.Context;
 
