@@ -4,9 +4,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.dss.sframework.tools.constant.ConstantUrl;
-import com.dss.sframework.controler.dao.TestObjectDao;
+import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.tools.delegate.UpdateDelegate;
-import com.dss.sframework.model.TestObject.TestObjectList;
+import com.dss.sframework.model.dto.TestObjectList;
 import com.dss.sframework.tools.util.HttpUtil;
 import com.google.gson.Gson;
 

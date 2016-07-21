@@ -19,7 +19,7 @@ import com.dss.sframework.R;
 /**
  * Created by gustavo.vieira on 06/02/2015.
  */
-public class GPSTracker extends Service implements LocationListener {
+public class GPSTrackerService extends Service implements LocationListener {
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -38,7 +38,7 @@ public class GPSTracker extends Service implements LocationListener {
     double latitude; // latitude
     double longitude; // longitude
 
-    public GPSTracker(Context context) {
+    public GPSTrackerService(Context context) {
         this.mContext = context;
         getLocation();
     }
@@ -109,7 +109,7 @@ public class GPSTracker extends Service implements LocationListener {
      */
     public void stopUsingGPS() {
         if (locationManager != null) {
-            locationManager.removeUpdates(GPSTracker.this);
+            locationManager.removeUpdates(GPSTrackerService.this);
             turnGPSOff();
         }
     }

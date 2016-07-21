@@ -10,7 +10,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import com.dss.sframework.R;
-import com.dss.sframework.model.TestObject.TestObject;
+import com.dss.sframework.model.dto.TestObjectDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +18,16 @@ import java.util.List;
 /**
 * Created by gustavo.vieira on 20/01/2015.
 */
-public class ListAdapter extends ArrayAdapter<TestObject> {
+public class ListAdapter extends ArrayAdapter<TestObjectDTO> {
 
     private Context context;
     private int layoutResourceId;
-    private List<TestObject> lObject;
-    private List<TestObject> filteredObject;
+    private List<TestObjectDTO> lObject;
+    private List<TestObjectDTO> filteredObject;
 
 
     public ListAdapter(Context context, int textViewResourceId,
-                       List<TestObject> objects) {
+                       List<TestObjectDTO> objects) {
         super(context, textViewResourceId, objects);
         this.setContext(context);
         this.setLayoutResourceId(textViewResourceId);
@@ -60,23 +60,23 @@ public class ListAdapter extends ArrayAdapter<TestObject> {
             holder = (ListClienteHolder) row.getTag();
         }
 
-        TestObject testObject = filteredObject.get(position);
+        TestObjectDTO testObjectDTO = filteredObject.get(position);
 
-        holder.id.setText(String.valueOf(testObject.getId()));
+        holder.id.setText(String.valueOf(testObjectDTO.getId()));
 
-        holder.nome.setText(testObject.getName());
+        holder.nome.setText(testObjectDTO.getName());
 
-        holder.data.setText(testObject.getDate());
+        holder.data.setText(testObjectDTO.getDate());
 
         return row;
 
     }
 
-    public List<TestObject> getFilteredObject() {
+    public List<TestObjectDTO> getFilteredObject() {
         return filteredObject;
     }
 
-    public void setFilteredObject(List<TestObject> filteredObject) {
+    public void setFilteredObject(List<TestObjectDTO> filteredObject) {
         this.filteredObject = filteredObject;
     }
 
@@ -101,11 +101,11 @@ public class ListAdapter extends ArrayAdapter<TestObject> {
         this.layoutResourceId = layoutResourceId;
     }
 
-    public List<TestObject> getlObjects() {
+    public List<TestObjectDTO> getlObjects() {
         return filteredObject;
     }
 
-    public void setlObjects(List<TestObject> lNoticias) {
+    public void setlObjects(List<TestObjectDTO> lNoticias) {
         this.lObject = lNoticias;
     }
 
@@ -126,7 +126,7 @@ public class ListAdapter extends ArrayAdapter<TestObject> {
                                           FilterResults results) {
 
                 // arrayListNames = (List<String>) results.values;
-                filteredObject = (List<TestObject>) results.values;
+                filteredObject = (List<TestObjectDTO>) results.values;
                 notifyDataSetChanged();
             }
 
@@ -136,13 +136,13 @@ public class ListAdapter extends ArrayAdapter<TestObject> {
                 FilterResults results = new FilterResults();
                 // ArrayList<String> FilteredArrayNames = new
                 // ArrayList<String>();
-                List<TestObject> FilteredArrayNames = new ArrayList<TestObject>();
+                List<TestObjectDTO> FilteredArrayNames = new ArrayList<TestObjectDTO>();
 
                 // perform your search here using the searchConstraint String.
 
                 constraint = constraint.toString().toLowerCase();
                 for (int i = 0; i < lObject.size(); i++) {
-                    TestObject object = lObject.get(i);
+                    TestObjectDTO object = lObject.get(i);
                     String dataNames = object.getName();
                     if (dataNames.toLowerCase().contains(constraint.toString())) {
                         FilteredArrayNames.add(object);

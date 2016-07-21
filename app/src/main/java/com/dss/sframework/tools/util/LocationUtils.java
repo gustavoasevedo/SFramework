@@ -11,7 +11,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.dss.sframework.R;
-import com.dss.sframework.controler.services.GPSTracker;
+import com.dss.sframework.controler.services.GPSTrackerService;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -69,7 +69,7 @@ public class LocationUtils{
     public static LatLng getLocation(Context context) {
 
 
-        GPSTracker mGPS = new GPSTracker(context);
+        GPSTrackerService mGPS = new GPSTrackerService(context);
         Location gps_localizacao = new Location("dummyprovider");
         LocationManager lm = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
         double latitude = 0.0;

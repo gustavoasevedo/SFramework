@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
+import com.dss.sframework.dao.TestObjectDao;
+import com.dss.sframework.model.dto.TestObjectDTO;
 import com.dss.sframework.tools.constant.ConststantAD;
-import com.dss.sframework.controler.dao.TestObjectDao;
 import com.dss.sframework.tools.factories.ImageFactory;
 import com.dss.sframework.tools.factories.JsonFactory;
-import com.dss.sframework.model.TestObject.TestObject;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -84,17 +84,17 @@ public class DemoFragment extends Fragment {
 
     @Click(R.id.btSelect)
     void selectClick(){
-            TestObject testObject = TestObjectDao.getInstance(context).selectId(1);
-            Toast.makeText(context, testObject.toString(), Toast.LENGTH_LONG).show();
+            TestObjectDTO TestObjectDTO = TestObjectDao.getInstance(context).selectId(1);
+            Toast.makeText(context, TestObjectDTO.toString(), Toast.LENGTH_LONG).show();
         }
 
 
     @Click(R.id.btInsert)
     void insertClick(){
 
-            TestObject testObject = TestObjectDao.getInstance(context).selectId(3);
-            ArrayList<TestObject> insert= new ArrayList<>();
-            insert.add(testObject);
+            TestObjectDTO TestObjectDTO = TestObjectDao.getInstance(context).selectId(3);
+            ArrayList<TestObjectDTO> insert= new ArrayList<>();
+            insert.add(TestObjectDTO);
 
             TestObjectDao.getInstance(context).insertListObject(insert);
 
@@ -104,16 +104,16 @@ public class DemoFragment extends Fragment {
 
     @Click(R.id.btnJsonList)
     void jsonListClick(){
-            TestObject testObject = TestObjectDao.getInstance(context).selectId(2);
-            TestObject testObject2 = TestObjectDao.getInstance(context).selectId(5);
-            TestObject testObject3 = TestObjectDao.getInstance(context).selectId(7);
+            TestObjectDTO TestObjectDTO = TestObjectDao.getInstance(context).selectId(2);
+            TestObjectDTO TestObjectDTO2 = TestObjectDao.getInstance(context).selectId(5);
+            TestObjectDTO TestObjectDTO3 = TestObjectDao.getInstance(context).selectId(7);
 
             ArrayList<Object> arrayList = new ArrayList<>();
-            arrayList.add(testObject2);
-            arrayList.add(testObject3);
+            arrayList.add(TestObjectDTO2);
+            arrayList.add(TestObjectDTO3);
 
 
-            Object send = testObject;
+            Object send = TestObjectDTO;
             JSONObject json= null;
 
             try {
@@ -132,16 +132,16 @@ public class DemoFragment extends Fragment {
 
             //Desserialize a list
 //            Gson serializer = new Gson();
-//            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
+//            TestObjectDTOList TestObjectDTOList = serializer.fromJson(TestObjectDTOList.setHeaderJson("TestObjectDTOList", result), TestObjectDTOList.class);
 
             Toast.makeText(context,result,Toast.LENGTH_LONG).show();
     }
 
     @Click(R.id.btnJson)
     void jsonClick (){
-            TestObject testObject = TestObjectDao.getInstance(context).selectId(5);
+            TestObjectDTO TestObjectDTO = TestObjectDao.getInstance(context).selectId(5);
 
-            Object send = testObject;
+            Object send = TestObjectDTO;
             JSONObject jsonObject = null;
             try {
                 jsonObject = JsonFactory.getJsonObject(send);
@@ -153,7 +153,7 @@ public class DemoFragment extends Fragment {
 
             //Desserialize one item
 //            Gson serializer = new Gson();
-//            TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", "[" + json + "]"), TestObjectList.class);
+//            TestObjectDTOList TestObjectDTOList = serializer.fromJson(TestObjectDTOList.setHeaderJson("TestObjectDTOList", "[" + json + "]"), TestObjectDTOList.class);
 
 
             Toast.makeText(context,json,Toast.LENGTH_LONG).show();

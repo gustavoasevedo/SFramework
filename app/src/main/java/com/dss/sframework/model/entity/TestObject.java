@@ -1,4 +1,4 @@
-package com.dss.sframework.model.TestObject;
+package com.dss.sframework.model.entity;
 import com.dss.sdatabase.annotations.BaseDBFieldName;
 import com.dss.sdatabase.annotations.BaseDBMethodGetName;
 import com.dss.sdatabase.annotations.BaseDBMethodSetName;
@@ -6,29 +6,27 @@ import com.dss.sdatabase.annotations.BaseDBPrimaryKey;
 import com.dss.sdatabase.annotations.BaseDBType;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 /**
  * Created by gustavo.vieira on 04/05/2015.
  */
 
-public class TestObject implements Serializable {
+public class TestObject{
 
     @SerializedName("id")
     @BaseDBFieldName("id")
     @BaseDBType("INTEGER")
     @BaseDBPrimaryKey
-    private int id;
+    protected int id;
 
     @SerializedName("name")
     @BaseDBFieldName("name")
     @BaseDBType("TEXT")
-    private String name;
+    protected String name;
 
     @SerializedName("date")
     @BaseDBFieldName("date")
     @BaseDBType("TEXT")
-    private String date;
+    protected String date;
 
     public TestObject(int id, String name, String date) {
         this.id = id;
@@ -72,16 +70,6 @@ public class TestObject implements Serializable {
     @BaseDBMethodSetName("date")
     public void setDate(String date) {
         this.date = date;
-    }
-
-
-    @Override
-    public String toString() {
-        return "TestObject{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", date='" + date + '\'' +
-                '}';
     }
 
 }

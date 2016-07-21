@@ -49,7 +49,6 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         gProdTask.execute();
 
         AnalyticsTrackers.initialize(this);
-
     }
 
     @Override

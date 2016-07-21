@@ -1,4 +1,4 @@
-package com.dss.sframework.model.TestObject;
+package com.dss.sframework.model.dto;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,6 +11,6 @@ public class TestObjectList {
     }
 
     @SerializedName("TestObjectList")
-    public ArrayList<TestObject> list = new ArrayList<>();
+    public ArrayList<TestObjectDTO> list = new ArrayList<>();
 
 }
