@@ -30,9 +30,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by gustavo.vieira on 22/05/2015.
- */
 @EFragment(R.layout.fragment_buttons)
 public class DemoFragment extends Fragment {
 
@@ -104,84 +101,50 @@ public class DemoFragment extends Fragment {
 
     @Click(R.id.btnJsonList)
     void jsonListClick(){
-            TestObjectDTO TestObjectDTO = TestObjectDao.getInstance(context).selectId(2);
-            TestObjectDTO TestObjectDTO2 = TestObjectDao.getInstance(context).selectId(5);
-            TestObjectDTO TestObjectDTO3 = TestObjectDao.getInstance(context).selectId(7);
+        TestObjectDTO TestObjectDTO = TestObjectDao.getInstance(context).selectId(2);
+        TestObjectDTO TestObjectDTO2 = TestObjectDao.getInstance(context).selectId(5);
+        TestObjectDTO TestObjectDTO3 = TestObjectDao.getInstance(context).selectId(7);
 
-            ArrayList<Object> arrayList = new ArrayList<>();
-            arrayList.add(TestObjectDTO2);
-            arrayList.add(TestObjectDTO3);
+        ArrayList<Object> arrayList = new ArrayList<>();
+        arrayList.add(TestObjectDTO);
+        arrayList.add(TestObjectDTO2);
+        arrayList.add(TestObjectDTO3);
 
+        String result = buildJsonList(arrayList);
 
-            Object send = TestObjectDTO;
-            JSONObject json= null;
-
-            try {
-                json = JsonFactory.getJsonObject(send);
-                JSONArray jsonArray = new JSONArray();
-                for(Object i:arrayList){
-                    jsonArray.put(JsonFactory.getJsonObject(i));
-                }
-
-                json.put("Lista",jsonArray);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String result = json.toString();
-
-            //Desserialize a list
+        //Desserialize a list
 //            Gson serializer = new Gson();
 //            TestObjectDTOList TestObjectDTOList = serializer.fromJson(TestObjectDTOList.setHeaderJson("TestObjectDTOList", result), TestObjectDTOList.class);
 
-            Toast.makeText(context,result,Toast.LENGTH_LONG).show();
+        Toast.makeText(context,result,Toast.LENGTH_LONG).show();
     }
 
     @Click(R.id.btnJson)
     void jsonClick (){
-            TestObjectDTO TestObjectDTO = TestObjectDao.getInstance(context).selectId(5);
+            TestObjectDTO testObjectDTO = TestObjectDao.getInstance(context).selectId(5);
 
-            Object send = TestObjectDTO;
-            JSONObject jsonObject = null;
-            try {
-                jsonObject = JsonFactory.getJsonObject(send);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String json = jsonObject.toString();
+            String json = buildJson(testObjectDTO).toString();
 
             //Desserialize one item
 //            Gson serializer = new Gson();
 //            TestObjectDTOList TestObjectDTOList = serializer.fromJson(TestObjectDTOList.setHeaderJson("TestObjectDTOList", "[" + json + "]"), TestObjectDTOList.class);
 
-
             Toast.makeText(context,json,Toast.LENGTH_LONG).show();
         }
 
-    public View.OnClickListener toBase64Click = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
 
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+    @Click(R.id.btntoBase64)
+    void toBase64Click(){
 
-            String base64 = ImageFactory.convertPhotoToBase64(bitmap);
-
-            image = base64;
-
-            Toast.makeText(context,base64,Toast.LENGTH_LONG).show();
+            Toast.makeText(context,buildBase64(),Toast.LENGTH_LONG).show();
 
             btnfromBase64.setVisibility(View.VISIBLE);
 
         }
-    };
 
     @Click(R.id.btnfromBase64)
     void fromBase64Click(){
-
-            Bitmap bitmap = ImageFactory.convertPhotoFromBase64(image, context);
-
-            Drawable thumb = new BitmapDrawable(getResources(), bitmap);
+            Drawable thumb = buildThumb();
 
             imgBase64.setImageDrawable(thumb);
     }
@@ -195,6 +158,52 @@ public class DemoFragment extends Fragment {
     void imageClick(){
 
             ImageFactory.showDialogImage(context, "Teste", "http://icons.iconarchive.com/icons/carlosjj/google-jfk/128/android-icon.png");
+    }
+
+    public String buildJson(TestObjectDTO testObjectDTO){
+        Object send = testObjectDTO;
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = JsonFactory.getJsonObject(send);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject.toString();
+    }
+
+    public String buildJsonList(ArrayList<Object> arrayList){
+        JSONObject json= new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            for(Object i:arrayList){
+                jsonArray.put(JsonFactory.getJsonObject(i));
+            }
+            json.put("Lista",jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonArray.toString();
+    }
+
+    public String buildBase64(){
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+
+        String base64 = ImageFactory.convertPhotoToBase64(bitmap);
+
+        image = base64;
+
+        return base64;
+    }
+
+    public Drawable buildThumb(){
+        Bitmap bitmap = ImageFactory.convertPhotoFromBase64(image);
+
+        Drawable thumb = new BitmapDrawable(getResources(), bitmap);
+
+        return thumb;
     }
 
 }

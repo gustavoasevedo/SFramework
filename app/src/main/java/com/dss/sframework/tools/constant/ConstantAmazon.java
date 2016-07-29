@@ -2,9 +2,6 @@ package com.dss.sframework.tools.constant;
 
 import java.util.Locale;
 
-/**
- * Created by gustavo.vieira on 11/05/2015.
- */
 public abstract class ConstantAmazon {
 
     public static final String AWS_ACCOUNT_ID =

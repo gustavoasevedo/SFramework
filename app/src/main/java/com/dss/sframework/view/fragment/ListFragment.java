@@ -13,23 +13,20 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.model.dto.TestObjectDTO;
-import com.dss.sframework.view.adapter.ListAdapter;
-import com.dss.sframework.dao.TestObjectDao;
-import com.dss.sframework.tools.delegate.UpdateDelegate;
 import com.dss.sframework.controler.tasks.UserSyncTask;
+import com.dss.sframework.model.dto.TestObjectList;
+import com.dss.sframework.model.entity.TestObject;
+import com.dss.sframework.tools.delegate.UpdateDelegate;
+import com.dss.sframework.view.adapter.ListAdapter;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
-
-/**
- * Created by gustavo.vieira on 22/05/2015.
- */
 @EFragment(R.layout.fragment_lista)
-public class ListFragment extends Fragment implements UpdateDelegate {
+public class ListFragment extends Fragment implements UpdateDelegate{
 
     @ViewById
     ListView listItems;
@@ -40,11 +37,15 @@ public class ListFragment extends Fragment implements UpdateDelegate {
     @ViewById
     SwipeRefreshLayout swipeContainer;
 
-
     Context context;
+
     Activity activity;
+
+    @Bean
     ListAdapter adapter;
-    ArrayList<TestObjectDTO> lista;
+
+    @Bean(TestObjectList.class)
+    TestObjectList lista;
 
 
     @AfterViews
@@ -57,7 +58,6 @@ public class ListFragment extends Fragment implements UpdateDelegate {
         configureAdapter();
     }
 
-
     public void configureSwipe(){
         swipeContainer.setColorSchemeColors(
                 getContext().getResources().getColor(R.color.blue),
@@ -69,11 +69,7 @@ public class ListFragment extends Fragment implements UpdateDelegate {
     }
 
     public void configureAdapter(){
-        lista = new ArrayList<>();
-
-        lista = TestObjectDao.getInstance(context).selectList();
-
-        adapter = new ListAdapter(context, R.layout.item_list, lista);
+        
         listItems.setAdapter(adapter);
 
         listItems.setOnItemClickListener(listClickListener);
@@ -84,11 +80,16 @@ public class ListFragment extends Fragment implements UpdateDelegate {
         swipeContainer.setOnRefreshListener(onRefreshListener);
     }
 
+    @ItemClick
+    void listItemsItemClicked(TestObject testObject) {
+        String mensagem = "Nome: " + testObject.getName();
+        Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
+    }
+
     public AdapterView.OnItemClickListener listClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> arg0, View v, int position,long arg3) {
-            String mensagem = "Nome: " + adapter.getFilteredObject().get(position).getName();
-            Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
+
         }
     };
 
@@ -127,9 +128,7 @@ public class ListFragment extends Fragment implements UpdateDelegate {
     @Override
     public void sucessoUpdate(boolean sucesso) {
         swipeContainer.setRefreshing(false);
-        lista = TestObjectDao.getInstance(context).selectList();
 
-        adapter = new ListAdapter(context, R.layout.item_list, lista);
         listItems.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -138,4 +137,5 @@ public class ListFragment extends Fragment implements UpdateDelegate {
     public void ErroUpdate(Exception e) {
         swipeContainer.setRefreshing(false);
     }
+
 }

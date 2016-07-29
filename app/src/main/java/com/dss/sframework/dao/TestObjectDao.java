@@ -11,11 +11,6 @@ import com.dss.sframework.model.entity.TestObject;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-/**
- * Created by digipronto on 05/04/16.
- */
-
-
 public class TestObjectDao extends BaseTable {
 
     private static TestObjectDao instance;

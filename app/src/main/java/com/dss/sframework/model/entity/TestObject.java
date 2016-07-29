@@ -6,10 +6,6 @@ import com.dss.sdatabase.annotations.BaseDBPrimaryKey;
 import com.dss.sdatabase.annotations.BaseDBType;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by gustavo.vieira on 04/05/2015.
- */
-
 public class TestObject{
 
     @SerializedName("id")
@@ -28,14 +24,14 @@ public class TestObject{
     @BaseDBType("TEXT")
     protected String date;
 
-    public TestObject(int id, String name, String date) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-    }
-
     public TestObject(){
 
+    }
+
+    public TestObject(TestObject testObject){
+        this.id = testObject.getId();
+        this.name = testObject.getName();
+        this.date = testObject.getDate();
     }
 
     @BaseDBMethodGetName("id")

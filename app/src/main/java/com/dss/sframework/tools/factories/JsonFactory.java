@@ -6,9 +6,6 @@ import org.json.JSONObject;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-/**
- * Created by gustavo.vieira on 07/05/2015.
- */
 public abstract class JsonFactory {
 
     /**

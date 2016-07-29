@@ -3,9 +3,6 @@ package com.dss.sframework.tools.factories;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by gustavo.vieira on 07/05/2015.
- */
 public abstract class DateFactory {
 
     public static String getCompleteData() {

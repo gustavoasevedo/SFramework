@@ -2,9 +2,6 @@ package com.dss.sframework.tools.constant;
 
 import com.dss.sframework.R;
 
-/**
- * Created by gustavo.vieira on 22/05/2015.
- */
 public class ConstantNavigationDrawer {
 
     public static final String[] TITLES =

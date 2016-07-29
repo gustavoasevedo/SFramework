@@ -18,9 +18,6 @@ import com.dss.sframework.view.adapter.NavigationDrawerAdapter;
 import com.dss.sframework.view.fragment.FragmentStarter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
-/**
- * Created by gustavo.vieira on 22/05/2015.
- */
 public class NavigationDrawer {
     String TITLES[];
     int ICONS[];

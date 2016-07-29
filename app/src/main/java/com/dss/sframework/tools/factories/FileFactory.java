@@ -6,9 +6,6 @@ import android.os.Environment;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by gustavo.vieira on 07/05/2015.
- */
 public class FileFactory {
 
     private String path;

@@ -8,9 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.dss.sframework.R;
 
-/**
- * Created by digipronto on 12/05/16.
- */
 public abstract class FragmentStarter {
 
 

@@ -1,8 +1,6 @@
 package com.dss.sframework.tools.enums;
 
-/**
- * Created by rodrigo on 06/08/2014.
- */
+
 public class Enums {
 
     public enum MEDIA_TYPE {

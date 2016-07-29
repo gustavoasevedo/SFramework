@@ -21,9 +21,6 @@ import com.dss.sframework.R;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * Created by gustavo.vieira on 06/05/2015.
- */
 public abstract class ImageFactory {
 
     /**
@@ -50,10 +47,9 @@ public abstract class ImageFactory {
     /**
      * Receive a base64 string and a context, convert and return a Bitmap image.
      * @param base64
-     * @param context
      * @return
      */
-    public static Bitmap convertPhotoFromBase64(String base64,Context context) {
+    public static Bitmap convertPhotoFromBase64(String base64) {
         byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 

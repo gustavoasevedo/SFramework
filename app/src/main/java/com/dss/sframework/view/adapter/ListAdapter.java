@@ -1,74 +1,59 @@
 package com.dss.sframework.view.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Filter;
-import android.widget.TextView;
 
-import com.dss.sframework.R;
+import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.model.dto.TestObjectDTO;
+import com.dss.sframework.model.dto.TestObjectList;
+
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
-* Created by gustavo.vieira on 20/01/2015.
-*/
-public class ListAdapter extends ArrayAdapter<TestObjectDTO> {
+//import com.dss.sframework.view.fragment.ListFragment_;
 
-    private Context context;
-    private int layoutResourceId;
+@EBean
+public class ListAdapter extends BaseAdapter{
+
+    @Bean(TestObjectList.class)
+    TestObjectList testObjectList;
+
+    @RootContext
+    Context context;
+
     private List<TestObjectDTO> lObject;
     private List<TestObjectDTO> filteredObject;
 
-
-    public ListAdapter(Context context, int textViewResourceId,
-                       List<TestObjectDTO> objects) {
-        super(context, textViewResourceId, objects);
-        this.setContext(context);
-        this.setLayoutResourceId(textViewResourceId);
-        this.setlObjects(objects);
-        this.setFilteredObject(objects);
+    @AfterInject
+    void initAdapter() {
+        filteredObject = TestObjectDao.getInstance(context).selectList();
+        lObject = TestObjectDao.getInstance(context).selectList();
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-        View row = convertView;
-        ListClienteHolder holder = null;
 
-        if (row == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+        ListItemView listItemView;
 
-            row = inflater.inflate(layoutResourceId, parent, false);
+        if (convertView == null) {
 
-            holder = new ListClienteHolder();
-
-            holder.id = (TextView) row.findViewById(R.id.txtListId);
-
-            holder.nome = (TextView) row.findViewById(R.id.txtListNome);
-
-            holder.data = (TextView) row.findViewById(R.id.txtListData);
-
-            row.setTag(holder);
+            listItemView = ListItemView_.build(context);
         } else {
-            holder = (ListClienteHolder) row.getTag();
+            listItemView = (ListItemView) convertView;
         }
 
-        TestObjectDTO testObjectDTO = filteredObject.get(position);
+        listItemView.bind(getItem(position));
 
-        holder.id.setText(String.valueOf(testObjectDTO.getId()));
-
-        holder.nome.setText(testObjectDTO.getName());
-
-        holder.data.setText(testObjectDTO.getDate());
-
-        return row;
+        return listItemView;
 
     }
 
@@ -76,38 +61,14 @@ public class ListAdapter extends ArrayAdapter<TestObjectDTO> {
         return filteredObject;
     }
 
-    public void setFilteredObject(List<TestObjectDTO> filteredObject) {
-        this.filteredObject = filteredObject;
-    }
-
-    static class ListClienteHolder {
-        TextView id,nome,data;
-    }
-
-    @Override
-    public Context getContext() {
-        return context;
-    }
-
     public void setContext(Context context) {
         this.context = context;
-    }
-
-    public int getLayoutResourceId() {
-        return layoutResourceId;
-    }
-
-    public void setLayoutResourceId(int layoutResourceId) {
-        this.layoutResourceId = layoutResourceId;
     }
 
     public List<TestObjectDTO> getlObjects() {
         return filteredObject;
     }
 
-    public void setlObjects(List<TestObjectDTO> lNoticias) {
-        this.lObject = lNoticias;
-    }
 
     @Override
     public int getCount() {
@@ -116,6 +77,16 @@ public class ListAdapter extends ArrayAdapter<TestObjectDTO> {
     }
 
     @Override
+    public TestObjectDTO getItem(int position) {
+        return filteredObject.get(position);
+    }
+
+
+    @Override
+    public long getItemId(int position) {
+        return getItem(position).getId();
+    }
+
     public Filter getFilter() {
 
         Filter filter = new Filter() {
