@@ -16,7 +16,7 @@ public class TestObjectDao extends BaseTable {
     private static TestObjectDao instance;
 
     public TestObjectDao(Context context) {
-        super(context, TestObject.class, ConstantDB.dbName,ConstantDB.version);
+        super(context, TestObject.class, ConstantDB.dbName, ConstantDB.version);
         createTable();
     }
 
@@ -31,20 +31,26 @@ public class TestObjectDao extends BaseTable {
         return instance;
     }
 
-    public void insertObject(TestObjectDTO testObject){
+    public void insertObject(TestObjectDTO testObjectDTO) {
 
         ArrayList<Object> objectArrayList = new ArrayList<>();
+        TestObject testObject = new TestObject(testObjectDTO);
 
         objectArrayList.add(testObject);
 
         insert(objectArrayList);
     }
 
-    public void insertListObject(ArrayList<TestObjectDTO> testObjectList){
-
+    public void insertListObject(ArrayList<TestObjectDTO> testObjectDTOsList) {
         ArrayList<Object> objectArrayList = new ArrayList<>();
+        ArrayList<TestObject> testObjects = new ArrayList<>();
 
-        for(Object object: testObjectList){
+        for(TestObjectDTO testObjectDTO : testObjectDTOsList){
+            TestObject testObject = new TestObject(testObjectDTO);
+            testObjects.add(testObject);
+        }
+
+        for (Object object : testObjects) {
             objectArrayList.add(object);
         }
 
@@ -52,21 +58,21 @@ public class TestObjectDao extends BaseTable {
     }
 
 
-    public TestObjectDTO selectId(int Id){
+    public TestObjectDTO selectId(int Id) {
 
         TestObjectDTO testObject = new TestObjectDTO();
         ArrayList<String> fields = new ArrayList<>();
         fields.add("id");
         String[] values = {String.valueOf(Id)};
 
-        testObject = selectWhereObject(fields,values);
+        testObject = selectWhereObject(fields, values);
 
         return testObject;
 
     }
 
 
-    public ArrayList<TestObjectDTO> selectList(){
+    public ArrayList<TestObjectDTO> selectList() {
         ArrayList<Object> objectList = new ArrayList<>();
         ArrayList<TestObjectDTO> lista = new ArrayList<>();
 
@@ -78,7 +84,7 @@ public class TestObjectDao extends BaseTable {
     }
 
 
-    public ArrayList<TestObjectDTO> selectListbyName(String nome){
+    public ArrayList<TestObjectDTO> selectListbyName(String nome) {
 
         ArrayList<Object> objectList = new ArrayList<>();
         ArrayList<TestObjectDTO> lista = new ArrayList<>();
@@ -87,7 +93,7 @@ public class TestObjectDao extends BaseTable {
         fields.add("name");
         String[] values = {nome};
 
-        objectList = selectWhereArray(fields,values);
+        objectList = selectWhereArray(fields, values);
 
         lista = mountObjectList(objectList);
 
@@ -95,13 +101,15 @@ public class TestObjectDao extends BaseTable {
     }
 
 
-    public TestObjectDTO selectWhereObject(ArrayList<String> fields,String[] values){
+    public TestObjectDTO selectWhereObject(ArrayList<String> fields, String[] values) {
 
-        TestObjectDTO testObject = new TestObjectDTO();
+        TestObject testObject = new TestObject();
+        TestObjectDTO testObjectDTO = new TestObjectDTO();
 
         try {
 
-            testObject = (TestObjectDTO) selectWhere(TestObject.class,fields,values);
+            testObject = (TestObject) selectWhere(TestObject.class, fields, values);
+            testObjectDTO = new TestObjectDTO(testObject);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -117,16 +125,16 @@ public class TestObjectDao extends BaseTable {
             e.printStackTrace();
         }
 
-        return testObject;
+        return testObjectDTO;
     }
 
-    public ArrayList<Object> selectWhereArray(ArrayList<String> fields,String[] values){
+    public ArrayList<Object> selectWhereArray(ArrayList<String> fields, String[] values) {
 
         ArrayList<Object> objectList = new ArrayList<>();
 
         try {
 
-            objectList = selectListWhere(TestObject.class,fields,values);
+            objectList = selectListWhere(TestObject.class, fields, values);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -145,7 +153,7 @@ public class TestObjectDao extends BaseTable {
         return objectList;
     }
 
-    public ArrayList<Object> selectNoWhere(){
+    public ArrayList<Object> selectNoWhere() {
 
         ArrayList<Object> objectList = new ArrayList<>();
 
@@ -171,16 +179,25 @@ public class TestObjectDao extends BaseTable {
     }
 
 
-    public ArrayList<TestObjectDTO> mountObjectList(ArrayList<Object> objectList){
+    public ArrayList<TestObjectDTO> mountObjectList(ArrayList<Object> objectList) {
 
         ArrayList<TestObjectDTO> lista = new ArrayList<>();
 
-        for(Object object : objectList){
+        for (Object object : objectList) {
             TestObjectDTO testObject = new TestObjectDTO((TestObject) object);
             lista.add(testObject);
         }
 
         return lista;
+    }
+
+    public void drop(){
+
+    }
+
+
+    public void deleteData(){
+        deleteAll();
     }
 
 }

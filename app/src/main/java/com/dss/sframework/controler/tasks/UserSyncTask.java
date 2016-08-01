@@ -26,7 +26,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     long time;
 //    ProgressDialog progress;
 
-    public UserSyncTask(int idUsuario,UpdateDelegate delegate) {
+    public UserSyncTask(int idUsuario, UpdateDelegate delegate) {
         this.mIdUsuario = idUsuario;
         this.delegate = delegate;
     }
@@ -68,7 +68,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
                 }
             }
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             this.erro = new Exception("Erro ao baixar dados de Usuario.");
             return false;
         }
@@ -98,7 +98,7 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
     }
 
 
-    public String makeConnection(){
+    public String makeConnection() {
         String url = ConstantUrl.URL_WEBSERVICE + ConstantUrl.METHOD_USER;
 
         String result = HttpUtil.postData(url, buildNameValuePair());
@@ -106,14 +106,14 @@ public class UserSyncTask extends AsyncTask<Void, Integer, Boolean> {
         return result;
     }
 
-    public ArrayList<NameValuePair> buildNameValuePair(){
+    public ArrayList<NameValuePair> buildNameValuePair() {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("id", ""));
 
         return nameValuePairs;
     }
 
-    public TestObjectList decompodeJson(String result){
+    public TestObjectList decompodeJson(String result) {
         Gson serializer = new Gson();
         TestObjectList testObjectList = serializer.fromJson(TestObjectList.setHeaderJson("TestObjectList", result), TestObjectList.class);
 

@@ -33,7 +33,7 @@ public class NavigationDrawer {
 
     ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
 
-    public NavigationDrawer(String[] TITLES, int[] ICONS, String NAME, String EMAIL, int PROFILE,Context context) {
+    public NavigationDrawer(String[] TITLES, int[] ICONS, String NAME, String EMAIL, int PROFILE, Context context) {
         this.TITLES = TITLES;
         this.ICONS = ICONS;
         this.NAME = NAME;
@@ -42,21 +42,21 @@ public class NavigationDrawer {
         this.context = context;
     }
 
-    public void mountDrawer(Toolbar toolbar){
-        mRecyclerView = (RecyclerView) ((Activity)context).findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
+    public void mountDrawer(Toolbar toolbar) {
+        mRecyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
 
-        mAdapter = new NavigationDrawerAdapter(TITLES,ICONS,NAME,EMAIL,PROFILE,context);       // Creating the Adapter of NavigationDrawerAdapter class(which we are going to see in a bit)
+        mAdapter = new NavigationDrawerAdapter(TITLES, ICONS, NAME, EMAIL, PROFILE, context);       // Creating the Adapter of NavigationDrawerAdapter class(which we are going to see in a bit)
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
 
         mLayoutManager = new LinearLayoutManager(context);                 // Creating a layout Manager
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Drawer = (DrawerLayout) ((Activity)context).findViewById(R.id.DrawerLayout);
+        Drawer = (DrawerLayout) ((Activity) context).findViewById(R.id.DrawerLayout);
     }
 
 
-    public void initDrawer(Context context, Toolbar toolbar){
+    public void initDrawer(Context context, Toolbar toolbar) {
 
         this.context = context;
 
@@ -73,7 +73,8 @@ public class NavigationDrawer {
 
     final GestureDetector mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 
-        @Override public boolean onSingleTapUp(MotionEvent e) {
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
             return true;
         }
 
@@ -83,12 +84,12 @@ public class NavigationDrawer {
     public RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            View child = rv.findChildViewUnder(e.getX(),e.getY());
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
 
-            if(child!=null && mGestureDetector.onTouchEvent(e)){
+            if (child != null && mGestureDetector.onTouchEvent(e)) {
                 Drawer.closeDrawers();
 
-                getClick(child,rv);
+                getClick(child, rv);
 
                 return true;
             }
@@ -107,7 +108,7 @@ public class NavigationDrawer {
     };
 
 
-    public void getClick(View child,RecyclerView rv) {
+    public void getClick(View child, RecyclerView rv) {
 
         switch (String.valueOf(rv.getChildAdapterPosition(child))) {
 
@@ -162,7 +163,7 @@ public class NavigationDrawer {
         };
     }
 
-    public void showInScreen(){
+    public void showInScreen() {
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();
         //        Drawer.openDrawer(Gravity.LEFT);

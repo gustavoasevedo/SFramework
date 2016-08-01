@@ -4,6 +4,7 @@ import com.dss.sdatabase.annotations.BaseDBMethodGetName;
 import com.dss.sdatabase.annotations.BaseDBMethodSetName;
 import com.dss.sdatabase.annotations.BaseDBPrimaryKey;
 import com.dss.sdatabase.annotations.BaseDBType;
+import com.dss.sframework.model.dto.TestObjectDTO;
 import com.google.gson.annotations.SerializedName;
 
 public class TestObject{
@@ -32,6 +33,12 @@ public class TestObject{
         this.id = testObject.getId();
         this.name = testObject.getName();
         this.date = testObject.getDate();
+    }
+
+    public TestObject(TestObjectDTO testObjectDTO){
+        this.id = testObjectDTO.getId();
+        this.name = testObjectDTO.getName();
+        this.date = testObjectDTO.getDate();
     }
 
     @BaseDBMethodGetName("id")

@@ -11,7 +11,7 @@ import java.util.List;
 @EBean
 public class TestObjectList implements TestObjectFinder {
 
-    public static String setHeaderJson(String header, String json){
+    public static String setHeaderJson(String header, String json) {
         return "{" + '"' + header + '"' + ":" + json + "}";
     }
 

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.dss.sframework.AnalyticsTrackers;
 import com.dss.sframework.R;
+import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.tools.constant.ConstantNavigationDrawer;
 import com.dss.sframework.tools.delegate.UpdateDelegate;
 import com.dss.sframework.view.fragment.FragmentStarter;
@@ -74,6 +75,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
                 break;
 
             case R.id.action_close:
+                TestObjectDao.getInstance(this).drop();
                 finish();
                 break;
         }

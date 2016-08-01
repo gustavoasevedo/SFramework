@@ -23,7 +23,7 @@ import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_lista)
-public class ListFragment extends Fragment implements UpdateDelegate{
+public class ListFragment extends Fragment implements UpdateDelegate {
 
     @ViewById
     ListView listItems;
@@ -48,14 +48,14 @@ public class ListFragment extends Fragment implements UpdateDelegate{
     @AfterViews
     void afterViews() {
         context = getActivity();
-        activity = ((Activity)context);
+        activity = ((Activity) context);
 
         configureSwipe();
 
         configureAdapter();
     }
 
-    public void configureSwipe(){
+    public void configureSwipe() {
         swipeContainer.setColorSchemeColors(
                 getContext().getResources().getColor(R.color.blue),
                 getContext().getResources().getColor(R.color.lightblue),
@@ -65,8 +65,8 @@ public class ListFragment extends Fragment implements UpdateDelegate{
 
     }
 
-    public void configureAdapter(){
-        
+    public void configureAdapter() {
+
         listItems.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
@@ -74,24 +74,24 @@ public class ListFragment extends Fragment implements UpdateDelegate{
         swipeContainer.setOnRefreshListener(onRefreshListener);
     }
 
-    @ItemClick
+    @ItemClick(R.id.listItems)
     void listItemsItemClicked(TestObject testObject) {
         String mensagem = "Nome: " + testObject.getName();
-        Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, mensagem, Toast.LENGTH_SHORT).show();
     }
-    
+
     public SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
 
-            UserSyncTask userSyncTask = new UserSyncTask(1,ListFragment.this);
+            UserSyncTask userSyncTask = new UserSyncTask(1, ListFragment.this);
             userSyncTask.execute();
 
         }
     };
 
     @TextChange(R.id.txtSearch)
-    void textChanged(CharSequence cs){
+    void textChanged(CharSequence cs) {
         adapter.getFilter().filter(cs);
     }
 

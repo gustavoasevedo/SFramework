@@ -21,7 +21,7 @@ import java.util.List;
 //import com.dss.sframework.view.fragment.ListFragment_;
 
 @EBean
-public class ListAdapter extends BaseAdapter{
+public class ListAdapter extends BaseAdapter {
 
     @Bean(TestObjectList.class)
     TestObjectList testObjectList;

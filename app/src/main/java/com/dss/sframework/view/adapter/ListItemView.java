@@ -15,7 +15,7 @@ import org.androidannotations.annotations.ViewById;
  */
 
 @EViewGroup(R.layout.item_list)
-public class ListItemView extends RelativeLayout{
+public class ListItemView extends RelativeLayout {
 
     @ViewById
     TextView txtListId;
