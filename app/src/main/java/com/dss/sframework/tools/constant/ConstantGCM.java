@@ -3,7 +3,7 @@ package com.dss.sframework.tools.constant;
 
 public abstract class ConstantGCM {
 
-    public static final String GCMSENDERKEY = "AIzaSyA-gSXvIl2TDYeA4Myafq5XTBfYIDtrXoQ";
+    public static final String GCMSENDERKEY = "AIzaSyBdp77tuS3_7MZSoZLUX-YmCw250udgb68";
 
 
 }

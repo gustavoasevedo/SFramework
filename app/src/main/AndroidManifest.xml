@@ -72,6 +72,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBdp77tuS3_7MZSoZLUX-YmCw250udgb68" />
 
+
         <service android:name=".controler.services.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -83,7 +84,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

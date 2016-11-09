@@ -8,9 +8,10 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
-import com.dss.sframework.R;
-import com.dss.sframework.view.activity.SplashActivity;
+import com.dss.sframework.view.activity.SplashActivity_;
 import com.google.firebase.messaging.RemoteMessage;
+
+import com.dss.sframework.R;
 
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
@@ -36,7 +37,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
     public PendingIntent buildIntent(){
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, SplashActivity_.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -50,7 +51,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("sFramework")
+                .setContentTitle("TradeApp")
                 .setContentText(messageBody)
                 .setAutoCancel(false)
                 .setSound(defaultSoundUri)

@@ -11,13 +11,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_maps)
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements OnMapReadyCallback{
 
     @ViewById
     MapView location_map;
@@ -35,13 +36,6 @@ public class MapsFragment extends Fragment {
         location_map.onCreate(getArguments());
 
         initMap();
-        checkLocation();
-
-        MapsInitializer.initialize(context);
-
-
-        setLocation();
-
     }
 
     public void checkLocation(){
@@ -55,8 +49,7 @@ public class MapsFragment extends Fragment {
     }
 
     public void initMap(){
-        map = location_map.getMap();
-        map.getUiSettings().setMyLocationButtonEnabled(false);
+       location_map.getMapAsync(MapsFragment.this);
     }
 
     public void setLocation(){
@@ -81,6 +74,16 @@ public class MapsFragment extends Fragment {
     public void onLowMemory() {
         super.onLowMemory();
         location_map.onLowMemory();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        this.map = map;
+        this.map.getUiSettings().setMyLocationButtonEnabled(false);
+        checkLocation();
+        MapsInitializer.initialize(context);
+        setLocation();
+
     }
 }
 

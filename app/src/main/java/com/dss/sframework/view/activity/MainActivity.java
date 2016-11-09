@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dss.sframework.AnalyticsTrackers;
 import com.dss.sframework.R;
 import com.dss.sframework.controler.tasks.ListUserSyncTask;
 import com.dss.sframework.dao.TestObjectDao;
@@ -48,7 +47,6 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
         new ListUserSyncTask(0, this).execute();
 
-        AnalyticsTrackers.initialize(this);
     }
 
     @Override
@@ -56,6 +54,9 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         super.onResume();
         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         nMgr.cancelAll();
+
+
+
     }
 
     @Override

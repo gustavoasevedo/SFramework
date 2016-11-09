@@ -1,0 +1,73 @@
+JvmtiExport can_access_local_variables 0
+JvmtiExport can_hotswap_or_post_breakpoint 0
+JvmtiExport can_post_on_exceptions 0
+# 327 ciObject found
+ciMethod java/lang/Object <init> ()V 4097 1 300485 0 0
+ciMethod java/lang/System arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V 6145 1 768 0 -1
+ciMethod java/lang/NullPointerException <init> (Ljava/lang/String;)V 0 0 1 0 -1
+ciMethod java/util/ArrayList <init> ()V 280849 1 32654 0 -1
+ciMethod java/util/ArrayList add (Ljava/lang/Object;)Z 785 1 35534 0 -1
+ciMethodData java/lang/Object <init> ()V 2 300487 orig 264 48 183 213 6 1 0 0 0 128 52 178 25 1 0 0 0 32 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 57 158 36 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 3 0 1 0 0 0 0 0 0 0 255 255 255 255 0 0 0 0 0 0 0 0 data 0 oops 0
+ciMethod com/android/dx/rop/cst/ConstantPool get (I)Lcom/android/dx/rop/cst/Constant; 0 0 1 0 -1
+ciMethod com/android/dx/util/ByteArray getByte (I)I 4097 1 598 0 0
+ciMethod com/android/dx/util/ByteArray getShort (I)I 81 1 286 0 0
+ciMethod com/android/dx/util/ByteArray getInt (I)I 553 1 10952 0 0
+ciMethod com/android/dx/util/ByteArray getUnsignedByte (I)I 2681 1 113300 0 256
+ciMethod com/android/dx/util/ByteArray getUnsignedShort (I)I 2097 1 46472 0 320
+ciMethod com/android/dx/util/ByteArray checkOffsets (II)V 2049 1 6257 0 128
+ciMethod com/android/dx/util/ByteArray getByte0 (I)I 4097 1 12669 0 0
+ciMethod com/android/dx/util/ByteArray getUnsignedByte0 (I)I 2665 1 239667 0 128
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor visitInvalid (III)V 0 0 1 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor visitNoArgs (IIILcom/android/dx/rop/type/Type;)V 0 0 1 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor visitLocal (IIIILcom/android/dx/rop/type/Type;I)V 0 0 1 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor visitConstant (IIILcom/android/dx/rop/cst/Constant;I)V 0 0 1 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor visitBranch (IIII)V 0 0 1 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor visitSwitch (IIILcom/android/dx/cf/code/SwitchList;I)V 0 0 1 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor visitNewarray (IILcom/android/dx/rop/cst/CstType;Ljava/util/ArrayList;)V 0 0 1 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray$Visitor getPreviousOffset ()I 0 0 1 0 -1
+ciMethod com/android/dx/rop/cst/CstInteger make (I)Lcom/android/dx/rop/cst/CstInteger; 193 1 2615 0 -1
+ciMethod com/android/dx/rop/cst/CstInteger <init> (I)V 4097 1 1689 0 -1
+ciMethod com/android/dx/rop/cst/CstInteger getValue ()I 4097 1 3628 0 -1
+ciMethod com/android/dx/rop/cst/CstLiteral32 getIntBits ()I 3313 1 414 0 -1
+ciMethod com/android/dx/rop/cst/CstFieldRef getType ()Lcom/android/dx/rop/type/Type; 4097 1 1966 0 -1
+ciMethod com/android/dx/rop/cst/CstBaseMethodRef getPrototype (Z)Lcom/android/dx/rop/type/Prototype; 33769 1 2351 0 -1
+ciMethod com/android/dx/rop/cst/CstInterfaceMethodRef toMethodRef ()Lcom/android/dx/rop/cst/CstMethodRef; 1345 1 168 0 -1
+ciMethod com/android/dx/rop/cst/StdConstantPool get (I)Lcom/android/dx/rop/cst/Constant; 4097 1 19744 0 128
+ciMethod com/android/dx/rop/cst/StdConstantPool throwInvalid (I)Lcom/android/dx/rop/cst/Constant; 0 0 1 0 -1
+ciMethod com/android/dx/util/MutabilityControl <init> (Z)V 3441 1 82148 0 32
+ciMethod com/android/dx/util/MutabilityControl setImmutable ()V 3097 1 28997 0 0
+ciMethod com/android/dx/util/MutabilityControl throwIfImmutable ()V 2121 1 108671 0 64
+ciMethod com/android/dx/util/MutabilityException <init> (Ljava/lang/String;)V 0 0 1 0 -1
+ciMethodData com/android/dx/util/ByteArray getUnsignedByte0 (I)I 2 239673 orig 264 48 183 213 6 1 0 0 0 232 190 245 25 1 0 0 0 40 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 1 0 0 97 55 29 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 3 0 1 0 0 0 0 0 0 0 255 255 255 255 0 0 0 0 0 0 0 0 data 0 oops 0
+ciMethod com/android/dx/rop/type/Type getBasicFrameType ()I 169009 1 13559 0 -1
+ciMethod com/android/dx/rop/type/Type isCategory1 ()Z 18793 1 1170 0 -1
+ciMethod com/android/dx/rop/type/Type isCategory2 ()Z 12673 1 1464 0 -1
+ciMethod com/android/dx/rop/type/Type isArrayOrKnownNull ()Z 0 0 1 0 -1
+ciMethod com/android/dx/rop/type/Type getComponentType ()Lcom/android/dx/rop/type/Type; 61513 1 4227 0 -1
+ciMethodData com/android/dx/util/ByteArray checkOffsets (II)V 2 6257 orig 264 48 183 213 6 1 0 0 0 96 189 245 25 1 0 0 0 40 3 0 0 64 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 137 187 0 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 10 0 2 0 0 0 208 1 0 0 255 255 255 255 7 0 1 0 0 0 0 0 data 58 0x10007 0x0 0x60 0x1771 0x60007 0x0 0x40 0x1771 0xe0007 0x1771 0x190 0x0 0x190002 0x0 0x1e0005 0x0 0x0 0x0 0x0 0x0 0x220005 0x0 0x0 0x0 0x0 0x0 0x270005 0x0 0x0 0x0 0x0 0x0 0x2b0005 0x0 0x0 0x0 0x0 0x0 0x300005 0x0 0x0 0x0 0x0 0x0 0x370005 0x0 0x0 0x0 0x0 0x0 0x3a0005 0x0 0x0 0x0 0x0 0x0 0x3d0002 0x0 oops 0
+ciMethod com/android/dx/rop/type/Prototype internInts (Lcom/android/dx/rop/type/Type;I)Lcom/android/dx/rop/type/Prototype; 0 0 1 0 -1
+ciMethod com/android/dx/util/FixedSizeList <init> (I)V 3417 1 30498 0 288
+ciMethod com/android/dx/util/FixedSizeList size ()I 3297 1 93903 0 0
+ciMethod com/android/dx/util/FixedSizeList get0 (I)Ljava/lang/Object; 2249 1 8499 0 160
+ciMethod com/android/dx/util/FixedSizeList set0 (ILjava/lang/Object;)V 4097 1 65029 0 -1
+ciMethod com/android/dx/util/FixedSizeList throwIndex (I)Ljava/lang/Object; 0 0 1 0 -1
+ciMethodData com/android/dx/util/ByteArray getUnsignedByte (I)I 2 114929 orig 264 48 183 213 6 1 0 0 0 160 186 245 25 1 0 0 0 72 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 79 1 0 0 17 253 13 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 3 0 2 0 0 0 32 0 0 0 255 255 255 255 2 0 5 0 0 0 0 0 data 4 0x50002 0x1bfa2 0xa0002 0x1bfad oops 0
+ciMethodData com/android/dx/util/ByteArray getUnsignedShort (I)I 2 46944 orig 264 48 183 213 6 1 0 0 0 104 187 245 25 1 0 0 0 88 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6 1 0 0 177 178 5 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 3 0 2 0 0 0 48 0 0 0 255 255 255 255 2 0 5 0 0 0 0 0 data 6 0x50002 0xb655 0xa0002 0xb658 0x140002 0xb659 oops 0
+ciMethod com/android/dx/cf/code/BytecodeArray parseInstruction (ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I 4593 1 35333 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray parseTableswitch (ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I 0 0 1 0 0
+ciMethod com/android/dx/cf/code/BytecodeArray parseLookupswitch (ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I 113 737 105 0 0
+ciMethod com/android/dx/cf/code/BytecodeArray parseNewarray (ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I 801 6705 100 0 -1
+ciMethod com/android/dx/cf/code/BytecodeArray parseWide (ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I 0 0 1 0 0
+ciMethod com/android/dx/cf/code/ByteCatchList <init> (I)V 633 1 79 0 0
+ciMethod com/android/dx/cf/code/ByteCatchList get (I)Lcom/android/dx/cf/code/ByteCatchList$Item; 2969 1 371 0 0
+ciMethod com/android/dx/cf/code/ByteCatchList set (ILcom/android/dx/cf/code/ByteCatchList$Item;)V 601 1 75 0 0
+ciMethod com/android/dx/cf/code/ByteCatchList listFor (I)Lcom/android/dx/cf/code/ByteCatchList; 63585 1 9514 0 0
+ciMethod com/android/dx/cf/code/ByteCatchList typeNotFound (Lcom/android/dx/cf/code/ByteCatchList$Item;[Lcom/android/dx/cf/code/ByteCatchList$Item;I)Z 601 1 75 0 0
+ciMethod com/android/dx/cf/code/ByteCatchList toTargetList (I)Lcom/android/dx/util/IntList; 63585 1 9513 0 0
+ciMethod com/android/dx/cf/code/LocalVariableList pcAndIndexToLocal (II)Lcom/android/dx/cf/code/LocalVariableList$Item; 59609 11281 3864 0 -1
+ciMethod com/android/dx/cf/code/LocalVariableList$Item getLocalItem ()Lcom/android/dx/rop/code/LocalItem; 1393 1 174 0 -1
+ciMethod com/android/dx/cf/code/LocalVariableList$Item getType ()Lcom/android/dx/rop/type/Type; 4577 1 572 0 -1
+ciMethod com/android/dx/cf/attrib/AttCode getCatches ()Lcom/android/dx/cf/code/ByteCatchList; 1273 1 159 0 0
+ciMethodData com/android/dx/util/MutabilityControl throwIfImmutable ()V 2 108671 orig 264 48 183 213 6 1 0 0 0 32 160 246 25 1 0 0 0 80 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 1 0 0 177 59 13 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 5 0 2 0 0 0 48 0 0 0 255 255 255 255 7 0 4 0 0 0 0 0 data 6 0x40007 0x1a77c 0x30 0x0 0xd0002 0x0 oops 0
+ciMethodData com/android/dx/util/ByteArray getInt (I)I 2 11718 orig 264 48 183 213 6 1 0 0 0 184 184 245 25 1 0 0 0 120 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 69 0 0 0 9 108 1 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 3 0 2 0 0 0 80 0 0 0 255 255 255 255 2 0 5 0 0 0 0 0 data 10 0x50002 0x2d81 0xa0002 0x2d81 0x140002 0x2d81 0x1f0002 0x2d81 0x2a0002 0x2d81 oops 0
+ciMethodData com/android/dx/rop/cst/CstInteger make (I)Lcom/android/dx/rop/cst/CstInteger; 2 2640 orig 264 48 183 213 6 1 0 0 0 72 29 246 25 1 0 0 0 248 1 0 0 80 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 24 0 0 0 193 81 0 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 8 0 2 0 0 0 176 0 0 0 255 255 255 255 7 0 17 0 0 0 0 0 data 22 0x110007 0x1e6 0x70 0x852 0x150005 0x496 0x7f8fc2bc4180 0x3bc 0x0 0x0 0x190007 0x49b 0x20 0x3b7 0x230002 0x681 0x2c0004 0x0 0x7f8fc2bc4180 0x681 0x0 0x0 oops 2
