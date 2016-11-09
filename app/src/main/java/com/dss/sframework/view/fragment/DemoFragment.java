@@ -164,7 +164,7 @@ public class DemoFragment extends Fragment {
         Object send = testObjectDTO;
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject = JsonFactory.getJsonObject(send);
+            jsonObject = JsonFactory.getJsonObject(testObjectDTO);
         } catch (JSONException e) {
             e.printStackTrace();
         }

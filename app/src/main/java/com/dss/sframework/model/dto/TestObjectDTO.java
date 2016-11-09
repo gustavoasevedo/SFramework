@@ -14,4 +14,14 @@ public class TestObjectDTO extends TestObject implements Serializable {
         super();
     }
 
+    @Override
+    public String toString() {
+        return "TestObject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
+
+
 }

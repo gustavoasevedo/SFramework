@@ -19,11 +19,11 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.fragment_maps)
 public class MapsFragment extends Fragment {
 
-    GoogleMap map;
-    Context context;
-
     @ViewById
     MapView location_map;
+
+    GoogleMap map;
+    Context context;
 
     @AfterViews
     void afterViews() {

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class JsonFactory {
 
@@ -17,7 +18,18 @@ public abstract class JsonFactory {
      */
     public static JSONObject getJsonObject(Object object) throws JSONException{
 
-        Field[] objVar = object.getClass().getDeclaredFields();
+        ArrayList<Field> fields =  new ArrayList<>(Arrays.asList(object.getClass().getSuperclass().getDeclaredFields()));
+        fields.addAll(Arrays.asList(object.getClass().getDeclaredFields()));
+
+        Object[] obj = fields.toArray();
+
+        Field[] objVar = new Field[obj.length];
+
+
+        for(int i=0; i<obj.length; i++){
+            objVar[i] = (Field) obj[i];
+        }
+
         JSONObject j = new JSONObject();
 
         ArrayList<Object> array = new ArrayList<>();

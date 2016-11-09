@@ -9,13 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.dss.sframework.R;
 import com.dss.sframework.view.adapter.PagerAdapter;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.PageScrolled;
 import org.androidannotations.annotations.ViewById;
 
 
@@ -26,13 +27,10 @@ public class PagerActivity extends ActionBarActivity {
     TabLayout tab_layout;
 
     @ViewById
-    RadioGroup groupTabs;
+    RadioButton btnCheck1;
 
     @ViewById
-    RadioButton btnFotos;
-
-    @ViewById
-    RadioButton btnWeb;
+    RadioButton btnCheck2;
 
     @ViewById
     Toolbar tool_bar;
@@ -55,10 +53,6 @@ public class PagerActivity extends ActionBarActivity {
         configureTabs();
 
         configureAdapter();
-
-        groupTabs.setOnCheckedChangeListener(onCheckedChangeListener);
-
-        pager.addOnPageChangeListener(onPageChangeListener);
     }
 
 
@@ -69,8 +63,8 @@ public class PagerActivity extends ActionBarActivity {
         tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tab_layout.setVisibility(View.INVISIBLE);
 
-        btnFotos.setBackgroundResource(getIconByIndex(0, true));
-        btnWeb.setBackgroundResource(getIconByIndex(1, false));
+        btnCheck1.setBackgroundResource(getIconByIndex(0, true));
+        btnCheck2.setBackgroundResource(getIconByIndex(1, false));
     }
 
     public void configureAdapter(){
@@ -79,26 +73,32 @@ public class PagerActivity extends ActionBarActivity {
         pager.setAdapter(adapter);
     }
 
-    public RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            checkButtons(checkedId);
-        }
-    };
+    @Click({R.id.btnCheck1, R.id.btnCheck2})
+    void clickRadio(View view){
+        checkButtons(view.getId());
+    }
+
+    @PageScrolled(R.id.pager)
+    void onPageChage(int position){
+        makeScroolAction(position);
+    }
+
 
     public void checkButtons(int checkedId){
         switch (checkedId) {
-            case R.id.btnFotos:
+            case R.id.btnCheck1:
                 pager.setCurrentItem(0);
-                btnFotos.setBackgroundResource(getIconByIndex(0, true));
-                btnWeb.setBackgroundResource(getIconByIndex(1, false));
+                btnCheck1.setBackgroundResource(getIconByIndex(0, true));
+                btnCheck2.setBackgroundResource(getIconByIndex(1, false));
+
                 break;
-            case R.id.btnWeb:
+            case R.id.btnCheck2:
                 pager.setCurrentItem(1);
-                btnFotos.setBackgroundResource(getIconByIndex(0, false));
-                btnWeb.setBackgroundResource(getIconByIndex(1, true));
+                btnCheck1.setBackgroundResource(getIconByIndex(0, false));
+                btnCheck2.setBackgroundResource(getIconByIndex(1, true));
                 break;
         }
+
     }
 
     public int getIconByIndex(int index, boolean disabled) {
@@ -108,13 +108,13 @@ public class PagerActivity extends ActionBarActivity {
         switch (index) {
 
             case 1:
-                rc = (disabled ? R.drawable.ic_search : R.drawable.ic_search);
+                rc = (disabled ? R.color.lightblue : R.drawable.rounded_quest);
 
                 break;
 
             case 0:
 
-                rc = (disabled ? R.drawable.ic_file : R.drawable.ic_file);
+                rc = (disabled ? R.color.lightblue : R.drawable.rounded_quest);
 
                 break;
         }
@@ -122,31 +122,15 @@ public class PagerActivity extends ActionBarActivity {
         return rc;
     }
 
-    public ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            makeScrooAction(position);
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
-
-    public void makeScrooAction(int position){
+    public void makeScroolAction(int position){
         switch (position) {
             case 0:
-                groupTabs.check(R.id.btnFotos);
+                btnCheck1.setBackgroundResource(getIconByIndex(0, true));
+                btnCheck2.setBackgroundResource(getIconByIndex(1, false));
                 break;
             case 1:
-                groupTabs.check(R.id.btnWeb);
-                break;
+                btnCheck1.setBackgroundResource(getIconByIndex(0, false));
+                btnCheck2.setBackgroundResource(getIconByIndex(1, true));
         }
     }
 

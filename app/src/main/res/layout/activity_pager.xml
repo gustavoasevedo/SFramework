@@ -42,7 +42,7 @@
                 android:layout_alignBottom="@+id/groupTabs"
                 android:layout_alignParentTop="true" />
 
-            <RadioGroup
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -57,22 +57,28 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
+                    android:layout_weight="0.5"
                     android:button="@null"
-                    android:id="@+id/btnFotos"
-                    android:background="@drawable/ic_file"
+                    android:id="@+id/btnCheck1"
+                    android:background="@drawable/rounded_quest"
+                    android:text="Botao1"
+                    android:checked="true"
+                    android:textAlignment="center"
                     style="?android:attr/borderlessButtonStyle"
                     android:gravity="top|bottom" />
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
+                    android:layout_weight="0.5"
                     android:button="@null"
-                    android:id="@+id/btnWeb"
-                    android:background="@drawable/ic_search"
+                    android:textAlignment="center"
+                    android:id="@+id/btnCheck2"
+                    android:text="Botao2"
+                    android:checked="false"
+                    android:background="@drawable/rounded_quest"
                     style="?android:attr/borderlessButtonStyle"
                     android:gravity="top|bottom" />
-            </RadioGroup>
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 

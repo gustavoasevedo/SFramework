@@ -12,13 +12,13 @@ import android.widget.Toast;
 
 import com.dss.sframework.AnalyticsTrackers;
 import com.dss.sframework.R;
+import com.dss.sframework.controler.tasks.ListUserSyncTask;
 import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.tools.constant.ConstantNavigationDrawer;
 import com.dss.sframework.tools.delegate.UpdateDelegate;
+import com.dss.sframework.tools.util.DeviceInfo;
 import com.dss.sframework.view.fragment.FragmentStarter;
 import com.dss.sframework.view.navigation.NavigationDrawer;
-import com.dss.sframework.controler.tasks.UserSyncTask;
-import com.dss.sframework.tools.util.DeviceInfo;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -46,8 +46,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
         FragmentStarter.startDemoFragment(this);
 
-        UserSyncTask gProdTask = new UserSyncTask(4,this);
-        gProdTask.execute();
+        new ListUserSyncTask(0, this).execute();
 
         AnalyticsTrackers.initialize(this);
     }
@@ -70,8 +69,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         int id = item.getItemId();
         switch (id){
             case R.id.action_reload:
-                UserSyncTask gProdTask = new UserSyncTask(4,this);
-                gProdTask.execute();
+                new ListUserSyncTask(0, this).execute();
                 break;
 
             case R.id.action_close:

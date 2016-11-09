@@ -49,15 +49,9 @@ public abstract class Permission {
     @TargetApi(Build.VERSION_CODES.M)
     public static void requestPermission(Context context,String permission) {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission)){
-
             String[] perms = {permission};
 
             ActivityCompat.requestPermissions((Activity) context, perms, permsRequestCode);
-
-        }else{
-            showMessageOKCancel(context,permission);
-        }
 
     }
 

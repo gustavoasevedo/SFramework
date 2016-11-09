@@ -26,16 +26,14 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 case 0:
 
                     fragment = new DemoFragment_();
-
-                    return fragment;
-
+                    break;
                 case 1:
 
                     fragment = new ListFragment_();
-
-                    return fragment;
+                    break;
             }
-        return null;
+
+        return fragment;
     }
 
     @Override
