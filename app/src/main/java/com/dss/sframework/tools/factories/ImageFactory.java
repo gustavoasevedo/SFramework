@@ -21,6 +21,8 @@ import com.dss.sframework.R;
 
 import java.io.ByteArrayOutputStream;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public abstract class ImageFactory {
 
     /**
@@ -84,14 +86,15 @@ public abstract class ImageFactory {
         text.setText(titulo);
         ImageView image = (ImageView) dialog.findViewById(R.id.imgFoto);
 
-
-
         Glide.with(context)
                 .load(url)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
                 .into(image);
+
+        PhotoViewAttacher mAttacher = new PhotoViewAttacher(image);
+        mAttacher.update();
 
         Button dialogButton = (Button) dialog.findViewById(R.id.closeButton);
         dialogButton.setOnClickListener(new View.OnClickListener() {
@@ -103,4 +106,5 @@ public abstract class ImageFactory {
 
         dialog.show();
     }
+
 }

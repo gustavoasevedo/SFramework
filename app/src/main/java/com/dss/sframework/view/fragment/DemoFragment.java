@@ -144,9 +144,9 @@ public class DemoFragment extends Fragment {
 
     @Click(R.id.btnfromBase64)
     void fromBase64Click(){
-            Drawable thumb = buildThumb();
+        Drawable thumb = buildThumb();
 
-            imgBase64.setImageDrawable(thumb);
+        imgBase64.setImageDrawable(thumb);
     }
 
     @Click(R.id.btnIntent)
