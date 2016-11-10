@@ -65,12 +65,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback{
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        location_map.onDestroy();
-    }
-
-    @Override
     public void onLowMemory() {
         super.onLowMemory();
         location_map.onLowMemory();
