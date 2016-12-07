@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.dss.sframework.R;
+import com.dss.sframework.view.activity.CalendarActivity_;
 import com.dss.sframework.view.activity.PagerActivity_;
 import com.dss.sframework.view.adapter.NavigationDrawerAdapter;
 import com.dss.sframework.view.fragment.FragmentStarter;
@@ -142,6 +143,12 @@ public class NavigationDrawer {
             case "6":
 
                 FragmentStarter.startVideoFragment(context);
+
+                break;
+            case "7":
+
+                Intent i = new Intent(context, CalendarActivity_.class);
+                ((Activity) context).startActivity(i);
 
                 break;
 

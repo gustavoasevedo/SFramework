@@ -10,10 +10,12 @@ public class ConstantNavigationDrawer {
                     "Pager",
                     "Maps",
                     "Youtube Player",
-                    "Video Player"};
+                    "Video Player",
+                    "Menu"};
 
     public static final int[] ICONS =
             {R.drawable.ic_file,
+                    R.drawable.ic_file,
                     R.drawable.ic_file,
                     R.drawable.ic_file,
                     R.drawable.ic_file,

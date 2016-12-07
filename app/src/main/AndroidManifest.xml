@@ -58,6 +58,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".view.activity.CalendarActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".view.activity.SplashActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
