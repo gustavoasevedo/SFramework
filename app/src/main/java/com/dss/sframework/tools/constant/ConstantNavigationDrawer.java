@@ -11,7 +11,7 @@ public class ConstantNavigationDrawer {
                     "Maps",
                     "Youtube Player",
                     "Video Player",
-                    "Menu"};
+                    "Calendário"};
 
     public static final int[] ICONS =
             {R.drawable.ic_file,

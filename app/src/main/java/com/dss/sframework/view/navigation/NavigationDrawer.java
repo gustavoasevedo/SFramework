@@ -134,8 +134,6 @@ public class NavigationDrawer {
 
                 break;
             case "5":
-
-//               caminhoThumb = "http://img.youtube.com/vi/" + video + "/0.jpg";
                 context.startActivity(YouTubeStandalonePlayer.createVideoIntent(((Activity) context),
                         "AIzaSyBdp77tuS3_7MZSoZLUX-YmCw250udgb68", "p5DVeDWtA5U"));
                 break;
