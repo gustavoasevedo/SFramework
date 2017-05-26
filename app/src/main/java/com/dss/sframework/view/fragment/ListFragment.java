@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.controler.tasks.ListUserSyncTask;
+import com.dss.sframework.controler.tasks.ListFormatSyncTask;
 import com.dss.sframework.model.dto.TestObjectList;
 import com.dss.sframework.model.entity.TestObject;
 import com.dss.sframework.tools.delegate.UpdateDelegate;
@@ -84,7 +84,7 @@ public class ListFragment extends Fragment implements UpdateDelegate {
         @Override
         public void onRefresh() {
 
-            new ListUserSyncTask(0, ListFragment.this).execute();
+            new ListFormatSyncTask(0, ListFragment.this).execute();
 
         }
     };

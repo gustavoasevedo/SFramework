@@ -11,7 +11,7 @@ import com.dss.sframework.model.entity.TestObject;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-public class TestObjectDao extends BaseTable {
+public class TestObjectDao extends BaseTable{
 
     private static TestObjectDao instance;
 
@@ -62,7 +62,7 @@ public class TestObjectDao extends BaseTable {
 
         TestObjectDTO testObject = new TestObjectDTO();
         ArrayList<String> fields = new ArrayList<>();
-        fields.add("id");
+        fields.add("id_Format");
         String[] values = {String.valueOf(Id)};
 
         testObject = selectWhereObject(fields, values);
@@ -72,7 +72,7 @@ public class TestObjectDao extends BaseTable {
     }
 
 
-    public ArrayList<TestObjectDTO> selectList() {
+    public ArrayList<TestObjectDTO> selectListItems() {
         ArrayList<Object> objectList = new ArrayList<>();
         ArrayList<TestObjectDTO> lista = new ArrayList<>();
 
@@ -90,7 +90,7 @@ public class TestObjectDao extends BaseTable {
         ArrayList<TestObjectDTO> lista = new ArrayList<>();
 
         ArrayList<String> fields = new ArrayList<>();
-        fields.add("name");
+        fields.add("format_Name");
         String[] values = {nome};
 
         objectList = selectWhereArray(fields, values);
@@ -108,12 +108,10 @@ public class TestObjectDao extends BaseTable {
 
         try {
 
-            testObject = (TestObject) selectWhere(TestObject.class, fields, values);
+            testObject = (TestObject) selectWhere(fields, values);
             testObjectDTO = new TestObjectDTO(testObject);
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -134,11 +132,9 @@ public class TestObjectDao extends BaseTable {
 
         try {
 
-            objectList = selectListWhere(TestObject.class, fields, values);
+            objectList = selectListWhere(fields, values);
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -159,11 +155,9 @@ public class TestObjectDao extends BaseTable {
 
         try {
 
-            objectList = selectList(TestObject.class);
+            objectList = selectList();
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();

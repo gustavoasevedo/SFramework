@@ -23,9 +23,6 @@ public class ListItemView extends RelativeLayout {
     @ViewById
     TextView txtListNome;
 
-    @ViewById
-    TextView txtListData;
-
     public ListItemView(Context context) {
         super(context);
     }
@@ -33,6 +30,5 @@ public class ListItemView extends RelativeLayout {
     public void bind(TestObjectDTO testObject) {
         txtListId.setText(String.valueOf(testObject.getId()));
         txtListNome.setText(testObject.getName());
-        txtListData.setText(testObject.getDate());
     }
 }

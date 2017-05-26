@@ -34,8 +34,8 @@ public class ListAdapter extends BaseAdapter {
 
     @AfterInject
     void initAdapter() {
-        filteredObject = TestObjectDao.getInstance(context).selectList();
-        lObject = TestObjectDao.getInstance(context).selectList();
+        filteredObject = TestObjectDao.getInstance(context).selectListItems();
+        lObject = TestObjectDao.getInstance(context).selectListItems();
     }
 
     @Override

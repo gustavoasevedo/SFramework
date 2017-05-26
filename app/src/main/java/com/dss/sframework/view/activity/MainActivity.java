@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dss.sframework.R;
-import com.dss.sframework.controler.tasks.ListUserSyncTask;
+import com.dss.sframework.controler.tasks.ListFormatSyncTask;
 import com.dss.sframework.dao.TestObjectDao;
 import com.dss.sframework.tools.constant.ConstantNavigationDrawer;
 import com.dss.sframework.tools.delegate.UpdateDelegate;
@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
 
         FragmentStarter.startDemoFragment(this);
 
-        new ListUserSyncTask(0, this).execute();
+        new ListFormatSyncTask(0, this).execute();
 
     }
 
@@ -70,7 +70,7 @@ public class MainActivity extends ActionBarActivity implements UpdateDelegate {
         int id = item.getItemId();
         switch (id){
             case R.id.action_reload:
-                new ListUserSyncTask(0, this).execute();
+                new ListFormatSyncTask(0, this).execute();
                 break;
 
             case R.id.action_close:

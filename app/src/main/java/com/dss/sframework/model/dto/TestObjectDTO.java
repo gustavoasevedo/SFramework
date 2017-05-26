@@ -19,7 +19,6 @@ public class TestObjectDTO extends TestObject implements Serializable {
         return "TestObject{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", date='" + date + '\'' +
                 '}';
     }
 
